@@ -1,5 +1,5 @@
 from DB.Tables import Base
-from sqlalchemy import Column, Integer, String, JSON
+from sqlalchemy import Column, Integer, JSON
 
 
 class KeyboardsTable(Base):

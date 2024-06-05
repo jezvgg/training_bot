@@ -1,5 +1,5 @@
 from DB.Tables import Base
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey
 
 
 class DialogueTable(Base):
