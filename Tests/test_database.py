@@ -13,11 +13,9 @@ class test_database(unittest.TestCase):
         '''
         Проверка на работоспособность подключения
         '''
-        # TODO: починить env vars
-        print(sys.version_info, sys.path)
-        print(os.environ, os.getenv('DB_USER'))
 
-        dbh = DBHelper('postgres', 'your_password', '127.0.0.1', '5432', 'training_bot')
+        # Спецальная роль в PostgreSQL
+        dbh = DBHelper('test', '1111', '127.0.0.1', '5432', 'training_bot')
 
         assert dbh is not None
 
