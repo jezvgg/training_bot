@@ -1,8 +1,8 @@
-from DB.Tables import Base
+from DB.Tables import BaseTable
 from sqlalchemy import Column, Integer, String, ForeignKey
 
 
-class DialogueTable(Base):
+class DialogueTable(BaseTable):
     __tablename__ = 'dialogue'
 
     id = Column("id", Integer, unique=True, primary_key=True)
@@ -18,8 +18,4 @@ class DialogueTable(Base):
         self.keyboard = keyboard
         self.eventname = eventname
         self.next_message = next_message
-
-
-    def __repr__(self):
-        return f"Dialogue({self.id}, {self.text}, {self.keyboard}, {self.eventname}, {self.next_message})"
 

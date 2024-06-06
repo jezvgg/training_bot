@@ -1,8 +1,8 @@
-from DB.Tables import Base
+from DB.Tables import BaseTable
 from sqlalchemy import Column, Integer, Boolean, String, ForeignKey
 
 
-class UserTable(Base):
+class UserTable(BaseTable):
     __tablename__ = "users"
 
     telegram_id = Column("telegram_id", Integer, unique=True, primary_key=True)
@@ -21,8 +21,4 @@ class UserTable(Base):
         self.is_accepted = is_accepted
         self.is_use = is_use
         self.username = username
-
-
-    def __repr__(self): 
-        return f"User({self.telegram_id}, {self.username} ,subs={self.subscribed}, curmes={self.current_message}, accepted={self.is_accepted}, using={self.is_use})"
     
