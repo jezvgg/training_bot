@@ -13,6 +13,11 @@ class UserTable(BaseTable):
     is_use = Column("is_use", Boolean, nullable=False)
 
 
+    @staticmethod
+    def build(model):
+        pass
+
+
     def __init__(self, id: int, subs: bool, current_message: int, 
                 is_accepted: bool, is_use: bool, username: str = None):
         self.telegram_id = id

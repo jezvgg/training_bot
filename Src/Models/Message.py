@@ -1,7 +1,7 @@
-from Src.Models.Keyboard import Keyboard
+from Src.Models import Keyboard, AbstractModel
 
 
-class Message:
+class Message(AbstractModel):
     '''
     Модель сообщения.
 

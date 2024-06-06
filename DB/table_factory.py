@@ -1,4 +1,5 @@
 from DB.Tables import *
+from Src.Models import *
 
 
 class table_factory:
@@ -6,7 +7,11 @@ class table_factory:
     Фабрика для конвертации моделей в таблицы БД.
     '''
     # К какой модели какую таблицу нужно использовать
-    __map: dict[BaseTable] = {}
+    __map: dict[AbstractModel, BaseTable] = {
+        Keyboard: KeyboardsTable,
+        User: UserTable,
+        Message: DialogueTable   
+    }
 
     @staticmethod
     def create(self, model):

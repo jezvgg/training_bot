@@ -1,7 +1,7 @@
-from Src.Models.Message import Message
+from Src.Models import Message, AbstractModel
 
 
-class User:
+class User(AbstractModel):
     __telegram_id: int
     __subcribed: bool
     __current_message: Message

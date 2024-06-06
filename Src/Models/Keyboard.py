@@ -1,7 +1,7 @@
+from Src.Models.AbstractModel import AbstractModel
 
 
-
-class Keyboard:
+class Keyboard(AbstractModel):
     __data: list[list[int|str]]
 
 
