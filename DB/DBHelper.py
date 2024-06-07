@@ -61,7 +61,7 @@ class DBHelper:
         return self.get_one(model).model()
 
 
-    def get_ones_mosels(self, model: AbstractModel) -> list[AbstractModel]:
+    def get_ones_models(self, model: AbstractModel) -> list[AbstractModel]:
         '''
         Получить все модели всех обектов совпадающих с моделью
         '''

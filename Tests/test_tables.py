@@ -43,6 +43,10 @@ class test_models(unittest.TestCase):
 
         assert dt2 is not None
 
+        message = dt.model()
+
+        assert message is not None
+
 
     def test_keyboards_table(self):
         kt = KeyboardsTable(0, [[0, 1, 2], [3, 4, 5]])
@@ -54,6 +58,10 @@ class test_models(unittest.TestCase):
         kt2 = KeyboardsTable.build(keyboard)
 
         assert kt2 is not None
+
+        keyboard = kt.model()
+
+        assert keyboard is not None
 
 
     def test_table_factory(self):
