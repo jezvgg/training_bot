@@ -23,7 +23,7 @@ class Message(AbstractModel):
         return Message(0, 'Если вы видите это сообщение, то произошла ошибка. Напишите об этом администрации.', 0)
 
 
-    def __init__(self, id: int, text: str, next_message_id: int, event_name: str = '', keyboard: Keyboard = None) -> None:
+    def __init__(self, id: int, text: str, next_message_id: int, event_name: str = None, keyboard: Keyboard = None) -> None:
         '''
         Модель сообщения.
 

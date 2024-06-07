@@ -1,6 +1,7 @@
-from DB.Tables import BaseTable
-from Src.Models import User
+from DB.Tables import BaseTable, DialogueTable
+from Src.Models import User, Message
 from sqlalchemy import Column, Integer, Boolean, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 
 class UserTable(BaseTable):
@@ -9,14 +10,16 @@ class UserTable(BaseTable):
     id = Column("telegram_id", Integer, unique=True, primary_key=True)
     subscribed = Column("subscribed", Boolean, nullable=False)
     username = Column("username", String)
-    current_message = Column("current_message", Integer, ForeignKey("dialogue.id"), nullable=False)
+    current_message = Column("current_message", Integer, ForeignKey(DialogueTable.id), nullable=False)
     is_accepted = Column("is_accepted", Boolean, nullable=False)
     is_use = Column("is_use", Boolean, nullable=False)
+
+    _current_message = relationship("DialogueTable")
 
 
     @staticmethod
     def build(model: User):
-        return UserTable(model.telegram_id, model.subcribed, model.current_message.id, 
+        return UserTable(model.id, model.subcribed, model.current_message.id, 
         model.is_accepted, model.is_use, model.username)
 
 
@@ -30,7 +33,10 @@ class UserTable(BaseTable):
         self.username = username
 
 
-    def model(self, message) -> User:
-        message = message.model()
-        return User(self.is_use, self.is_accepted, self.username, message, self.subscribed, self.id)
+    def model(self) -> User:
+        # LOGGING: Тут должен быть варнинг, что self._current_message пустой
+        args = [self.is_use, self.is_accepted, self.username]
+        if self._current_message: args += [self._current_message.model(), self.subscribed, self.id]
+        else: args += [Message.error_message(),  self.subscribed, self.id]
+        return User(*args)
     

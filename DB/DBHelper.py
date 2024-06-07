@@ -1,11 +1,14 @@
-from DB.Tables import Base, BaseTable
+from DB.Tables import Base, BaseTable, MessagesTable
 from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy import create_engine, Engine
+from sqlalchemy import create_engine, Engine, inspect
 from DB.table_factory import table_factory
 from Src.Models import AbstractModel
 
 # TODO: Сделать его синглтоном
 class DBHelper:
+    '''
+    Класс для работы с БД
+    '''
     session: Session
     engine: Engine
 
@@ -44,10 +47,27 @@ class DBHelper:
         return self.session.query(table).filter(table.id == model.id).all()
 
 
-    # TODO: Сделать get с фильтрацией
-    # TODO: Сделать получение сразу моделей
-    
+    def get_models(self, model: AbstractModel) -> list[AbstractModel]:
+        '''
+        Получить модели из таблицы данных соответствующей модели
+        '''
+        return [table.model() for table in self.get(model)]
 
+
+    def get_one_model(self, model: AbstractModel) -> AbstractModel:
+        '''
+        Получить модель из БД
+        '''
+        return self.get_one(model).model()
+
+
+    def get_ones_mosels(self, model: AbstractModel) -> list[AbstractModel]:
+        '''
+        Получить все модели всех обектов совпадающих с моделью
+        '''
+        return [table.model() for table in self.get_ones(model)]
+            
+    # TODO: Сделать get с фильтрацией
 
     def add(self, model: AbstractModel):
         '''

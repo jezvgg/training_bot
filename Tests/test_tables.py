@@ -10,7 +10,7 @@ class test_models(unittest.TestCase):
     '''
     
     def test_user_table(self):
-        ut = UserTable(0, True, 5, True, True)
+        ut = UserTable(0, True, 0, True, True)
 
         assert ut is not None
 
@@ -20,6 +20,10 @@ class test_models(unittest.TestCase):
         ut2 = UserTable.build(user)
 
         assert ut2 is not None
+
+        user2 = ut.model()
+
+        assert user2 is not None
 
 
     def test_message_table(self):

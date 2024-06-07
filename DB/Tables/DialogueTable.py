@@ -1,6 +1,7 @@
 from DB.Tables import BaseTable
 from Src.Models import Message
 from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 
 class DialogueTable(BaseTable):
@@ -12,6 +13,8 @@ class DialogueTable(BaseTable):
     eventname = Column("eventname", String)
     next_message = Column("next_message", Integer, ForeignKey("dialogue.id"), nullable=False)
 
+    _text = relationship('MessagesTable')
+    _keyboard = relationship('KeyboardsTable')
 
     @staticmethod
     def build(model: Message):
@@ -29,9 +32,11 @@ class DialogueTable(BaseTable):
         self.next_message = next_message
 
 
-    def model(self, message, keyboard = None) -> Message:
-        message = [self.id, message.text, self.next_message]
-        if self.eventname: message.append(self.eventname)
-        if keyboard: message.append(keyboard)
-        return Message(*keyboard)
+    def model(self) -> Message:
+        args = [self.id]
+        if self._text: args.append(self._text.text)
+        args.append(self.next_message)
+        if self.eventname: args.append(self.eventname)
+        if self._keyboard: args.append(self._keyboard.model())
+        return Message(*args)
     

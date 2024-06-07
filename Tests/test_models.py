@@ -22,4 +22,4 @@ class test_models(unittest.TestCase):
         usr = User(True, True, 'Username', msg, False, 113133313)
 
         assert usr.current_message.id is not None
-        assert usr.telegram_id is not None
+        assert usr.id is not None
