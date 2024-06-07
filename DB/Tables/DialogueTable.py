@@ -1,4 +1,5 @@
 from DB.Tables import BaseTable
+from Src.Models import Message
 from sqlalchemy import Column, Integer, String, ForeignKey
 
 
@@ -12,10 +13,25 @@ class DialogueTable(BaseTable):
     next_message = Column("next_message", Integer, ForeignKey("dialogue.id"), nullable=False)
 
 
-    def __init__(self, id: int, text: str, next_message: int, keyboard: int = None, eventname: str = None):
+    @staticmethod
+    def build(model: Message):
+        dialog = DialogueTable(model.id, model.text, model.next_message_id)
+        if model.keyboard: dialog.keyboard = model.keyboard.id
+        if model.event_name: dialog.eventname = model.event_name
+        return dialog
+
+
+    def __init__(self, id: int, text: int, next_message: int, keyboard: int = None, eventname: str = None):
         self.id = id
         self.text = text
         self.keyboard = keyboard
         self.eventname = eventname
         self.next_message = next_message
 
+
+    def model(self, message, keyboard = None) -> Message:
+        message = [self.id, message.text, self.next_message]
+        if self.eventname: message.append(self.eventname)
+        if keyboard: message.append(keyboard)
+        return Message(*keyboard)
+    

@@ -4,9 +4,9 @@ from abc import abstractclassmethod
 
 class BaseTable(Base):
     __abstract__ = True
+    id: int
 
 
-    @abstractclassmethod
     @staticmethod
     def build(model):
         '''
@@ -15,7 +15,14 @@ class BaseTable(Base):
         pass
 
 
+    def model():
+        '''
+        Фабричный метод возращающий модель с данными из таблицы
+        '''
+        pass
+
+
     def __repr__(self):
-        classname = str(self.__class__)
-        fields = [f"{str(field)}={str(getattr(self, field))}" for field in dir(self) if not field.startswith('_')]
+        classname = str(self.__class__.__name__)
+        fields = [f"{str(field)}={str(getattr(self, field))}" for field in vars(self) if not field.startswith('_')]
         return f"{classname}({', '.join(fields)})"

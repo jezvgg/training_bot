@@ -13,7 +13,20 @@ class table_factory:
         Message: DialogueTable   
     }
 
-    @staticmethod
-    def create(self, model):
+
+    @classmethod
+    def get(cls, model: AbstractModel):
+        if isinstance(model, type(AbstractModel)):
+            return cls.__map[model]
+        return cls.__map[type(model)]
+
+
+    @classmethod
+    def create(cls, model: AbstractModel) -> BaseTable:
         # У этих таблиц соответственно должен быть фабричный метод от модели
-        return self.__map[model].build(model)
+        return cls.get(model).build(model)
+
+
+    @classmethod
+    def keys(cls):
+        return list(cls.__map.keys())

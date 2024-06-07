@@ -20,7 +20,7 @@ class User(AbstractModel):
 
 
     @property
-    def telegram_id(self) -> int:
+    def id(self) -> int:
         return self.__telegram_id
 
 

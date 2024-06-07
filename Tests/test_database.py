@@ -1,7 +1,5 @@
 from DB.DBHelper import DBHelper
 import unittest
-import os
-import sys
 
 
 class test_database(unittest.TestCase):
@@ -9,6 +7,7 @@ class test_database(unittest.TestCase):
     Тестирование работы и связи с базой данных
     '''
 
+    # TODO: дописать тестирование
     def test_starting_database(self):
         '''
         Проверка на работоспособность подключения
