@@ -1,13 +1,13 @@
 from DB.Tables import BaseTable, DialogueTable
 from Src.Models import User, Message
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey
+from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, BigInteger
 from sqlalchemy.orm import relationship
 
 
 class UserTable(BaseTable):
     __tablename__ = "users"
 
-    id = Column("telegram_id", Integer, unique=True, primary_key=True)
+    id = Column("telegram_id", BigInteger, unique=True, primary_key=True)
     subscribed = Column("subscribed", Boolean, nullable=False)
     username = Column("username", String)
     current_message = Column("current_message", Integer, ForeignKey(DialogueTable.id), nullable=False)

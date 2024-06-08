@@ -1,11 +1,11 @@
-from DB.Tables import Base, BaseTable, MessagesTable
-from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy import create_engine, Engine, inspect
+from DB.Tables import Base, BaseTable
+from sqlalchemy.orm import sessionmaker, Session, Query
+from sqlalchemy import create_engine, Engine
 from DB.table_factory import table_factory
 from Src.Models import AbstractModel
 
-# TODO: Сделать его синглтоном
-class DBHelper:
+
+class DBHelper(object):
     '''
     Класс для работы с БД
     '''
@@ -23,7 +23,13 @@ class DBHelper:
         self.session = Session()
 
 
-    def get(self, model: AbstractModel) -> list[BaseTable]:
+    def __new__(cls, *args):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(DBHelper, cls).__new__(cls)
+        return cls.instance
+
+
+    def get(self, model: AbstractModel) -> Query[BaseTable]:
         '''
         Получить таблицу данных соответствующую модели
         '''
@@ -31,20 +37,20 @@ class DBHelper:
         return self.session.query(table_factory.get(model))
 
 
-    def get_one(self, model: AbstractModel) -> BaseTable:
+    def get_one(self, model: AbstractModel, id: int) -> BaseTable:
         '''
         Получить данные объекта из БД
         '''
         table = table_factory.get(model)
-        return self.session.query(table).filter(table.id == model.id).one()
+        return self.session.query(table).filter(table.id == id).one()
 
 
-    def get_ones(self, model: AbstractModel) -> list[BaseTable]:
+    def get_ones(self, model: AbstractModel, id: int) -> list[BaseTable]:
         '''
         Получить все данные всех обектов совпадающих с моделью
         '''
         table = table_factory.get(model)
-        return self.session.query(table).filter(table.id == model.id).all()
+        return self.session.query(table).filter(table.id == id).all()
 
 
     def get_models(self, model: AbstractModel) -> list[AbstractModel]:
@@ -54,22 +60,22 @@ class DBHelper:
         return [table.model() for table in self.get(model)]
 
 
-    def get_one_model(self, model: AbstractModel) -> AbstractModel:
+    def get_one_model(self, model: AbstractModel, id: int) -> AbstractModel:
         '''
         Получить модель из БД
         '''
-        return self.get_one(model).model()
+        return self.get_one(model, id).model()
 
 
-    def get_ones_models(self, model: AbstractModel) -> list[AbstractModel]:
+    def get_ones_models(self, model: AbstractModel, id: int) -> list[AbstractModel]:
         '''
         Получить все модели всех обектов совпадающих с моделью
         '''
-        return [table.model() for table in self.get_ones(model)]
+        return [table.model() for table in self.get_ones(model, id)]
             
     # TODO: Сделать get с фильтрацией
 
-    def add(self, model: AbstractModel):
+    def add(self, model: AbstractModel) -> bool: 
         '''
         Добавление модели в БД
         '''
@@ -77,5 +83,27 @@ class DBHelper:
         # TODO: проверка на корректность объекта и возможность его добавления
         self.session.add(table_object)
         self.session.commit()
+
+        return True
+
+
+    def update(self, model: AbstractModel) -> bool:
+        '''
+        Обновление данных соотвутсвующих модели в БД
+        '''
+        current_table_object = table_factory.create(model)
+        was_table_object = self.get_one(model, model.id)
+        
+        current_vars = set([var for var in vars(current_table_object) if not var.startswith('_')])
+        was_vars = set([var for var in vars(was_table_object) if not var.startswith('_')])
+        all_vars = current_vars & was_vars
+
+        for var in all_vars:
+            if getattr(current_table_object, var) != getattr(was_table_object, var):
+                setattr(was_table_object, var, getattr(current_table_object, var))
+        
+        self.session.commit()
+
+        return True
         
 

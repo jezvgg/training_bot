@@ -1,4 +1,4 @@
-from Src.Models import Message
+from Src.Models.Message import Message
 
 
 class Dialogue_manager:
@@ -8,13 +8,14 @@ class Dialogue_manager:
     messages: dict[int, Message]
 
 
-    def __init__(self, messages: dict[int, Message]):
+    def __init__(self, messages: list[Message]):
         '''
         Args:
-            messages - словарь, где ключ - id сообщения, а value - сообщение (Message)
+            messages - список моделей Message
         '''
-        # TODO: добавить проверку messages на корректность
-        self.messages = messages
+        self.messages = {}
+        for message in messages:
+            self.messages[message.id] = message
 
 
     def get_start(self):
