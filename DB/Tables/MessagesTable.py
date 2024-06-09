@@ -1,8 +1,8 @@
-from DB.Tables import Base
+from DB.Tables import BaseTable
 from sqlalchemy import Column, Integer, String
 
 
-class MessagesTable(Base):
+class MessagesTable(BaseTable):
     __tablename__ = 'messages'
     
     id = Column("id", Integer, unique=True, primary_key=True)
@@ -12,6 +12,3 @@ class MessagesTable(Base):
     def __init__(self, id:int, text: str):
         self.id = id
         self.text = text
-
-
-    def __repr__(self): return f"Message({self.id}, '{self.text}')"
