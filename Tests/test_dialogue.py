@@ -1,11 +1,11 @@
 import unittest
 from Src.Models import *
-from Src.Dialogue_manager import Dialogue_manager
+from Src.dialogue_manager import dialogue_manager
 
 
 class test_dialogue(unittest.TestCase):
     '''
-    Тестирование способности бота введения диалога (Dialogue_manager)
+    Тестирование способности бота введения диалога (dialogue_manager)
     '''
     def test_dialogue_messages(self):
         msg1 = Message(1, 'Первое сообщение', 2)
@@ -18,7 +18,7 @@ class test_dialogue(unittest.TestCase):
                     3: msg3,
                     4: msg4}
 
-        manager = Dialogue_manager(messages)
+        manager = dialogue_manager(messages)
 
         first_msg = manager.get_start()
         assert first_msg == msg1

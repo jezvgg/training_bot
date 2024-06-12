@@ -10,7 +10,8 @@ class table_factory:
     __map: dict[AbstractModel, BaseTable] = {
         Keyboard: KeyboardsTable,
         User: UserTable,
-        Message: DialogueTable   
+        Message: DialogueTable,
+        Command: CommandsTable
     }
 
 

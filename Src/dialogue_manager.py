@@ -1,11 +1,12 @@
-from Src.Models.Message import Message
+from Src.Models import Message
 
 
-class Dialogue_manager:
+# TODO: Сделать из этого итератор
+class dialogue_manager:
     '''
     Класс для работы и управлением сообщениями.
     '''
-    messages: dict[int, Message]
+    __messages: dict[int, Message]
 
 
     def __init__(self, messages: list[Message]):
@@ -13,24 +14,24 @@ class Dialogue_manager:
         Args:
             messages - список моделей Message
         '''
-        self.messages = {}
+        self.__messages = {}
         for message in messages:
-            self.messages[message.id] = message
+            self.__messages[message.id] = message
 
 
     def get_start(self):
         '''
         Получить стартовое сообщение (первое)
         '''
-        key = list(self.messages.keys())[0]
-        return self.messages[key]
+        key = list(self.__messages.keys())[0]
+        return self.__messages[key]
 
 
     def get_next(self, message: Message):
         '''
         Получить следующее сообщние от текущего.
         '''
-        if message.next_message_id not in self.messages.keys():
+        if message.next_message_id not in self.__messages.keys():
             raise Exception('Невозможно получить следующее сообщение. Оно отсутствует.')
 
-        return self.messages[message.next_message_id]
+        return self.__messages[message.next_message_id]
