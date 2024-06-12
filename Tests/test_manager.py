@@ -1,6 +1,7 @@
 import unittest
 from Src.Models import *
 from Src.dialogue_manager import dialogue_manager
+from Src.commands_manager import command_manager
 
 
 class test_dialogue(unittest.TestCase):
@@ -13,10 +14,10 @@ class test_dialogue(unittest.TestCase):
         msg3 = Message(3, 'Последнее сообщение', 4)
         msg4 = Message(4, 'Рекурсионное сообщение', 3)
 
-        messages = {1: msg1,
-                    2: msg2,
-                    3: msg3,
-                    4: msg4}
+        messages = [msg1,
+                    msg2,
+                    msg3,
+                    msg4]
 
         manager = dialogue_manager(messages)
 
@@ -36,4 +37,23 @@ class test_dialogue(unittest.TestCase):
         assert to_recursion_msg == msg4
         print(to_recursion_msg.text)
 
+
+    def test_commands_manager(self):
+
+        msg1 = Message(1, 'Первое сообщение', 2)
+        msg2 = Message(2, 'Второе сообщение', 4)
+        msg3 = Message(3, 'Последнее сообщение', 4)
+        msg4 = Message(4, 'Рекурсионное сообщение', 3)
+
+        commands = [Command('', msg1, 'start'),
+                    Command('', msg2, 'next'),
+                    Command('', msg3, 'training'),
+                    Command('', msg4, 'get_last')]
+
+        manager = command_manager(commands)
+
+        assert manager.get('/start') == msg1
+        assert manager.get('/next') == msg2
+        assert manager.get('/get_last') == msg4
+        
         

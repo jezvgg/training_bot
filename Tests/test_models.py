@@ -23,3 +23,12 @@ class test_models(unittest.TestCase):
 
         assert usr.current_message.id is not None
         assert usr.id is not None
+
+
+    def test_command_model(self):
+
+        msg = Message(1, 'Первое тестовое сообщение', 2)
+        cmd = Command('', msg, 'start')
+
+        assert cmd is not None
+        assert cmd.name == '/start'
