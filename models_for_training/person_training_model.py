@@ -14,7 +14,7 @@ class person_training_model(abstract_reference):
         super().__init__(name)
 
     @property
-    def workout(self)->list:
+    def workout(self)->list[workout_type]:
         return self.__workout
     
     @property

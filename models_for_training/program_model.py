@@ -4,8 +4,8 @@ from models_for_training.field_types.workout_type import workout_type
 
 class Weekly_program_model(abstract_reference):
     __is_male:bool=True
-    __workout:list=[]
-    __trainings:list=[]
+    __workout:list[workout_type]=[]
+    __trainings:dict[int:list[Block_model]]={}
 
 
 
@@ -15,15 +15,15 @@ class Weekly_program_model(abstract_reference):
     
 
     @property
-    def workout(self)->list:
+    def workout(self)->list[workout_type]:
         return self.__workout
     
     @property 
     def workouts_per_week(self)->int:
-        return len(self.__trainings)
+        return len(list(self.__trainings.keys()))
     
     @property
-    def trainings(self)->list:
+    def trainings(self)->dict[int:list[Block_model]]:
         return self.__trainings
     
     @is_male.setter
@@ -33,15 +33,14 @@ class Weekly_program_model(abstract_reference):
     def add_workout_type(self,value:workout_type)->None:
         self.__workout.append(value)
 
-    def add_training(self)->None:
-        if self.workouts_per_week<5:
-            self.__trainings.append([])
-        else:
-            raise Exception("MAXIMUM VALUE OF TRAININGS PER WEEK IS 5")
 
-    def add_block(self,block:Block_model,index:int=-1)->None:
-        try:
-            self.__trainings[index].append(block)
-        
-        except Exception as ex:
-            print(f'error {ex} occured')
+
+    def add_block(self,block:Block_model,day:int=1)->None:
+        if day >0 and day<6:
+            if day in self.__trainings.keys():
+
+                self.__trainings[day].append(block)
+            else:
+                self.__trainings[day]=[block]
+        else:
+            raise Exception("Day must be from 1 to 5")
