@@ -9,6 +9,9 @@ class test_dialogue(unittest.TestCase):
     Тестирование способности бота введения диалога (dialogue_manager)
     '''
     def test_dialogue_messages(self):
+        '''
+        Смотрим что у нас правильно получается первое сообщение и правильно работает переход между сообщениями.
+        '''
         msg1 = Message(1, 'Первое сообщение', 2)
         msg2 = Message(2, 'Второе сообщение', 4)
         msg3 = Message(3, 'Последнее сообщение', 4)
@@ -39,6 +42,9 @@ class test_dialogue(unittest.TestCase):
 
 
     def test_commands_manager(self):
+        '''
+        Смотрим что у нас правильно вызываются сообщения от команд
+        '''
 
         msg1 = Message(1, 'Первое сообщение', 2)
         msg2 = Message(2, 'Второе сообщение', 4)

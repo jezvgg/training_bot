@@ -11,6 +11,14 @@ class Command(AbstractModel):
 
 
     def __init__(self, description: str, message: Message, name: str) -> None:
+        '''
+        Модель команд бота (например /start)
+
+        Args:
+            description - описание команды (на будущее)
+            message - сообщение, к которому ведёт команда
+            name - сама команда (без черты)
+        '''
         self.__name: str = name
         self.__message: Message = message
         self.__description: str = description

@@ -10,7 +10,6 @@ class test_database(unittest.TestCase):
 
     dbh = DBHelper('test', '1111', '127.0.0.1', '5432', 'test')
 
-    # TODO: дописать тестирование
     def test_starting_database(self):
         '''
         Проверка на работоспособность подключения

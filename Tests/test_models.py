@@ -32,3 +32,11 @@ class test_models(unittest.TestCase):
 
         assert cmd is not None
         assert cmd.name == '/start'
+
+
+    def test_keyboard_model(self):
+
+        kbd = Keyboard(0, [{'Yes':0, 'No':1}])
+
+        assert kbd is not None
+        assert kbd.build_markup() is not None
