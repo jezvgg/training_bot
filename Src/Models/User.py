@@ -2,6 +2,9 @@ from Src.Models import Message, AbstractModel
 
 
 class User(AbstractModel):
+    '''
+    Модель пользователя
+    '''
     __telegram_id: int
     __subcribed: bool
     __current_message: Message
@@ -11,6 +14,17 @@ class User(AbstractModel):
 
 
     def __init__(self, is_use: bool, is_accepted: bool, username: str, current_message: Message, subcribed: bool, telegram_id: int) -> None:
+        '''
+        Модель пользователя
+
+        Args:
+            telegram_id - уникальный номер пользователя, из телеграма
+            subscribed - флаг, подписаный пользователь
+            current_message - сообщение на котором остановился пользователь
+            username - имя пользователя
+            is_accepted - принял ли условия соглашения пользователь
+            is_use - если false значит забанен
+        '''
         self.__telegram_id: int = telegram_id
         self.__subcribed: bool = subcribed
         self.__current_message: Message = current_message

@@ -10,7 +10,6 @@ class test_database(unittest.TestCase):
 
     dbh = DBHelper('test', '1111', '127.0.0.1', '5432', 'test')
 
-    # TODO: дописать тестирование
     def test_starting_database(self):
         '''
         Проверка на работоспособность подключения
@@ -31,7 +30,7 @@ class test_database(unittest.TestCase):
     def test_get_one(self):
         user = self.dbh.get(User)[0].model()
 
-        result = self.dbh.get_one(user)
+        result = self.dbh.get_one(user, user.id)
 
         assert result is not None
 
@@ -39,7 +38,7 @@ class test_database(unittest.TestCase):
     def test_get_ones(self):
         user = self.dbh.get(User)[0].model()
 
-        result = self.dbh.get_ones(user)
+        result = self.dbh.get_ones(user, user.id)
 
         assert result is not None
         assert len(result) > 0
@@ -56,7 +55,7 @@ class test_database(unittest.TestCase):
     def test_get_one_model(self):
         user = self.dbh.get_models(User)[0]
 
-        result = self.dbh.get_one_model(user)
+        result = self.dbh.get_one_model(user, user.id)
 
         assert result is not None
         assert type(result) == User
@@ -65,9 +64,25 @@ class test_database(unittest.TestCase):
     def test_get_ones_models(self):
         user = self.dbh.get_models(User)[0]
 
-        result = self.dbh.get_ones_models(user)
+        result = self.dbh.get_ones_models(user, user.id)
 
         assert result is not None
         assert len(result) > 0
         assert type(result[0]) == User
         
+
+    def test_add(self):
+        user = User(True, False, '', Message.error_message(), False, 1)
+        
+        result = self.dbh.add(user)
+
+        assert type(result) is bool
+
+    
+    def test_update(self):
+        user = self.dbh.get_models(User)[0]
+
+        user.username = user.username + '_'
+        result = self.dbh.update(user)
+
+        assert result is True

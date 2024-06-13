@@ -12,9 +12,9 @@ class DBHelper(object):
     session: Session
     engine: Engine
 
+
     def __init__(self, user: str, password: str, host: str, port: str, database: str):
         url = f"postgresql://{user}:{password}@{host}:{port}/{database}"
-        # TODO: сделать проверку на наличие БД
         self.engine = create_engine(url, echo=False)
 
         Base.metadata.create_all(bind=self.engine)
@@ -72,14 +72,15 @@ class DBHelper(object):
         Получить все модели всех обектов совпадающих с моделью
         '''
         return [table.model() for table in self.get_ones(model, id)]
-            
-    # TODO: Сделать get с фильтрацией
+
 
     def add(self, model: AbstractModel) -> bool: 
         '''
         Добавление модели в БД
         '''
         table_object = table_factory.create(model)
+        if self.get_one_model(model, model.id) is not None:
+            return False
         # TODO: проверка на корректность объекта и возможность его добавления
         self.session.add(table_object)
         self.session.commit()

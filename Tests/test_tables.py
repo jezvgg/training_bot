@@ -64,6 +64,23 @@ class test_models(unittest.TestCase):
         assert keyboard is not None
 
 
+    def test_commands_table(self):
+        cmdt = CommandsTable('start', 0)
+
+        assert cmdt is not None
+
+        message = Message(1, 'Первое тестовое сообщение', 2)
+        command = Command('', message, 'start')
+
+        cmdt2 = CommandsTable.build(command)
+
+        assert cmdt2 is not None
+
+        command = cmdt.model()
+
+        assert command is not None
+
+
     def test_table_factory(self):
         message = Message(0, 'test text', 3)
         user = User(True, True, 'test username', message, True, 0)
