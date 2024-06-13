@@ -52,7 +52,7 @@ class telegram_service:
         '''
         Получить пользователя по id
         '''
-        if len(self.__db.get_ones(User, user_id)) == 0:
+        if not self.__db.get_ones(User, user_id):
             return self.create_user(user_id)
         
         return self.__db.get_one_model(User, user_id)

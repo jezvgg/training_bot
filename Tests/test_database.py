@@ -71,3 +71,19 @@ class test_database(unittest.TestCase):
         assert len(result) > 0
         assert type(result[0]) == User
         
+
+    def test_add(self):
+        user = User(True, False, '', Message.error_message(), False, 1)
+        
+        result = self.dbh.add(user)
+
+        assert type(result) is bool
+
+    
+    def test_update(self):
+        user = self.dbh.get_models(User)[0]
+
+        user.username = user.username + '_'
+        result = self.dbh.update(user)
+
+        assert result is True
