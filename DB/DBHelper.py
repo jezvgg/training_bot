@@ -12,6 +12,8 @@ class DBHelper(object):
     session: Session
     engine: Engine
 
+    # TODO: Добавить in
+
     def __init__(self, user: str, password: str, host: str, port: str, database: str):
         url = f"postgresql://{user}:{password}@{host}:{port}/{database}"
         # TODO: сделать проверку на наличие БД

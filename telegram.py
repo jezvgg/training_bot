@@ -2,8 +2,8 @@ from aiogram import Dispatcher, types, F
 from DB.DBHelper import DBHelper
 from Src.dialogue_manager import dialogue_manager
 from Src.commands_manager import command_manager
-from Src.Models import Message, User, Command
-from Src.event_handler import event_handler
+from Src.Models import Message, Command
+from Src.Services.telegram_service import telegram_service
 import os
 
 
@@ -11,74 +11,34 @@ db = DBHelper(os.environ['DB_USER'], os.environ['DB_PASSWORD'], os.environ['DB_H
               os.environ['DB_PORT'], os.environ['DB_NAME'])
 dialogue = dialogue_manager(db.get_models(Message))
 commands = command_manager(db.get_models(Command))
-user: User = None
+service = telegram_service(dialogue, commands, db)
 
 
 async def command_handler(message: types.Message):
-    print(message.from_user.full_name)
-    # Создаём нового пользователя, если его нет в БД
-    if len(db.get_ones(User, message.from_user.id)) == 0:
-        user_message = commands.get(message.text)
-        user = User(True, False, message.from_user.full_name, user_message, False, message.from_user.id)
-        db.add(user)
-    else:
-        user = db.get_one_model(User, message.from_user.id)
-        user.current_message = commands.get(message.text)
-        db.update(user)
+    user = service.get_user(message.from_user.id)
 
-    text = user.current_message.text
+    user.current_message = commands.get(message.text)
+    db.update(user)
 
-    if user.current_message.event_name:
-        event = event_handler.get_event(user.current_message.event_name).activate(user, message)
-        text = text.format(event=event)
-
-    if user.current_message.keyboard: 
-        await message.answer(text, reply_markup=user.current_message.keyboard.build_markup())
-    else: await message.answer(text)
+    await message.answer(**service.create_answer(user)) 
 
 
 async def message_handler(message: types.Message):
-    print(message.from_user.full_name)
-    # Создаём нового пользователя, если его нет в БД
-    if len(db.get_ones(User, message.from_user.id)) == 0:
-        user_message = dialogue.get_start()
-        user = User(True, False, message.from_user.full_name, user_message, False, message.from_user.id)
-        db.add(user)
-    else:
-        user = db.get_one_model(User, message.from_user.id)
-        user.current_message = dialogue.get_next(user.current_message)
-        db.update(user)
+    user = service.get_user(message.from_user.id)
 
-    text = user.current_message.text
+    user.current_message = dialogue.get_next(user.current_message)
+    db.update(user)
 
-    if user.current_message.event_name:
-        event = event_handler.get_event(user.current_message.event_name).activate(user, message)
-        text = text.format(event=event)
-
-    if user.current_message.keyboard: 
-        await message.answer(text, reply_markup=user.current_message.keyboard.build_markup())
-    else: await message.answer(text)
+    await message.answer(**service.create_answer(user))
 
 
 async def callback_handler(callback: types.CallbackQuery):
-    if len(db.get_ones(User, callback.from_user.id)) == 0:
-        user_message = dialogue.get(int(callback.data))
-        user = User(True, False, callback.from_user.full_name, user_message, False, callback.from_user.id)
-        db.add(user)
-    else:
-        user = db.get_one_model(User, callback.from_user.id)
-        user.current_message = dialogue.get(int(callback.data))
-        db.update(user)
+    user = service.get_user(callback.from_user.id)
 
-    text = user.current_message.text
+    user.current_message = dialogue.get(int(callback.data))
+    db.update(user)
 
-    if user.current_message.event_name:
-        event = event_handler.get_event(user.current_message.event_name).activate(user, callback.message)
-        text = text.format(event=event)
-
-    if user.current_message.keyboard: 
-        await callback.message.answer(text, reply_markup=user.current_message.keyboard.build_markup())
-    else: await callback.message.answer(text)
+    await callback.message.answer(**service.create_answer(user))
 
 
 def register_handlers(dp: Dispatcher):
