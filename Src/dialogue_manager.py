@@ -31,7 +31,14 @@ class dialogue_manager:
         '''
         Получить следующее сообщние от текущего.
         '''
-        if message.next_message_id not in self.__messages.keys():
+        return self.get(message.next_message_id)
+
+
+    def get(self, message_id: int):
+        '''
+        Получить сообщение по id (для Callback'ов)
+        '''
+        if message_id not in self.__messages.keys():
             raise Exception('Невозможно получить следующее сообщение. Оно отсутствует.')
 
-        return self.__messages[message.next_message_id]
+        return self.__messages[message_id]

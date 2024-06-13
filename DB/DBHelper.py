@@ -75,6 +75,7 @@ class DBHelper(object):
             
     # TODO: Сделать get с фильтрацией
 
+    # TODO: Сделать add и update с таблицами
     def add(self, model: AbstractModel) -> bool: 
         '''
         Добавление модели в БД

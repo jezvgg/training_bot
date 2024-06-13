@@ -32,7 +32,9 @@ async def command_handler(message: types.Message):
         event = event_handler.get_event(user.current_message.event_name).activate(user, message)
         text = text.format(event=event)
 
-    await message.answer(text)
+    if user.current_message.keyboard: 
+        await message.answer(text, reply_markup=user.current_message.keyboard.build_markup())
+    else: await message.answer(text)
 
 
 async def message_handler(message: types.Message):
@@ -53,9 +55,33 @@ async def message_handler(message: types.Message):
         event = event_handler.get_event(user.current_message.event_name).activate(user, message)
         text = text.format(event=event)
 
-    await message.answer(text)
+    if user.current_message.keyboard: 
+        await message.answer(text, reply_markup=user.current_message.keyboard.build_markup())
+    else: await message.answer(text)
+
+
+async def callback_handler(callback: types.CallbackQuery):
+    if len(db.get_ones(User, callback.from_user.id)) == 0:
+        user_message = dialogue.get(int(callback.data))
+        user = User(True, False, callback.from_user.full_name, user_message, False, callback.from_user.id)
+        db.add(user)
+    else:
+        user = db.get_one_model(User, callback.from_user.id)
+        user.current_message = dialogue.get(int(callback.data))
+        db.update(user)
+
+    text = user.current_message.text
+
+    if user.current_message.event_name:
+        event = event_handler.get_event(user.current_message.event_name).activate(user, callback.message)
+        text = text.format(event=event)
+
+    if user.current_message.keyboard: 
+        await callback.message.answer(text, reply_markup=user.current_message.keyboard.build_markup())
+    else: await callback.message.answer(text)
 
 
 def register_handlers(dp: Dispatcher):
     dp.message.register(command_handler, F.text.startswith('/'))
     dp.message.register(message_handler, F.text)
+    dp.callback_query.register(callback_handler, F.data)
