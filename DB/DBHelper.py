@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker, Session, Query
 from sqlalchemy import create_engine, Engine
 from DB.table_factory import table_factory
 from Src.Models import AbstractModel
+from Src.settings import settings
 
 
 class DBHelper(object):
@@ -13,8 +14,8 @@ class DBHelper(object):
     engine: Engine
 
 
-    def __init__(self, user: str, password: str, host: str, port: str, database: str):
-        url = f"postgresql://{user}:{password}@{host}:{port}/{database}"
+    def __init__(self, config: settings):
+        url = "postgresql://{user}:{password}@{host}:{port}/{database}".format(**config.database_kwargs())
         self.engine = create_engine(url, echo=False)
 
         Base.metadata.create_all(bind=self.engine)

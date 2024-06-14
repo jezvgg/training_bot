@@ -1,8 +1,9 @@
 from DB.DBHelper import DBHelper
 from Src.dialogue_manager import dialogue_manager
 from Src.commands_manager import command_manager
-from Src.Models import User, Message
+from Src.Models import User
 from Src.event_handler import event_handler
+from aiogram import types
 
 
 class telegram_service:
@@ -15,20 +16,20 @@ class telegram_service:
 
 
     @staticmethod
-    def create_answer(user: User, message: Message = None) -> dict:
+    def create_answer(user: User, message: types.Message = None) -> dict:
         '''
         Создать аргументы для ответа в телеграм
         '''
         if not message: message = user.current_message
         
-        answer_kwargs = {'text':message.text}
+        answer_kwargs = {'text': user.current_message.text}
 
-        if message.event_name:
-            event = event_handler.get_event(message.event_name).activate(user, message)
+        if user.current_message.event_name:
+            event = event_handler.get_event(user.current_message.event_name).activate(user, message)
             answer_kwargs['text'] = answer_kwargs['text'].format(event=event)
 
-        if message.keyboard: 
-            answer_kwargs['reply_markup'] = message.keyboard.build_markup()
+        if user.current_message.keyboard: 
+            answer_kwargs['reply_markup'] = user.current_message.keyboard.build_markup()
 
         return answer_kwargs
 
