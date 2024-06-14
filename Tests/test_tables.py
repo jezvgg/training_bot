@@ -8,6 +8,15 @@ class test_models(unittest.TestCase):
     '''
     Проверка создания моделей таблиц, их функций (если таковые есть) и фабричных методов.
     '''
+
+    def test_base_table(self):
+
+        bt = BaseTable.build(AbstractModel)
+
+        assert bt is not None
+
+        assert bt.__repr__() != ''
+        
     
     def test_user_table(self):
         ut = UserTable(0, True, 0, True, True)
