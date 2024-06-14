@@ -4,11 +4,10 @@ from Src.dialogue_manager import dialogue_manager
 from Src.commands_manager import command_manager
 from Src.Models import Message, Command
 from Src.Services.telegram_service import telegram_service
-import os
+from Src.settings import settings
 
 
-db = DBHelper(os.environ['DB_USER'], os.environ['DB_PASSWORD'], os.environ['DB_HOST'],
-              os.environ['DB_PORT'], os.environ['DB_NAME'])
+db = DBHelper(settings.from_env())
 dialogue = dialogue_manager(db.get_models(Message))
 commands = command_manager(db.get_models(Command))
 service = telegram_service(dialogue, commands, db)
@@ -20,7 +19,7 @@ async def command_handler(message: types.Message):
     user.current_message = commands.get(message.text)
     db.update(user)
 
-    await message.answer(**service.create_answer(user)) 
+    await message.answer(**service.create_answer(user, message)) 
 
 
 async def message_handler(message: types.Message):
@@ -29,7 +28,7 @@ async def message_handler(message: types.Message):
     user.current_message = dialogue.get_next(user.current_message)
     db.update(user)
 
-    await message.answer(**service.create_answer(user))
+    await message.answer(**service.create_answer(user, message))
 
 
 async def callback_handler(callback: types.CallbackQuery):
@@ -38,7 +37,7 @@ async def callback_handler(callback: types.CallbackQuery):
     user.current_message = dialogue.get(int(callback.data))
     db.update(user)
 
-    await callback.message.answer(**service.create_answer(user))
+    await callback.message.answer(**service.create_answer(user, callback.message))
 
 
 def register_handlers(dp: Dispatcher):

@@ -1,11 +1,19 @@
 import unittest
 from Src.Models import *
+from Src.settings import settings
 
 
 class test_models(unittest.TestCase):
     '''
     Проверка создания моделей, их функций (если таковые есть) и фабричных методов.
     '''
+
+    def test_settings_model(self):
+        
+        sets = settings('test', '1111', '127.0.0.1', '5432', 'test', 'token')
+
+        assert sets is not None
+
 
     def test_message_model(self):
         

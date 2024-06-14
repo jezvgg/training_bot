@@ -1,5 +1,6 @@
 from DB.DBHelper import DBHelper
 from Src.Models import *
+from Src.settings import settings
 import unittest
 
 
@@ -7,8 +8,8 @@ class test_database(unittest.TestCase):
     '''
     Тестирование работы и связи с базой данных
     '''
-
-    dbh = DBHelper('test', '1111', '127.0.0.1', '5432', 'test')
+    sets = settings('test', '1111', '127.0.0.1', '5432', 'test', 'token')
+    dbh = DBHelper(sets)
 
     def test_starting_database(self):
         '''
@@ -16,7 +17,7 @@ class test_database(unittest.TestCase):
         '''
 
         # Спецальная роль в PostgreSQL
-        dbh = DBHelper('test', '1111', '127.0.0.1', '5432', 'test')
+        dbh = DBHelper(self.sets)
 
         assert dbh is not None
 
