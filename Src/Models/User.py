@@ -13,7 +13,7 @@ class User(AbstractModel):
     __is_use: bool
 
 
-    def __init__(self, is_use: bool, is_accepted: bool, username: str, current_message: Message, subcribed: bool, telegram_id: int) -> None:
+    def __init__(self, is_use: bool, is_accepted: bool, username: str, current_message: Message, subscribed: bool, id: int) -> None:
         '''
         Модель пользователя
 
@@ -25,8 +25,8 @@ class User(AbstractModel):
             is_accepted - принял ли условия соглашения пользователь
             is_use - если false значит забанен
         '''
-        self.__telegram_id: int = telegram_id
-        self.__subcribed: bool = subcribed
+        self.__telegram_id: int = id
+        self.__subcribed: bool = subscribed
         self.__current_message: Message = current_message
         self.__username: str = username
         self.__is_accepted: bool = is_accepted
@@ -39,12 +39,12 @@ class User(AbstractModel):
 
 
     @property
-    def subcribed(self) -> bool:
+    def subscribed(self) -> bool:
         return self.__subcribed
 
 
-    @subcribed.setter
-    def subcribed(self, value : bool) -> None:
+    @subscribed.setter
+    def subscribed(self, value : bool) -> None:
         self.__subcribed = value
 
 

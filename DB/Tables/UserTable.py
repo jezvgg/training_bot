@@ -17,16 +17,10 @@ class UserTable(BaseTable):
     _current_message = relationship("DialogueTable")
 
 
-    @staticmethod
-    def build(model: User):
-        return UserTable(model.id, model.subcribed, model.current_message.id, 
-        model.is_accepted, model.is_use, model.username)
-
-
-    def __init__(self, id: int, subs: bool, current_message: int, 
+    def __init__(self, id: int, subscribed: bool, current_message: int, 
                 is_accepted: bool, is_use: bool, username: str = None):
         self.id = id
-        self.subscribed = subs
+        self.subscribed = subscribed
         self.current_message = current_message
         self.is_accepted = is_accepted
         self.is_use = is_use
@@ -34,9 +28,5 @@ class UserTable(BaseTable):
 
 
     def model(self) -> User:
-        # LOGGING: Тут должен быть варнинг, что self._current_message пустой
-        args = [self.is_use, self.is_accepted, self.username]
-        if self._current_message: args += [self._current_message.model(), self.subscribed, self.id]
-        else: args += [Message.error_message(),  self.subscribed, self.id]
-        return User(*args)
+        return self._convert(User, current_message=Message.error_message())
     
