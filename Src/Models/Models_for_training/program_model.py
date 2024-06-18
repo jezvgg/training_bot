@@ -14,7 +14,6 @@ class Weekly_program_model(abstract_reference):
     @property
     def is_male(self)->bool:
         return self.__is_male
-    #перекинуть в инит работу со списками
 
     @property
     def workout(self)->list[workout_type]:

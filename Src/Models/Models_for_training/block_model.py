@@ -11,7 +11,7 @@ class  Block_model(abstract_reference):
     __exersices_criteria:list[list[muscle_type,location_type,pattern_type]]=field(default_factory=list[list[muscle_type,location_type,pattern_type]])
 
     def add_block(self)->None:
-        #TODO инвертировать логику, сделать массив пустым внутри инита (переменная класса не должна быть массивом)
+
         if self.count>8:
             raise Exception("MAXIMUM VALUE OF TRAININGS PER WEEK IS 8")
         self.__exersices_criteria.append([])

@@ -18,7 +18,7 @@ class Exercise_model(abstract_reference):
     __is_circular:bool=False
     #ссылка на статью
     __link:str=None
-    #TODO пустую строку тоже в инит
+
 
 
 

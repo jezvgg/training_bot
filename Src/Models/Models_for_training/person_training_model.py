@@ -8,18 +8,19 @@ from dataclasses import dataclass,field
 class person_training_model(abstract_reference):
     __is_male:bool=False
     __trains_per_week:int=0
-    __workout:list=field(default_factory=list)
+    __workout:list[workout_type]=field(default_factory=list[workout_type])
 
 
 
-    #TODO возвращать true
-    #тип воркаута, выбераем каждый раз
+
     
-    def add_workout(self,value:workout_type)->None:
+    def add_workout(self,value:workout_type)->bool:
         self.__workout.append(value)
+        return True
 
-    def clear_workout(self)->None:
+    def clear_workout(self)->bool:
         self.__workout.clear()
+        return True
 
     @property
     def workout(self)->list[workout_type]:
@@ -39,11 +40,11 @@ class person_training_model(abstract_reference):
     
     @trains_per_week.setter
     def trains_per_week(self,value:int)->None:
-        #TODO инвертировать логику
-        if value>0 and value <6:
-            self.__trains_per_week=value
-        else:
+
+        if value<0 or value >6:
             raise Exception("value must be between 1 and 5")
-    
+        self.__trains_per_week=value
+        
+
 
 

@@ -21,13 +21,18 @@ class Training_prototype:
 
 
         for cur_program_model in self.__data:
+            
             if cur_program_model.is_male==user.is_male and \
             cur_program_model.workout==user.workout and \
-            cur_program_model.trainings==user.trains_per_week:
+            cur_program_model.workouts_per_week==user.trains_per_week:
                 result.append(cur_program_model)
         
 
         return Training_prototype(result)
+    
+    @property
+    def data(self):
+        return self.__data
 
 
 
