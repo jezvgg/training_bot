@@ -1,18 +1,20 @@
-from models_for_training.abstract_model import abstract_reference
-from models_for_training.block_model import Block_model
-from models_for_training.field_types.workout_type import workout_type
+from Src.Models.Models_for_training.abstract_model import abstract_reference
+from Src.Models.Models_for_training.block_model import Block_model
+from Src.Models.Models_for_training.Enums.workout_type import workout_type
+from dataclasses import dataclass, field
 
+@dataclass
 class Weekly_program_model(abstract_reference):
     __is_male:bool=True
-    __workout:list[workout_type]=[]
-    __trainings:dict[int:list[Block_model]]={}
+    __workout:list[workout_type]=field(default_factory=list[workout_type])
+    __trainings:dict[int:list[Block_model]]=field(default_factory=dict[int:list[Block_model]])
 
 
 
     @property
     def is_male(self)->bool:
         return self.__is_male
-    
+    #перекинуть в инит работу со списками
 
     @property
     def workout(self)->list[workout_type]:
@@ -36,6 +38,7 @@ class Weekly_program_model(abstract_reference):
 
 
     def add_block(self,block:Block_model,day:int=1)->None:
+        #TODO инвертировать логику
         if day >0 and day<6:
             if day in self.__trainings.keys():
 

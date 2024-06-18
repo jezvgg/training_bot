@@ -1,14 +1,12 @@
 from Src.Models.AbstractModel import AbstractModel
+from dataclasses import dataclass,field
 
-
+@dataclass
 class Keyboard(AbstractModel):
     __id: int
-    __data: list[list[int|str]]
+    __data: list[list[int|str]]=field(default_factory=list[list[int|str]])
 
 
-    def __init__(self, id:int, data: list[list[int|str]]) -> None:
-        self.__data: list[list[int|str]] = data
-        self.__id = id
 
 
     @property

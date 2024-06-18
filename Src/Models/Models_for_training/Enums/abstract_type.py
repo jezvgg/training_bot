@@ -1,4 +1,5 @@
 from abc import ABC
+from dataclasses import dataclass
 
 
 class abstract_type(ABC):

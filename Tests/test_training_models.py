@@ -1,12 +1,12 @@
 import unittest 
-from models_for_training.exercise_model import Exercise_model
-from models_for_training.block_model import Block_model
-from models_for_training.person_training_model import person_training_model
-from models_for_training.program_model import Weekly_program_model
-from models_for_training.field_types.pattern_type import pattern_type
-from models_for_training.field_types.muscle_type import muscle_type
-from models_for_training.field_types.location_type import location_type
-from models_for_training.field_types.workout_type import workout_type
+from Src.Models.Models_for_training.exercise_model import Exercise_model
+from Src.Models.Models_for_training.block_model import Block_model
+from Src.Models.Models_for_training.person_training_model import person_training_model
+from Src.Models.Models_for_training.program_model import Weekly_program_model
+from Src.Models.Models_for_training.Enums.pattern_type import pattern_type
+from Src.Models.Models_for_training.Enums.muscle_type import muscle_type
+from Src.Models.Models_for_training.Enums.location_type import location_type
+from Src.Models.Models_for_training.Enums.workout_type import workout_type
 
 class test_models_for_training(unittest.TestCase):
 

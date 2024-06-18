@@ -1,5 +1,5 @@
 #тогда проще будет сделать поля типа bool: home, gym и берём данные оттуда
-from models_for_training.field_types.abstract_type import abstract_type
+from Src.Models.Models_for_training.Enums.abstract_type import abstract_type
 
 #класс для локации
 class location_type(abstract_type):

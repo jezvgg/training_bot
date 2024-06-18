@@ -20,6 +20,7 @@ class test_models(unittest.TestCase):
 
         msg = Message(1, 'Первое тестовое сообщение', 2)
         usr = User(True, True, 'Username', msg, False, 113133313)
+        User()
 
         assert usr.current_message.id is not None
         assert usr.id is not None

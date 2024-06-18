@@ -1,22 +1,21 @@
 from Src.Models import Message, AbstractModel
+from dataclasses import dataclass,field
 
-
+@dataclass
 class User(AbstractModel):
-    __telegram_id: int
-    __subcribed: bool
-    __current_message: Message
-    __username: str
-    __is_accepted: bool
     __is_use: bool
+    __is_accepted: bool
+    __username: str
+    __current_message: Message
+    __subcribed: bool
+    __telegram_id: int
 
 
-    def __init__(self, is_use: bool, is_accepted: bool, username: str, current_message: Message, subcribed: bool, telegram_id: int) -> None:
-        self.__telegram_id: int = telegram_id
-        self.__subcribed: bool = subcribed
-        self.__current_message: Message = current_message
-        self.__username: str = username
-        self.__is_accepted: bool = is_accepted
-        self.__is_use: bool = is_use
+
+
+
+
+
 
 
     @property

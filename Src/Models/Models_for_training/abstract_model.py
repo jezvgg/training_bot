@@ -1,13 +1,12 @@
 from abc import ABC
+from dataclasses import dataclass
 
-
+@dataclass
 class abstract_reference(ABC):
 
     __name:str = ""
 
     
-    def __init__(self, name: str = "untituled") -> None:
-        self.name = name
 
     @property    
     def name(self)->str:

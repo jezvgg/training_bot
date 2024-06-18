@@ -1,10 +1,12 @@
-from models_for_training.abstract_model import abstract_reference
-from models_for_training.field_types.muscle_type import muscle_type
-from models_for_training.field_types.location_type import location_type
-from models_for_training.field_types.pattern_type import pattern_type
-
+from Src.Models.Models_for_training.abstract_model import abstract_reference
+from Src.Models.Models_for_training.Enums.muscle_type import muscle_type
+from Src.Models.Models_for_training.Enums.location_type import location_type
+from Src.Models.Models_for_training.Enums.pattern_type import pattern_type
+from dataclasses import dataclass
 #пока должно быть поле текст, через которое генерим статью в тг
 
+
+@dataclass
 class Exercise_model(abstract_reference):
     __description:str=''
     __technique:str=''
@@ -14,7 +16,11 @@ class Exercise_model(abstract_reference):
     __muscle:muscle_type=None
     __locations:location_type=None
     __is_circular:bool=False
-    # __tolerance=0
+    #ссылка на статью
+    __link:str=None
+    #TODO пустую строку тоже в инит
+
+
 
     @property
     def description(self)->str:
@@ -81,5 +87,3 @@ class Exercise_model(abstract_reference):
         self.__is_circular=value
     
 
-    def __init__(self, name: str = "untituled") -> None:
-        super().__init__(name)

@@ -13,10 +13,10 @@ class test_dialogue(unittest.TestCase):
         msg3 = Message(3, 'Последнее сообщение', 4)
         msg4 = Message(4, 'Рекурсионное сообщение', 3)
 
-        messages = {1: msg1,
-                    2: msg2,
-                    3: msg3,
-                    4: msg4}
+        messages = [ msg1,
+                     msg2,
+                     msg3,
+                     msg4]
 
         manager = Dialogue_manager(messages)
 
