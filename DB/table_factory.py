@@ -20,6 +20,7 @@ class table_factory:
         '''
         Получить класс таблицы соответсвющий моделе
         '''
+        print(model)
         if model not in cls.__map.keys() and type(model) not in cls.__map.keys():
             raise Exception('Конвертация модели невозможна. Нет подходящей таблицы в фабрике.')
 
