@@ -1,4 +1,4 @@
-from DB.DBHelper import DBHelper
+from DB.DBHelper import DBInterface
 from Src.dialogue_manager import dialogue_manager
 from Src.commands_manager import command_manager
 from Src.Models import User
@@ -10,7 +10,7 @@ class telegram_service:
     '''
     Сервис реализующий логику работы телеграм эндпоинт
     '''
-    __db: DBHelper
+    __db: DBInterface
     __dilogue: dialogue_manager
     __commands: command_manager
 
@@ -34,7 +34,7 @@ class telegram_service:
         return answer_kwargs
 
 
-    def __init__(self, dilogue: dialogue_manager, commands: command_manager, helper: DBHelper):
+    def __init__(self, dilogue: dialogue_manager, commands: command_manager, helper: DBInterface):
         self.__db = helper
         self.__dilogue = dilogue
         self.__commands = commands
@@ -56,4 +56,4 @@ class telegram_service:
         if not self.__db.get_ones(User, user_id):
             return self.create_user(user_id)
         
-        return self.__db.get_one_model(User, user_id)
+        return self.__db.get_one(User, user_id)

@@ -23,30 +23,30 @@ class test_database(unittest.TestCase):
 
 
     def test_get(self):
-        result = self.dbh.get(User)
+        result = self.dbh._get(User)
 
         assert result is not None
 
 
     def test_get_one(self):
-        user = self.dbh.get(User)[0].model()
+        user = self.dbh._get(User)[0].model()
 
-        result = self.dbh.get_one(user, user.id)
+        result = self.dbh._get_one(user, user.id)
 
         assert result is not None
 
 
     def test_get_ones(self):
-        user = self.dbh.get(User)[0].model()
+        user = self.dbh._get(User)[0].model()
 
-        result = self.dbh.get_ones(user, user.id)
+        result = self.dbh._get_ones(user, user.id)
 
         assert result is not None
         assert len(result) > 0
 
 
     def test_get_models(self):
-        result = self.dbh.get_models(User)
+        result = self.dbh.get(User)
 
         assert result is not None
         assert len(result) > 0
@@ -54,18 +54,18 @@ class test_database(unittest.TestCase):
 
 
     def test_get_one_model(self):
-        user = self.dbh.get_models(User)[0]
+        user = self.dbh.get(User)[0]
 
-        result = self.dbh.get_one_model(user, user.id)
+        result = self.dbh.get_one(user, user.id)
 
         assert result is not None
         assert type(result) == User
 
 
     def test_get_ones_models(self):
-        user = self.dbh.get_models(User)[0]
+        user = self.dbh.get(User)[0]
 
-        result = self.dbh.get_ones_models(user, user.id)
+        result = self.dbh.get_ones(user, user.id)
 
         assert result is not None
         assert len(result) > 0
@@ -81,7 +81,7 @@ class test_database(unittest.TestCase):
 
     
     def test_update(self):
-        user = self.dbh.get_models(User)[0]
+        user = self.dbh.get(User)[0]
 
         user.username = user.username + '_'
         result = self.dbh.update(user)

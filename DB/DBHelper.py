@@ -4,9 +4,10 @@ from sqlalchemy import create_engine, Engine
 from DB.table_factory import table_factory
 from Src.Models import AbstractModel
 from Src.settings import settings
+from DB.DBInterface import DBInterface
 
 
-class DBHelper(object):
+class DBHelper(DBInterface):
     '''
     Класс для работы с БД
     '''
@@ -24,75 +25,48 @@ class DBHelper(object):
         self.session = Session()
 
 
-    def __new__(cls, *args):
-        if not hasattr(cls, 'instance'):
-            cls.instance = super(DBHelper, cls).__new__(cls)
-        return cls.instance
-
-
-    def get(self, model: AbstractModel) -> Query[BaseTable]:
-        '''
-        Получить таблицу данных соответствующую модели
-        '''
-        # TODO: Сделать проверку на наличие модели в фабрике
+    def _get(self, model: AbstractModel) -> Query[BaseTable]:
         return self.session.query(table_factory.get(model))
 
 
-    def get_one(self, model: AbstractModel, id: int) -> BaseTable:
-        '''
-        Получить данные объекта из БД
-        '''
+    def _get_one(self, model: AbstractModel, id: int) -> BaseTable:
         table = table_factory.get(model)
         return self.session.query(table).filter(table.id == id).one()
 
 
-    def get_ones(self, model: AbstractModel, id: int) -> list[BaseTable]:
-        '''
-        Получить все данные всех обектов совпадающих с моделью
-        '''
+    def _get_ones(self, model: AbstractModel, id: int) -> list[BaseTable]:
         table = table_factory.get(model)
         return self.session.query(table).filter(table.id == id).all()
 
 
-    def get_models(self, model: AbstractModel) -> list[AbstractModel]:
-        '''
-        Получить модели из таблицы данных соответствующей модели
-        '''
-        return [table.model() for table in self.get(model)]
+    def get(self, model: AbstractModel) -> list[AbstractModel]:
+        return [table.model() for table in self._get(model)]
 
 
-    def get_one_model(self, model: AbstractModel, id: int) -> AbstractModel:
-        '''
-        Получить модель из БД
-        '''
-        return self.get_one(model, id).model()
+    def get_one(self, model: AbstractModel, id: int) -> AbstractModel:
+        return self._get_one(model, id).model()
 
 
-    def get_ones_models(self, model: AbstractModel, id: int) -> list[AbstractModel]:
-        '''
-        Получить все модели всех обектов совпадающих с моделью
-        '''
-        return [table.model() for table in self.get_ones(model, id)]
+    def get_ones(self, model: AbstractModel, id: int) -> list[AbstractModel]:
+        return [table.model() for table in self._get_ones(model, id)]
 
 
-    def add(self, model: AbstractModel) -> bool: 
-        '''
-        Добавление модели в БД
-        '''
-        table_object = table_factory.create(model)
-        if self.get_one_model(model, model.id) is not None:
-            return False
-        # TODO: проверка на корректность объекта и возможность его добавления
-        self.session.add(table_object)
+    def _add(self, table: BaseTable) -> bool:
+        self.session.add(table)
         self.session.commit()
 
         return True
 
 
+    def add(self, model: AbstractModel) -> bool: 
+        table_object = table_factory.create(model)
+        if self.get_one(model, model.id) is not None:
+            return False
+
+        return self._add(table_object)
+
+
     def update(self, model: AbstractModel) -> bool:
-        '''
-        Обновление данных соотвутсвующих модели в БД
-        '''
         current_table_object = table_factory.create(model)
         was_table_object = self.get_one(model, model.id)
         
