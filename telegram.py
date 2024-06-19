@@ -8,8 +8,8 @@ from Src.settings import settings
 
 
 db = DBHelper(settings.from_env())
-dialogue = dialogue_manager(db.get_models(Message))
-commands = command_manager(db.get_models(Command))
+dialogue = dialogue_manager(db.get(Message))
+commands = command_manager(db.get(Command))
 service = telegram_service(dialogue, commands, db)
 
 

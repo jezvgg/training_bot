@@ -68,7 +68,7 @@ class DBHelper(DBInterface):
 
     def update(self, model: AbstractModel) -> bool:
         current_table_object = table_factory.create(model)
-        was_table_object = self.get_one(model, model.id)
+        was_table_object = self._get_one(model, model.id)
         
         current_vars = set([var for var in vars(current_table_object) if not var.startswith('_')])
         was_vars = set([var for var in vars(was_table_object) if not var.startswith('_')])
@@ -77,7 +77,7 @@ class DBHelper(DBInterface):
         for var in all_vars:
             if getattr(current_table_object, var) != getattr(was_table_object, var):
                 setattr(was_table_object, var, getattr(current_table_object, var))
-        
+
         self.session.commit()
 
         return True

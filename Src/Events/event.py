@@ -5,6 +5,5 @@ from Src.Models import User
 
 class event(Protocol):
 
-    @staticmethod
-    def activate(user: User, message: message) -> str:
+    def activate(self, user: User, message: message) -> str:
         pass

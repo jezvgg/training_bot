@@ -13,10 +13,17 @@ class telegram_service:
     __db: DBInterface
     __dilogue: dialogue_manager
     __commands: command_manager
+    __events: event_handler
 
 
-    @staticmethod
-    def create_answer(user: User, message: types.Message = None) -> dict:
+    def __init__(self, dilogue: dialogue_manager, commands: command_manager, helper: DBInterface):
+        self.__db = helper
+        self.__dilogue = dilogue
+        self.__commands = commands
+        self.__events = event_handler(self.__db)
+
+
+    def create_answer(self, user: User, message: types.Message = None) -> dict:
         '''
         Создать аргументы для ответа в телеграм
         '''
@@ -25,19 +32,13 @@ class telegram_service:
         answer_kwargs = {'text': user.current_message.text}
 
         if user.current_message.event_name:
-            event = event_handler.get_event(user.current_message.event_name).activate(user, message)
+            event = self.__events.get_event(user.current_message.event_name).activate(user, message)
             answer_kwargs['text'] = answer_kwargs['text'].format(event=event)
 
         if user.current_message.keyboard: 
             answer_kwargs['reply_markup'] = user.current_message.keyboard.build_markup()
 
         return answer_kwargs
-
-
-    def __init__(self, dilogue: dialogue_manager, commands: command_manager, helper: DBInterface):
-        self.__db = helper
-        self.__dilogue = dilogue
-        self.__commands = commands
 
 
     def create_user(self, user_id: int, username: str = '') -> User:

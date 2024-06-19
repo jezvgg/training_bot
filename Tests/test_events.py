@@ -13,7 +13,7 @@ class test_events(unittest.TestCase):
         # Вместо сообщения телеграмма
         message = namedtuple('message', ['text'])
         mes = message('some text')
-        result = show_event.activate(user, mes)
+        result = show_event().activate(user, mes)
 
         assert result is not None
         assert result == 'done'
