@@ -1,9 +1,23 @@
 from Src.Events import *
+from DB.DBInterface import DBInterface
 
 
 class event_handler:
-    __map: dict[str, event] = {'show': show_event}
+    '''
+    Фабрика на ключевых словах, возращает класс ивента
+    '''
+    __map: dict[str, event]
 
-    @classmethod
-    def get_event(cls, eventname: str):
-        return cls.__map[eventname]
+
+    def __init__(self, db: DBInterface):
+        self.__map = {'show': show_event()}
+
+
+    def get_event(self, eventname: str):
+        '''
+        Получить ивент
+
+        Args:
+            eventname - название ивента
+        '''
+        return self.__map[eventname]

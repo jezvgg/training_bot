@@ -1,9 +1,9 @@
 import telegram
 from aiogram import Dispatcher, Bot
-import os
+from Src.settings import settings
 import asyncio
 
-bot = Bot(token=os.environ['TOKEN'])
+bot = Bot(token=settings.from_env().bot_token)
 dp = Dispatcher()
 
 if __name__ == '__main__':

@@ -3,6 +3,10 @@ from dataclasses import dataclass,field
 
 @dataclass
 class User(AbstractModel):
+
+    '''
+    Модель пользователя
+    '''
     __is_use: bool
     __is_accepted: bool
     __username: str
@@ -17,19 +21,18 @@ class User(AbstractModel):
 
 
 
-
     @property
     def id(self) -> int:
         return self.__telegram_id
 
 
     @property
-    def subcribed(self) -> bool:
+    def subscribed(self) -> bool:
         return self.__subcribed
 
 
-    @subcribed.setter
-    def subcribed(self, value : bool) -> None:
+    @subscribed.setter
+    def subscribed(self, value : bool) -> None:
         self.__subcribed = value
 
 

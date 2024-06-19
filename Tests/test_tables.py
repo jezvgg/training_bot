@@ -8,6 +8,15 @@ class test_models(unittest.TestCase):
     '''
     Проверка создания моделей таблиц, их функций (если таковые есть) и фабричных методов.
     '''
+
+    def test_base_table(self):
+
+        bt = BaseTable.build(AbstractModel)
+
+        assert bt is not None
+
+        assert bt.__repr__() != ''
+        
     
     def test_user_table(self):
         ut = UserTable(0, True, 0, True, True)
@@ -62,6 +71,23 @@ class test_models(unittest.TestCase):
         keyboard = kt.model()
 
         assert keyboard is not None
+
+
+    def test_commands_table(self):
+        cmdt = CommandsTable('start', 0)
+
+        assert cmdt is not None
+
+        message = Message(1, 'Первое тестовое сообщение', 2)
+        command = Command('', message, 'start')
+
+        cmdt2 = CommandsTable.build(command)
+
+        assert cmdt2 is not None
+
+        command = cmdt.model()
+
+        assert command is not None
 
 
     def test_table_factory(self):

@@ -16,6 +16,7 @@ class DialogueTable(BaseTable):
     _text = relationship('MessagesTable')
     _keyboard = relationship('KeyboardsTable')
 
+
     @staticmethod
     def build(model: Message):
         dialog = DialogueTable(model.id, model.text, model.next_message_id)

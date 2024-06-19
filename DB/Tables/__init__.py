@@ -7,3 +7,4 @@ from DB.Tables.DialogueTable import DialogueTable
 from DB.Tables.KeyboardsTable import KeyboardsTable
 from DB.Tables.MessagesTable import MessagesTable
 from DB.Tables.UserTable import UserTable
+from DB.Tables.CommandsTable import CommandsTable
