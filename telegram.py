@@ -37,6 +37,9 @@ async def callback_handler(callback: types.CallbackQuery):
     user.current_message = dialogue.get(int(callback.data))
     db.update(user)
 
+    print(callback.data)
+    print(callback.message.text)
+    print(callback.json())
     await callback.message.answer(**service.create_answer(user, callback.message))
 
 

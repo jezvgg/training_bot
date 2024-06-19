@@ -1,4 +1,5 @@
 from Src.Events import *
+from DB.Tables import UserInfoTable
 from DB.DBInterface import DBInterface
 
 
@@ -10,7 +11,8 @@ class event_handler:
 
 
     def __init__(self, db: DBInterface):
-        self.__map = {'show': show_event()}
+        self.__map = {'show': show_event(),
+                      'save_user_info': save_user_event(db)}
 
 
     def get_event(self, eventname: str):

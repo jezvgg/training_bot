@@ -27,11 +27,10 @@ class telegram_service:
         '''
         Создать аргументы для ответа в телеграм
         '''
-        if not message: message = user.current_message
-        
         answer_kwargs = {'text': user.current_message.text}
 
         if user.current_message.event_name:
+            print(user.current_message.event_name)
             event = self.__events.get_event(user.current_message.event_name).activate(user, message)
             answer_kwargs['text'] = answer_kwargs['text'].format(event=event)
 
