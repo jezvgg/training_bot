@@ -1,9 +1,9 @@
 from typing import Protocol
 from aiogram import types
-from Src.Models import User
+from Src.Models import User, Message
 
 
 class event(Protocol):
 
-    def activate(self, user: User, message: types.Message) -> str:
+    def activate(self, user: User, message: types.Message) -> Message:
         pass

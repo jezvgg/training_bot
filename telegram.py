@@ -16,31 +16,25 @@ service = telegram_service(dialogue, commands, db)
 async def command_handler(message: types.Message):
     user = service.get_user(message.from_user.id)
 
-    user.current_message = commands.get(message.text)
-    db.update(user)
+    output_message = service.handle_command(user, message)
 
-    await message.answer(**service.create_answer(user, message)) 
+    await message.answer(**service.create_answer(output_message)) 
 
 
 async def message_handler(message: types.Message):
     user = service.get_user(message.from_user.id)
 
-    user.current_message = dialogue.get_next(user.current_message)
-    db.update(user)
+    output_message = service.handle_message(user, message)
 
-    await message.answer(**service.create_answer(user, message))
+    await message.answer(**service.create_answer(output_message))
 
 
 async def callback_handler(callback: types.CallbackQuery):
     user = service.get_user(callback.from_user.id)
 
-    user.current_message = dialogue.get(int(callback.data))
-    db.update(user)
+    output_message = service.handle_callback(user, callback)
 
-    print(callback.data)
-    print(callback.message.text)
-    print(callback.json())
-    await callback.message.answer(**service.create_answer(user, callback.message))
+    await callback.message.answer(**service.create_answer(output_message))
 
 
 def register_handlers(dp: Dispatcher):

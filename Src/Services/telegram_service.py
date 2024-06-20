@@ -1,9 +1,10 @@
 from DB.DBHelper import DBInterface
 from Src.dialogue_manager import dialogue_manager
 from Src.commands_manager import command_manager
-from Src.Models import User
+from Src.Models import User, Message
 from Src.event_handler import event_handler
 from aiogram import types
+from functools import singledispatchmethod
 
 
 class telegram_service:
@@ -23,19 +24,45 @@ class telegram_service:
         self.__events = event_handler(self.__db)
 
 
-    def create_answer(self, user: User, message: types.Message = None) -> dict:
+    def handle_command(self, user: User, message: types.Message) -> Message:
+        next_message = self.__commands.get(message.text)
+        user.current_message = next_message
+        self.__db.update(user)
+
+        if next_message.event_name:
+            return self.__events.get_event(next_message.event_name).activate(user, message)
+        return next_message
+
+
+    def handle_message(self, user: User, message: types.Message) -> Message:
+        next_message = self.__dilogue.get_next(user.current_message)
+        user.current_message = next_message
+        self.__db.update(user)
+
+        print(message.text)
+
+        if next_message.event_name:
+            return self.__events.get_event(next_message.event_name).activate(user, message)
+        return next_message
+
+    
+    def handle_callback(self, user: User, callback: types.CallbackQuery) -> Message:
+        next_message = self.__dilogue.get(int(callback.data))
+        user.current_message = next_message
+        self.__db.update(user)
+
+        if next_message.event_name:
+            return self.__events.get_event(next_message.event_name).activate(user, callback.message)
+        return next_message
+
+    def create_answer(self, message: Message) -> dict:
         '''
         Создать аргументы для ответа в телеграм
         '''
-        answer_kwargs = {'text': user.current_message.text}
+        answer_kwargs = {'text':message.text}
 
-        if user.current_message.event_name:
-            print(user.current_message.event_name)
-            event = self.__events.get_event(user.current_message.event_name).activate(user, message)
-            answer_kwargs['text'] = answer_kwargs['text'].format(event=event)
-
-        if user.current_message.keyboard: 
-            answer_kwargs['reply_markup'] = user.current_message.keyboard.build_markup()
+        if message.keyboard: 
+            answer_kwargs['reply_markup'] = message.keyboard.build_markup()
 
         return answer_kwargs
 

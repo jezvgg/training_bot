@@ -51,6 +51,11 @@ class Message(AbstractModel):
         return self.__text
 
 
+    @text.setter
+    def text(self, value: str) -> None:
+        self.__text = value
+        
+
     @property
     def keyboard(self) -> Keyboard:
         return self.__keyboard

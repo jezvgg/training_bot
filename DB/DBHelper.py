@@ -66,6 +66,10 @@ class DBHelper(DBInterface):
         return self._add(table_object)
 
 
+    def _update(self):
+        self.session.commit()
+
+
     def update(self, model: AbstractModel) -> bool:
         current_table_object = table_factory.create(model)
         was_table_object = self._get_one(table_factory.get(model), model.id)
@@ -81,5 +85,14 @@ class DBHelper(DBInterface):
         self.session.commit()
 
         return True
+
+
+    def _delete(self, table: BaseTable) -> bool:
+        self.session.delete(table)
+        self.session.commit()
+
+
+    def delete(self, model: AbstractModel) -> bool:
+        self._delete(table_factory.create(model))
         
 

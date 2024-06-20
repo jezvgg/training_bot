@@ -1,6 +1,7 @@
 from Src.Events.event import event
 from aiogram import types
-from Src.Models import User
+from Src.Models import User, Message
+from Src.dialogue_manager import dialogue_manager
 
 
 class show_event(event):
@@ -9,6 +10,9 @@ class show_event(event):
     Выводит в консоль пользователя и сообщение.
     '''
 
-    def activate(self, user: User, message: types.Message) -> str:
+    def activate(self, user: User, message: types.Message) -> Message:
         print(user, message.text)
-        return 'done'
+        output = user.current_message
+        output.text = output.text.format(event='done')
+
+        return output
