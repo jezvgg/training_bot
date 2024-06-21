@@ -58,11 +58,11 @@ class test_models(unittest.TestCase):
 
 
     def test_keyboards_table(self):
-        kt = KeyboardsTable(0, [[0, 1, 2], [3, 4, 5]])
+        kt = KeyboardsTable(0, [{'0':0, '0':1, '0':2}, {'0':3, '0':4, '0':5}])
 
         assert kt is not None
 
-        keyboard = Keyboard(0, [[0, 1, 2], [3, 4, 5]])
+        keyboard = Keyboard(0, [{'0':0, '0':1, '0':2}, {'0':3, '0':4, '0':5}])
 
         kt2 = KeyboardsTable.build(keyboard)
 
