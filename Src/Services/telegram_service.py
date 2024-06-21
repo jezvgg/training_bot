@@ -39,8 +39,6 @@ class telegram_service:
         user.current_message = next_message
         self.__db.update(user)
 
-        print(message.text)
-
         if next_message.event_name:
             return self.__events.get_event(next_message.event_name).activate(user, message)
         return next_message
