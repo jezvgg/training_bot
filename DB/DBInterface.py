@@ -65,8 +65,28 @@ class DBInterface(object):
         '''
         pass
 
+    def _update(self):
+        '''
+        Обновляет значения в БД
+        '''
+        pass
+
     def update(self, model: AbstractModel) -> bool:
         '''
         Обновление данных соотвутсвующих модели в БД
+        '''
+        pass
+
+
+    def _delete(self, table: BaseTable) -> bool:
+        '''
+        Удалить запись из таблицы
+        '''
+        pass
+
+    
+    def delete(self, model: AbstractModel) -> bool:
+        '''
+        Удалить модель из БД
         '''
         pass

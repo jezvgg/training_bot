@@ -1,7 +1,6 @@
 from Src.Models import Message
 
 
-# TODO: Сделать из этого итератор
 class dialogue_manager:
     '''
     Класс для работы и управлением сообщениями.

@@ -1,5 +1,7 @@
 from DB.DBHelper import DBHelper
+from DB.DBTest import DBTest
 from Src.Models import *
+from DB.Tables import *
 from Src.settings import settings
 import unittest
 
@@ -23,23 +25,23 @@ class test_database(unittest.TestCase):
 
 
     def test_get(self):
-        result = self.dbh._get(User)
+        result = self.dbh._get(UserTable)
 
         assert result is not None
 
 
     def test_get_one(self):
-        user = self.dbh._get(User)[0].model()
+        user = self.dbh._get(UserTable)[0].model()
 
-        result = self.dbh._get_one(user, user.id)
+        result = self.dbh._get_one(UserTable, user.id)
 
         assert result is not None
 
 
     def test_get_ones(self):
-        user = self.dbh._get(User)[0].model()
+        user = self.dbh._get(UserTable)[0].model()
 
-        result = self.dbh._get_ones(user, user.id)
+        result = self.dbh._get_ones(UserTable, user.id)
 
         assert result is not None
         assert len(result) > 0
@@ -87,3 +89,43 @@ class test_database(unittest.TestCase):
         result = self.dbh.update(user)
 
         assert result is True
+
+
+    def test_db_test_init(self):
+        db = DBTest(User(True, False, '', Message.error_message(), False, 1))
+
+        assert db is not None
+
+    def test_db_test_get(self):
+        db = DBTest(User(True, False, '', Message.error_message(), False, 1))
+
+        users = db.get(User)
+
+        assert users is not None
+        assert len(users) > 0
+
+    def test_db_test_get_one(self):
+        db = DBTest(User(True, False, '', Message.error_message(), False, 1))
+
+        user = db.get_one(User, 1)
+
+        assert user is not None
+        assert user.id == 1
+
+    def test_db_test_get_ones(self):
+        db = DBTest(User(True, False, '', Message.error_message(), False, 1))
+
+        users = db.get_ones(User, 1)
+
+        assert users is not None
+        assert len(users) > 0
+
+    def test_db_test_add(self):
+        db = DBTest(User(True, False, '', Message.error_message(), False, 1))
+
+        users1 = db.get(User)[:]
+        result = db.add(User(True, False, '', Message.error_message(), False, 2))
+        users2 = db.get(User)[:]
+
+        assert result is True
+        assert len(users1) < len(users2)
