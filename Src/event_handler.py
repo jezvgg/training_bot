@@ -1,5 +1,6 @@
 from Src.Events import *
 from DB.DBInterface import DBInterface
+from Src.dialogue_manager import dialogue_manager
 
 
 class event_handler:
@@ -10,7 +11,8 @@ class event_handler:
 
 
     def __init__(self, db: DBInterface):
-        self.__map = {'show': show_event()}
+        self.__map = {'show': show_event(),
+                      'save_user_info': save_user_event(db)}
 
 
     def get_event(self, eventname: str):
@@ -21,3 +23,8 @@ class event_handler:
             eventname - название ивента
         '''
         return self.__map[eventname]
+
+
+    @property
+    def events(self):
+        return self.__map

@@ -1,5 +1,6 @@
 from DB.DBInterface import DBInterface
 from Src.Models import AbstractModel
+from DB.Tables import BaseTable
 
 
 class DBTest(DBInterface):
@@ -17,10 +18,22 @@ class DBTest(DBInterface):
 
 
     def __get_type(self, model):
-        if isinstance(model, type(AbstractModel)):
+        if isinstance(model, type):
             return model
 
         return type(model)
+
+
+    def _get(self, table: BaseTable) -> list[BaseTable]:
+        return self.get(table)
+
+
+    def _get_one(self, model: AbstractModel, id: int) -> BaseTable:
+        return self.get_one(model, id)
+
+
+    def _get_ones(self, model: AbstractModel, id: int) -> BaseTable:
+        return self.get_ones(model, id)
 
 
     def get(self, model: AbstractModel) -> list[AbstractModel]:
@@ -33,6 +46,10 @@ class DBTest(DBInterface):
 
     def get_ones(self, model: AbstractModel, id: int) -> list[AbstractModel]:
         return [value for value in self.get(model) if value.id == id]
+
+
+    def _add(self, table: BaseTable) -> bool:
+        return self.add(table)
 
 
     def add(self, model: AbstractModel) -> bool:

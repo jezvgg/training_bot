@@ -25,30 +25,30 @@ class DBHelper(DBInterface):
         self.session = Session()
 
 
-    def _get(self, model: AbstractModel) -> Query[BaseTable]:
-        return self.session.query(table_factory.get(model))
+    def _get(self, table: BaseTable) -> Query[BaseTable]:
+        return self.session.query(table)
 
 
-    def _get_one(self, model: AbstractModel, id: int) -> BaseTable:
-        table = table_factory.get(model)
+    def _get_one(self, table: BaseTable, id: int) -> BaseTable:
         return self.session.query(table).filter(table.id == id).one()
 
 
-    def _get_ones(self, model: AbstractModel, id: int) -> list[BaseTable]:
-        table = table_factory.get(model)
+    def _get_ones(self, table: BaseTable, id: int) -> list[BaseTable]:
         return self.session.query(table).filter(table.id == id).all()
 
 
     def get(self, model: AbstractModel) -> list[AbstractModel]:
-        return [table.model() for table in self._get(model)]
+        return [table.model() for table in self._get(table_factory.get(model))]
 
 
     def get_one(self, model: AbstractModel, id: int) -> AbstractModel:
-        return self._get_one(model, id).model()
+        table = table_factory.get(model)
+        return self._get_one(table, id).model()
 
 
     def get_ones(self, model: AbstractModel, id: int) -> list[AbstractModel]:
-        return [table.model() for table in self._get_ones(model, id)]
+        table_ = table_factory.get(model)
+        return [table.model() for table in self._get_ones(table_, id)]
 
 
     def _add(self, table: BaseTable) -> bool:
@@ -66,9 +66,13 @@ class DBHelper(DBInterface):
         return self._add(table_object)
 
 
+    def _update(self):
+        self.session.commit()
+
+
     def update(self, model: AbstractModel) -> bool:
         current_table_object = table_factory.create(model)
-        was_table_object = self._get_one(model, model.id)
+        was_table_object = self._get_one(table_factory.get(model), model.id)
         
         current_vars = set([var for var in vars(current_table_object) if not var.startswith('_')])
         was_vars = set([var for var in vars(was_table_object) if not var.startswith('_')])
@@ -81,5 +85,14 @@ class DBHelper(DBInterface):
         self.session.commit()
 
         return True
+
+
+    def _delete(self, table: BaseTable) -> bool:
+        self.session.delete(table)
+        self.session.commit()
+
+
+    def delete(self, model: AbstractModel) -> bool:
+        self._delete(table_factory.create(model))
         
 
