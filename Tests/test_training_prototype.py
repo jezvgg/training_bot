@@ -1,12 +1,12 @@
 import unittest
 from Src.Models.Models_for_training.exercise_model import Exercise_model
 from Src.Models.Models_for_training.block_model import Block_model
-from Src.Models.Models_for_training.person_training_model import person_training_model
+from Src.Models.Models_for_training.person_training_model import Person_training_model
 from Src.Models.Models_for_training.program_model import Weekly_program_model
-from Src.Models.Models_for_training.Enums.pattern_type import pattern_type
-from Src.Models.Models_for_training.Enums.muscle_type import muscle_type
-from Src.Models.Models_for_training.Enums.location_type import location_type
-from Src.Models.Models_for_training.Enums.workout_type import workout_type
+from Src.Enums.pattern_type import pattern_type
+from Src.Enums.muscle_type import muscle_type
+from Src.Enums.location_type import location_type
+from Src.Enums.workout_type import workout_type
 from Src.Prototypes.training_prototype import Training_prototype
 
 class test_training_prototype(unittest.TestCase):
@@ -17,11 +17,11 @@ class test_training_prototype(unittest.TestCase):
         slim=workout_type('fitnes')
         spartan=workout_type('spartan')
         
-        baki=person_training_model('baki',True,5,[kachat])
-        joseph=person_training_model('Joseph',True,3,[spartan])
-        kama=person_training_model('kama',True,3,[spartan])
-        jolyn=person_training_model('Jolyne',False,3,[spartan])
-        ky=person_training_model("Ky",True,3,[slim])
+        baki=Person_training_model('baki',True,5,[workout_type('kachat')])
+        joseph=Person_training_model('Joseph',True,3,[spartan])
+        kama=Person_training_model('kama',True,3,[spartan])
+        jolyn=Person_training_model('Jolyne',False,3,[spartan])
+        ky=Person_training_model("Ky",True,3,[slim])
 
 
         joestar=Weekly_program_model("Joestar",True,[spartan],{1:None,3:None,5:None})

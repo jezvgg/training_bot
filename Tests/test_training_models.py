@@ -1,12 +1,12 @@
 import unittest 
 from Src.Models.Models_for_training.exercise_model import Exercise_model
 from Src.Models.Models_for_training.block_model import Block_model
-from Src.Models.Models_for_training.person_training_model import person_training_model
+from Src.Models.Models_for_training.person_training_model import Person_training_model
 from Src.Models.Models_for_training.program_model import Weekly_program_model
-from Src.Models.Models_for_training.Enums.pattern_type import pattern_type
-from Src.Models.Models_for_training.Enums.muscle_type import muscle_type
-from Src.Models.Models_for_training.Enums.location_type import location_type
-from Src.Models.Models_for_training.Enums.workout_type import workout_type
+from Src.Enums.pattern_type import pattern_type
+from Src.Enums.muscle_type import muscle_type
+from Src.Enums.location_type import location_type
+from Src.Enums.workout_type import workout_type
 
 class test_models_for_training(unittest.TestCase):
 
@@ -117,7 +117,7 @@ class test_models_for_training(unittest.TestCase):
         workout=workout_type('workout 1')
         workout_2=workout_type('workout 2')
         workouts_per_week=3
-        tr=person_training_model()
+        tr=Person_training_model()
 
         #действие
         tr.is_male=male
@@ -143,7 +143,7 @@ class test_models_for_training(unittest.TestCase):
         workout=workout_type('workout 1')
         workout_2=workout_type('workout 2')
         workouts_per_week=8
-        tr=person_training_model()
+        tr=Person_training_model()
 
         #действие
         tr.is_male=male

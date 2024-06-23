@@ -1,8 +1,8 @@
 
 from Src.Models.Models_for_training.abstract_model import abstract_reference
-from Src.Models.Models_for_training.Enums.muscle_type import muscle_type
-from Src.Models.Models_for_training.Enums.location_type import location_type
-from Src.Models.Models_for_training.Enums.pattern_type import pattern_type
+from  Src.Enums.muscle_type import muscle_type
+from  Src.Enums.location_type import location_type
+from  Src.Enums.pattern_type import pattern_type
 from dataclasses import dataclass,field
 
 @dataclass

@@ -6,7 +6,8 @@ class abstract_reference(ABC):
 
     __name:str = ""
 
-    
+    def __str__(self) -> str:
+        return self.name
 
     @property    
     def name(self)->str:
@@ -20,5 +21,5 @@ class abstract_reference(ABC):
 
         self.__name = value_striped
 
-        
+    
 

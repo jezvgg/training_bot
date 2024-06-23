@@ -1,11 +1,11 @@
 #не юсер, а друге имя
 
 from Src.Models.Models_for_training.abstract_model import abstract_reference
-from Src.Models.Models_for_training.Enums.workout_type import workout_type
+from  Src.Enums.workout_type import workout_type
 from dataclasses import dataclass,field
 
 @dataclass
-class person_training_model(abstract_reference):
+class Person_training_model(abstract_reference):
     __is_male:bool=False
     __trains_per_week:int=0
     __workout:list[workout_type]=field(default_factory=list[workout_type])

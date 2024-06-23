@@ -1,6 +1,6 @@
 from Src.Models.Models_for_training.abstract_model import abstract_reference
 from Src.Models.Models_for_training.block_model import Block_model
-from Src.Models.Models_for_training.Enums.workout_type import workout_type
+from Src.Enums.workout_type import workout_type
 from dataclasses import dataclass, field
 
 @dataclass
@@ -16,7 +16,7 @@ class Weekly_program_model(abstract_reference):
         return self.__is_male
 
     @property
-    def workout(self)->list[workout_type]:
+    def workout(self)->workout_type:
         return self.__workout
     
     @property 
