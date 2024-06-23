@@ -5,6 +5,7 @@ from DB.table_factory import table_factory
 from Src.Models import AbstractModel
 from Src.settings import settings
 from DB.DBInterface import DBInterface
+from functools import singledispatchmethod
 
 
 class DBHelper(DBInterface):
@@ -16,7 +17,8 @@ class DBHelper(DBInterface):
 
 
     def __init__(self, config: settings):
-        url = "postgresql://{user}:{password}@{host}:{port}/{database}".format(**config.database_kwargs())
+        url = config.db_url
+        url = url.format(**config.database_kwargs())
         self.engine = create_engine(url, echo=False)
 
         Base.metadata.create_all(bind=self.engine)
@@ -25,30 +27,45 @@ class DBHelper(DBInterface):
         self.session = Session()
 
 
-    def _get(self, table: BaseTable) -> Query[BaseTable]:
+    def __get_type(self, model) -> type:
+        if isinstance(model, type):
+            return model
+
+        return type(model)
+
+
+    def _get(self, obj: BaseTable | AbstractModel) -> Query[BaseTable]:
+        if issubclass(self.__get_type(obj), BaseTable): return self._get_table(obj)
+        elif issubclass(self.__get_type(obj), AbstractModel): return self._get_model(obj)
+        return None
+
+
+    def _get_table(self, table: BaseTable) -> Query[BaseTable]:
         return self.session.query(table)
 
 
-    def _get_one(self, table: BaseTable, id: int) -> BaseTable:
-        return self.session.query(table).filter(table.id == id).one()
+    def _get_model(self, model: AbstractModel) -> Query[BaseTable]:
+        return self.session.query(table_factory.get(model))
 
 
-    def _get_ones(self, table: BaseTable, id: int) -> list[BaseTable]:
-        return self.session.query(table).filter(table.id == id).all()
+    def _get_one(self, table: BaseTable | AbstractModel, id: int) -> BaseTable:
+        return self._get(table).filter(table.id == id).one()
 
 
-    def get(self, model: AbstractModel) -> list[AbstractModel]:
-        return [table.model() for table in self._get(table_factory.get(model))]
+    def _get_ones(self, table: BaseTable | AbstractModel, id: int) -> list[BaseTable]:
+        return self._get(table).filter(table.id == id).all()
 
 
-    def get_one(self, model: AbstractModel, id: int) -> AbstractModel:
-        table = table_factory.get(model)
-        return self._get_one(table, id).model()
+    def get(self, model: BaseTable | AbstractModel) -> list[AbstractModel]:
+        return [table.model() for table in self._get(model)]
 
 
-    def get_ones(self, model: AbstractModel, id: int) -> list[AbstractModel]:
-        table_ = table_factory.get(model)
-        return [table.model() for table in self._get_ones(table_, id)]
+    def get_one(self, model: BaseTable | AbstractModel, id: int) -> AbstractModel:
+        return self._get_one(model, id).model()
+
+
+    def get_ones(self, model: BaseTable | AbstractModel, id: int) -> list[AbstractModel]:
+        return [table.model() for table in self._get_ones(model, id)]
 
 
     def _add(self, table: BaseTable) -> bool:
@@ -60,7 +77,7 @@ class DBHelper(DBInterface):
 
     def add(self, model: AbstractModel) -> bool: 
         table_object = table_factory.create(model)
-        if self.get_one(model, model.id) is not None:
+        if len(self.get_ones(model, model.id)) > 0:
             return False
 
         return self._add(table_object)

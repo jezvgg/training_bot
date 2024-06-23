@@ -53,6 +53,7 @@ class telegram_service:
             return self.__events.get_event(next_message.event_name).activate(user, callback.message)
         return next_message
 
+
     def create_answer(self, message: Message) -> dict:
         '''
         Создать аргументы для ответа в телеграм

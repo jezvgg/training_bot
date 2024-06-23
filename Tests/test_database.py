@@ -10,7 +10,7 @@ class test_database(unittest.TestCase):
     '''
     Тестирование работы и связи с базой данных
     '''
-    sets = settings('test', '1111', '127.0.0.1', '5432', 'test', 'token')
+    sets = settings('test', '1111', '/home/jezvgg/Projects/training_bot/test_db.db', '5432', 'test', 'sqlite:///{host}', '')
     dbh = DBHelper(sets)
 
     def test_starting_database(self):
