@@ -3,6 +3,7 @@ from DB.DBTest import DBTest
 from Src.Models import *
 from DB.Tables import *
 from Src.settings import settings
+from pathlib import Path
 import unittest
 
 
@@ -10,7 +11,7 @@ class test_database(unittest.TestCase):
     '''
     Тестирование работы и связи с базой данных
     '''
-    sets = settings('test', '1111', '/home/jezvgg/Projects/training_bot/test_db.db', '5432', 'test', 'sqlite:///{host}', '')
+    sets = settings('test', '1111', Path('test_db.db').resolve(), '5432', 'test', 'sqlite:///{host}', '')
     dbh = DBHelper(sets)
 
     def test_starting_database(self):
