@@ -10,7 +10,7 @@ class test_models(unittest.TestCase):
 
     def test_settings_model(self):
         
-        sets = settings('test', '1111', '127.0.0.1', '5432', 'test', 'token')
+        sets = settings('test', '1111', '127.0.0.1', '5432', 'test', 'url', 'token')
 
         assert sets is not None
 
