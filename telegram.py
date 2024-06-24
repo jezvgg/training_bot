@@ -7,7 +7,7 @@ from Src.Services.telegram_service import telegram_service
 from Src.settings import settings
 
 
-db = DBHelper(settings.from_env())
+db = DBHelper(settings.from_json())
 dialogue = dialogue_manager(db.get(Message))
 commands = command_manager(db.get(Command))
 service = telegram_service(dialogue, commands, db)

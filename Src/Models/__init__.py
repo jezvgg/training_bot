@@ -3,3 +3,4 @@ from Src.Models.Keyboard import Keyboard
 from Src.Models.Message import Message
 from Src.Models.User import User
 from Src.Models.Command import Command
+from Src.Models.Diet import Diet

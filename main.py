@@ -3,7 +3,7 @@ from aiogram import Dispatcher, Bot
 from Src.settings import settings
 import asyncio
 
-bot = Bot(token=settings.from_env().bot_token)
+bot = Bot(token=settings.from_json().bot_token)
 dp = Dispatcher()
 
 if __name__ == '__main__':
