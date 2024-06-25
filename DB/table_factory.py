@@ -11,7 +11,8 @@ class table_factory:
         Keyboard: KeyboardsTable,
         User: UserTable,
         Message: DialogueTable,
-        Command: CommandsTable
+        Command: CommandsTable,
+        Feature: FeaturesTable
     }
 
 

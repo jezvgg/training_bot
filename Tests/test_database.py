@@ -5,6 +5,7 @@ from DB.Tables import *
 from Src.settings import settings
 from pathlib import Path
 import unittest
+import datetime
 
 
 class test_database(unittest.TestCase):
@@ -32,7 +33,8 @@ class test_database(unittest.TestCase):
 
 
     def test_get_one(self):
-        user = self.dbh._get(UserTable)[0].model()
+        print(self.dbh._get(UserTable).all())
+        user = self.dbh._get(UserTable).all()[0].model()
 
         result = self.dbh._get_one(UserTable, user.id)
 
@@ -76,7 +78,7 @@ class test_database(unittest.TestCase):
         
 
     def test_add(self):
-        user = User(True, False, '', Message.error_message(), False, 1)
+        user = User(True, False, '', Message.error_message(), None, 1)
         
         result = self.dbh.add(user)
 

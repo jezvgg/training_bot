@@ -1,10 +1,12 @@
 from DB.DBHelper import DBInterface
 from Src.dialogue_manager import dialogue_manager
 from Src.commands_manager import command_manager
-from Src.Models import User, Message
+from Src.Models import User, Message, Feature
 from Src.event_handler import event_handler
 from aiogram import types
 from functools import singledispatchmethod
+from datetime import datetime
+
 
 
 class telegram_service:
@@ -22,6 +24,24 @@ class telegram_service:
         self.__dilogue = dilogue
         self.__commands = commands
         self.__events = event_handler(self.__db)
+
+
+    def get_features(self) -> dict[int:Message]:
+        users = self.__db.get(User)
+        # Нормально features выгружать раз в день или лучше выгрузить их сразу и потом использовать?
+        features = self.__db.get(Feature)
+        messages = {}
+        
+        for user in users:
+            if user.subscribe.start is None or user.subscribe.end is None or \
+            user.subscribe.start > datetime.now() or user.subscribe.end < datetime.now():
+                continue
+
+            delta = datetime.now() - user.subscribe.start
+
+            messages[user.id] = features[delta.days].message
+
+        return messages
 
 
     def handle_command(self, user: User, message: types.Message) -> Message:
@@ -70,7 +90,7 @@ class telegram_service:
         '''
         Создать нового пользователя
         '''
-        user = User(True, False, username, self.__dilogue.get_start(), False, user_id)
+        user = User(True, False, username, self.__dilogue.get_start(), None, user_id)
         self.__db.add(user)
         return user
 
@@ -79,7 +99,7 @@ class telegram_service:
         '''
         Получить пользователя по id
         '''
-        if not self.__db.get_ones(User, user_id):
+        if not len(self.__db.get_ones(User, user_id)) > 0:
             return self.create_user(user_id)
         
         return self.__db.get_one(User, user_id)
