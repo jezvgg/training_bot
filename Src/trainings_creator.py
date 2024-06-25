@@ -36,25 +36,29 @@ class trainings_getter:
 
 
     #изолировать методы друг от друга, установить pretier
-    def get_training(self,trainings_per_day:int=8):
-        pass
-        #self.get_program()
+    def get_training(self,trainings_per_day:int=8)->defaultdict[int:list[Exercise_model]]:
+        program=self.get_program()
+
+        blocks=self.get_blocks(program,trainings_per_day)
+
+        return self.get_exercise(blocks)
 
 
-    def get_program(self):
+
+    def get_program(self)->Weekly_program_model:
         fitting_programs=self.__program_prototype.filter_person_training_model(self.__person)
 
         return fitting_programs.sample()[0]
 
     
-    def get_blocks(self,trainings_pe_day:int=8):
+    def get_blocks(self,program:Weekly_program_model,trainings_pe_day:int=8)->defaultdict[int:list[Block_model]]:
         person_training_blocks=defaultdict(lambda:[])
 
-        for cur_day in self.__person_program.trainings:
-            trainings_per_block=trainings_pe_day//len(self.__person_program.trainings[cur_day])
+        for cur_day in program.trainings:
+            trainings_per_block=trainings_pe_day//len(program.trainings[cur_day])
 
-            for cur_block in self.__person_program.trainings[cur_day]:
-                fitting_blocks=self.__block_prototype.filter_block_on_day(cur_block.muscle_type,trainings_per_block)
+            for cur_block in program.trainings[cur_day]:
+                fitting_blocks=self.__block_prototype.filter_block_on_day(cur_block.muscle,trainings_per_block)
 
                 block=fitting_blocks.sample()[0]
 
@@ -67,14 +71,13 @@ class trainings_getter:
 
 
 
-    def get_exercise(self,blocks:defaultdict[int:Block_model]):
+    def get_exercise(self,blocks:defaultdict[int:list[Block_model]])->defaultdict[int:list[Exercise_model]]:
         person_training_execises=defaultdict(lambda:[])
         for cur_day in blocks.keys():
 
             for cur_block in blocks[cur_day]:
                 
                 for cur_criteria in cur_block.exersices_criteria:
-
                     fitting_exercises=self.__exercise_prototype.filter_exercises_criteria(cur_criteria)
 
                     added=person_training_execises[cur_day]
