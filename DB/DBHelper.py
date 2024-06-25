@@ -49,10 +49,12 @@ class DBHelper(DBInterface):
 
 
     def _get_one(self, table: BaseTable | AbstractModel, id: int) -> BaseTable:
+        if issubclass(self.__get_type(table), AbstractModel): table = table_factory.get(table)
         return self._get(table).filter(table.id == id).one()
 
 
     def _get_ones(self, table: BaseTable | AbstractModel, id: int) -> list[BaseTable]:
+        if issubclass(self.__get_type(table), AbstractModel): table = table_factory.get(table)
         return self._get(table).filter(table.id == id).all()
 
 

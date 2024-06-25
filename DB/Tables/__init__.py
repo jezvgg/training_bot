@@ -9,3 +9,4 @@ from DB.Tables.MessagesTable import MessagesTable
 from DB.Tables.UserTable import UserTable
 from DB.Tables.CommandsTable import CommandsTable
 from DB.Tables.UserInfoTable import UserInfoTable
+from DB.Tables.FeaturesTable import FeaturesTable
