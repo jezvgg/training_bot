@@ -1,8 +1,10 @@
 from Src.Models.Models_for_training.program_model import Weekly_program_model
 from Src.Models.Models_for_training.person_training_model import Person_training_model
 from Src.Enums.workout_type import workout_type
+from Src.Prototypes.prototype import prototype
+from random import sample
 
-class Training_prototype:
+class training_prototype(prototype):
     __data:list[Weekly_program_model]=[]
     __is_error:bool=False
 
@@ -32,12 +34,15 @@ class Training_prototype:
         for cur_program_model in self.__data:
             
             if cur_program_model.is_male==user.is_male and \
-            Training_prototype._equal_workouts(cur_program_model.workout,user.workout) and \
+            training_prototype._equal_workouts(cur_program_model.workout,user.workout) and \
             cur_program_model.workouts_per_week==user.trains_per_week:
                 result.append(cur_program_model)
         
 
-        return Training_prototype(result)
+        return training_prototype(result)
+    
+    def sample(self, amount: int = 1):
+        return sample(self.__data,amount)
     
     @property
     def data(self):

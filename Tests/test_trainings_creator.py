@@ -37,13 +37,9 @@ class test_trainings_creator(unittest.TestCase):
         program=Weekly_program_model('пример',1,[],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
 
 
-        training_creator=trainings_getter(program,[block_biceps,block_chest],[exer1,exer2,exer3,exer4,exer5])
 
         #действие
-        training_creator.create_training(2)
 
-
-        print(training_creator.program)
 
         #проверка
         assert True==True

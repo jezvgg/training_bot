@@ -5,34 +5,34 @@ from Src.Enums.location_type import location_type
 from Src.Prototypes.prototype import prototype
 from random import sample
 
-class exersise_prototype(prototype):
-    __data:list[Exercise_model]=[]
+class block_prototype(prototype):
+    __data:list[Block_model]=[]
     __is_error:bool=False
 
 
 
-    def __init__(self,data:list[Exercise_model]):
+    def __init__(self,data:list[Block_model]):
         if len(data)==0:
             self.__is_error=True
         self.__data=data
 
     
-    def filter_exercises_criteria(self,criteria:list[muscle_type,location_type,pattern_type]):
+    def filter_block_on_day(self,muscle:muscle_type,amount_of_exercises:int):
         if self.__is_error:
             return self.__data
     
         result=[]
 
 
-        for cur_exersise in self.__data:
-            if cur_exersise.muscle.name==criteria[0].name and \
-            cur_exersise.locations.name==criteria[1].name and \
-            cur_exersise.pattern.name==criteria[2].name:
-                result.append(cur_exersise)
+        for cur_block in self.__data:
+            if cur_block.muscle.name==muscle.name and \
+            cur_block.count==amount_of_exercises:
+                result.append(cur_block)
         
 
-        return exersise_prototype(result)
+        return block_prototype(result)
     
+    #sample and samples
     def sample(self, amount: int = 1):
         return sample(self.__data,amount)
     

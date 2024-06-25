@@ -7,7 +7,7 @@ from Src.Enums.pattern_type import pattern_type
 from Src.Enums.muscle_type import muscle_type
 from Src.Enums.location_type import location_type
 from Src.Enums.workout_type import workout_type
-from Src.Prototypes.training_prototype import Training_prototype
+from Src.Prototypes.training_prototype import training_prototype
 
 class test_training_prototype(unittest.TestCase):
 
@@ -31,7 +31,7 @@ class test_training_prototype(unittest.TestCase):
         kiske=Weekly_program_model("Kiske",True,[slim],{1:None,3:None,5:None})
 
         #действие
-        prot=Training_prototype([joestar,pula,hanma,kujo,kiske])
+        prot=training_prototype([joestar,pula,hanma,kujo,kiske])
         battle_tendency=prot.filter_person_training_model(joseph)
         grappler=prot.filter_person_training_model(baki)
         schaa=prot.filter_person_training_model(kama)
@@ -42,6 +42,8 @@ class test_training_prototype(unittest.TestCase):
 
         #проверка
         print(f'joseph:{battle_tendency.data}')
+        assert battle_tendency.sample() is not None
+        print(f'sample:{battle_tendency.sample()} ')
         assert len(battle_tendency.data)==2
 
         print(f'kama:{schaa.data}')

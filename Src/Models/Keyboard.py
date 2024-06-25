@@ -11,8 +11,8 @@ class Keyboard(AbstractModel):
     Модель клавиатуры бота
     '''
     __id: int
-    __data: list[list[int|str]]=field(default_factory=list[list[int|str]])
-
+    __data: list[dict[str,int]]=field(default_factory=list[dict[str,int]])
+    __buttons: list[list[InlineKeyboardButton]]=field(default_factory=list[list[InlineKeyboardButton]])
 
 
     def build_markup(self):
