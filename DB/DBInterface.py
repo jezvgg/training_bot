@@ -17,49 +17,49 @@ class DBInterface(object):
             cls.instance = super(type(cls), cls).__new__(cls)
         return cls.instance
 
-    def _get(self, model: AbstractModel) -> Query[BaseTable]:
+    def _get(self, table: AbstractModel | BaseTable) -> Query[BaseTable]:
         '''
         Получить таблицу данных соответствующую модели
         '''
         pass
 
-    def _get_one(self, model: AbstractModel, id: int) -> BaseTable: 
+    def _get_one(self, table: AbstractModel | BaseTable, id: int) -> BaseTable: 
         '''
         Получить данные объекта из БД
         '''
         pass
 
-    def _get_ones(self, model: AbstractModel, id: int) -> list[BaseTable]: 
+    def _get_ones(self, table: AbstractModel | BaseTable, id: int) -> list[BaseTable]: 
         '''
         Получить все данные всех обектов совпадающих с моделью
         '''
         pass
 
-    def get(self, model: AbstractModel) -> list[AbstractModel]:
+    def get(self, model: AbstractModel | BaseTable) -> list[AbstractModel]:
         '''
         Получить модели из таблицы данных соответствующей модели
         '''
         pass
 
-    def get_one(self, model: AbstractModel, id: int) -> AbstractModel:
+    def get_one(self, model: AbstractModel | BaseTable, id: int) -> AbstractModel:
         '''
         Получить модель из БД
         '''
         pass
 
-    def get_ones(self, model: AbstractModel, id: int) -> list[AbstractModel]:
+    def get_ones(self, model: AbstractModel | BaseTable, id: int) -> list[AbstractModel]:
         '''
         Получить все модели всех обектов совпадающих с моделью
         '''
         pass
 
-    def _add(self, table: BaseTable) -> bool:
+    def _add(self, table: AbstractModel | BaseTable) -> bool:
         '''
         Добавление значения таблицы в БД
         '''
         pass
 
-    def add(self, model: AbstractModel) -> bool: 
+    def add(self, model: AbstractModel | BaseTable) -> bool: 
         '''
         Добавление модели в БД
         '''
