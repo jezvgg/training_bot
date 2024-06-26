@@ -1,4 +1,5 @@
-from Src.Models import Message, AbstractModel
+from Src.Models import Message, AbstractModel, Period
+from datetime import datetime
 
 
 class User(AbstractModel):
@@ -6,14 +7,16 @@ class User(AbstractModel):
     Модель пользователя
     '''
     __telegram_id: int
-    __subcribed: bool
     __current_message: Message
     __username: str
     __is_accepted: bool
     __is_use: bool
+    __subscribe: Period
 
 
-    def __init__(self, is_use: bool, is_accepted: bool, username: str, current_message: Message, subscribed: bool, id: int) -> None:
+    def __init__(self, is_use: bool, is_accepted: bool, username: str, \
+    current_message: Message, subscribe_start: datetime, subscribe_end: datetime, \
+    id: int) -> None:
         '''
         Модель пользователя
 
@@ -26,7 +29,7 @@ class User(AbstractModel):
             is_use - если false значит забанен
         '''
         self.__telegram_id: int = id
-        self.__subcribed: bool = subscribed
+        self.__subscribe: Period = Period(subscribe_start, subscribe_end)
         self.__current_message: Message = current_message
         self.__username: str = username
         self.__is_accepted: bool = is_accepted
@@ -39,13 +42,13 @@ class User(AbstractModel):
 
 
     @property
-    def subscribed(self) -> bool:
-        return self.__subcribed
+    def subscribe(self) -> Period:
+        return self.__subscribe
 
 
-    @subscribed.setter
-    def subscribed(self, value : bool) -> None:
-        self.__subcribed = value
+    @subscribe.setter
+    def subscribe(self, value : Period) -> None:
+        self.__subscribe = value
 
 
     @property

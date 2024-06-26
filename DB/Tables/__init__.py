@@ -10,3 +10,4 @@ from DB.Tables.UserTable import UserTable
 from DB.Tables.CommandsTable import CommandsTable
 from DB.Tables.UserInfoTable import UserInfoTable
 from DB.Tables.DietInfoTable import DietInfoTable
+from DB.Tables.FeaturesTable import FeaturesTable

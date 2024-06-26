@@ -1,11 +1,16 @@
 import telegram
-from aiogram import Dispatcher, Bot
-from Src.settings import settings
+from aiogram import Dispatcher
 import asyncio
 
-bot = Bot(token=settings.from_json().bot_token)
+
 dp = Dispatcher()
+
+
+async def main():
+    await telegram.features_sender()
+    await dp.start_polling(telegram.bot)
+
 
 if __name__ == '__main__':
     telegram.register_handlers(dp)
-    asyncio.run(dp.start_polling(bot))
+    asyncio.run(main())

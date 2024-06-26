@@ -1,10 +1,12 @@
 from DB.DBHelper import DBInterface
 from Src.dialogue_manager import dialogue_manager
 from Src.commands_manager import command_manager
-from Src.Models import User, Message
+from Src.Models import User, Message, Feature
 from Src.event_handler import event_handler
 from aiogram import types
 from functools import singledispatchmethod
+from datetime import datetime
+
 
 
 class telegram_service:
@@ -24,34 +26,73 @@ class telegram_service:
         self.__events = event_handler(self.__db)
 
 
-    def handle_command(self, user: User, message: types.Message) -> Message:
-        next_message = self.__commands.get(message.text)
+    def get_features(self) -> dict[int:Message]:
+        '''
+        Получить словарь сообщений для рассылки раз в день.
+
+        В словаре ключ это chat_id, а значение Message который надо отправить.
+        '''
+        users = self.__db.get(User)
+        # Если будет высокая нагрузка на БД, то features можно выгрузить заранее
+        features = self.__db.get(Feature)
+        messages = {}
+        
+        for user in users:
+            if user.subscribe.start is None or user.subscribe.end is None or \
+            user.subscribe.start > datetime.now() or user.subscribe.end < datetime.now():
+                continue
+
+            delta = datetime.now() - user.subscribe.start
+
+            messages[user.id] = features[delta.days].message
+
+        return messages
+
+
+    def __handle(self, user: User, message: types.Message, next_message: Message) -> Message:
+        '''
+        Базовый обработчик сообщений
+        '''
+        last_message = user.current_message
         user.current_message = next_message
-        self.__db.update(user)
+        output = user.current_message
 
         if next_message.event_name:
-            return self.__events.get_event(next_message.event_name).activate(user, message)
-        return next_message
+            # Если при работе event будет ошибка, отправляем старое сообщение заного
+            try:
+                output = self.__events.get_event(next_message.event_name).activate(user, message)
+            except Exception as e:
+                # Временно сделана отловка всех ошибок, при логировании поменять
+                print(e)
+                return last_message
+        
+        self.__db.update(user)
+        return output
+
+
+    def handle_command(self, user: User, message: types.Message) -> Message:
+        '''
+        Обработчик команд
+        '''
+        next_message = self.__commands.get(message.text)
+        return self.__handle(user, message, next_message)
 
 
     def handle_message(self, user: User, message: types.Message) -> Message:
+        '''
+        Обработчик сообщений
+        '''
         next_message = self.__dilogue.get_next(user.current_message)
-        user.current_message = next_message
-        self.__db.update(user)
-
-        if next_message.event_name:
-            return self.__events.get_event(next_message.event_name).activate(user, message)
-        return next_message
+        return self.__handle(user, message, next_message)
 
     
     def handle_callback(self, user: User, callback: types.CallbackQuery) -> Message:
+        '''
+        Обработчик кнопок
+        '''
         next_message = self.__dilogue.get(int(callback.data))
-        user.current_message = next_message
-        self.__db.update(user)
+        return self.__handle(user, callback.message, next_message)
 
-        if next_message.event_name:
-            return self.__events.get_event(next_message.event_name).activate(user, callback.message)
-        return next_message
 
     def create_answer(self, message: Message) -> dict:
         '''
@@ -69,7 +110,7 @@ class telegram_service:
         '''
         Создать нового пользователя
         '''
-        user = User(True, False, username, self.__dilogue.get_start(), False, user_id)
+        user = User(True, False, username, self.__dilogue.get_start(), None, None, user_id)
         self.__db.add(user)
         return user
 
@@ -78,7 +119,7 @@ class telegram_service:
         '''
         Получить пользователя по id
         '''
-        if not self.__db.get_ones(User, user_id):
+        if not len(self.__db.get_ones(User, user_id)) > 0:
             return self.create_user(user_id)
         
         return self.__db.get_one(User, user_id)

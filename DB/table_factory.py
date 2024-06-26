@@ -13,8 +13,8 @@ class table_factory:
         User: UserTable,
         Message: DialogueTable,
         Command: CommandsTable,
-        Diet: DietInfoTable
-
+        Diet: DietInfoTable,
+        Feature: FeaturesTable
     }
 
 

@@ -14,6 +14,7 @@ class settings:
     __db_host: str
     __db_port: str
     __db_name: str
+    __db_url: str
     __bot_token: str
     __token_for_gpt: str
     __id_bot_gpt: str
@@ -24,8 +25,9 @@ class settings:
         '''
         Создать конфиги из переменных сред
         '''
-        return settings(os.environ['DB_USER'], os.environ['DB_PASSWORD'], os.environ['DB_HOST'],
-                        os.environ['DB_PORT'], os.environ['DB_NAME'], os.environ['TOKEN'])
+        return settings(os.environ.get('DB_USER'), os.environ.get('DB_PASSWORD'), os.environ.get('DB_HOST'),
+                        os.environ.get('DB_PORT'), os.environ.get('DB_NAME'), os.environ.get('DB_URL'), 
+                        os.environ.get('TOKEN'))
 
     @staticmethod
     def from_json():
@@ -89,3 +91,8 @@ class settings:
     @property
     def id_bot_gpt(self) -> str:
         return self.__id_bot_gpt
+
+    
+    @property
+    def db_url(self) -> str:
+        return self.__db_url

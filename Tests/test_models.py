@@ -1,6 +1,7 @@
 import unittest
 from Src.Models import *
 from Src.settings import settings
+from datetime import datetime
 
 
 class test_models(unittest.TestCase):
@@ -10,7 +11,7 @@ class test_models(unittest.TestCase):
 
     def test_settings_model(self):
         
-        sets = settings('test', '1111', '127.0.0.1', '5432', 'test', 'token')
+        sets = settings('test', '1111', '127.0.0.1', '5432', 'test', 'url', 'token')
 
         assert sets is not None
 
@@ -27,7 +28,7 @@ class test_models(unittest.TestCase):
     def test_user_model(self):
 
         msg = Message(1, 'Первое тестовое сообщение', 2)
-        usr = User(True, True, 'Username', msg, False, 113133313)
+        usr = User(True, False, '', msg, datetime.now(), datetime.now(), 1)
 
         assert usr.current_message.id is not None
         assert usr.id is not None

@@ -8,6 +8,10 @@ from DB.Tables import DietInfoTable
 from Src.settings import settings
 from requests import post
 
+
+
+            
+    
 class diet_get_event(event):
     '''
     Ивент для получения диеты без опроса.
@@ -27,8 +31,10 @@ class diet_get_event(event):
     def activate(self, user: User, message: types.Message) -> Message:
         self.__info_body = self._db._get_one(UserInfoTable, user.id)
         self.__info_diet = self._db._get_one(DietInfoTable, user.id)
+
         
         gpt_answer=self.get_diet()
+
         text = user.current_message.text.format(
             diet=gpt_answer
 
@@ -62,9 +68,14 @@ class diet_get_event(event):
         url=gpt_request['url']
         headers= gpt_request['headers']
         data=gpt_request['data']
-        response = post(url, headers=headers, json=data)
-        response=response.json()
+      
+        response = post(url, headers, data)
+        print(response)
+        response=response
         return response["messages"][0]["content"]
+    
+
+    
     
 
 

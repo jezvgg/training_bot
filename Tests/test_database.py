@@ -3,14 +3,16 @@ from DB.DBTest import DBTest
 from Src.Models import *
 from DB.Tables import *
 from Src.settings import settings
+from pathlib import Path
 import unittest
+from datetime import datetime
 
 
 class test_database(unittest.TestCase):
     '''
     Тестирование работы и связи с базой данных
     '''
-    sets = settings('test', '1111', '127.0.0.1', '5432', 'test', 'token')
+    sets = settings('test', '1111', Path('test_db.db').resolve(), '5432', 'test', 'sqlite:///{host}', '')
     dbh = DBHelper(sets)
 
     def test_starting_database(self):
@@ -31,7 +33,8 @@ class test_database(unittest.TestCase):
 
 
     def test_get_one(self):
-        user = self.dbh._get(UserTable)[0].model()
+        print(self.dbh._get(UserTable).all())
+        user = self.dbh._get(UserTable).all()[0].model()
 
         result = self.dbh._get_one(UserTable, user.id)
 
@@ -75,7 +78,7 @@ class test_database(unittest.TestCase):
         
 
     def test_add(self):
-        user = User(True, False, '', Message.error_message(), False, 1)
+        user = User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1)
         
         result = self.dbh.add(user)
 
@@ -92,12 +95,12 @@ class test_database(unittest.TestCase):
 
 
     def test_db_test_init(self):
-        db = DBTest(User(True, False, '', Message.error_message(), False, 1))
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
 
         assert db is not None
 
     def test_db_test_get(self):
-        db = DBTest(User(True, False, '', Message.error_message(), False, 1))
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
 
         users = db.get(User)
 
@@ -105,7 +108,7 @@ class test_database(unittest.TestCase):
         assert len(users) > 0
 
     def test_db_test_get_one(self):
-        db = DBTest(User(True, False, '', Message.error_message(), False, 1))
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
 
         user = db.get_one(User, 1)
 
@@ -113,7 +116,7 @@ class test_database(unittest.TestCase):
         assert user.id == 1
 
     def test_db_test_get_ones(self):
-        db = DBTest(User(True, False, '', Message.error_message(), False, 1))
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
 
         users = db.get_ones(User, 1)
 
@@ -121,10 +124,10 @@ class test_database(unittest.TestCase):
         assert len(users) > 0
 
     def test_db_test_add(self):
-        db = DBTest(User(True, False, '', Message.error_message(), False, 1))
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
 
         users1 = db.get(User)[:]
-        result = db.add(User(True, False, '', Message.error_message(), False, 2))
+        result = db.add(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
         users2 = db.get(User)[:]
 
         assert result is True
