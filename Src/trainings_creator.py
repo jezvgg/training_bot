@@ -35,7 +35,6 @@ class trainings_getter:
 
 
 
-    #изолировать методы друг от друга, установить pretier
     def get_training(self,trainings_per_day:int=8)->defaultdict[int:list[Exercise_model]]:
         program=self.get_program()
 
