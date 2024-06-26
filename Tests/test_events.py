@@ -4,6 +4,7 @@ from Src.Models import User, Message
 from DB.Tables import UserInfoTable
 from collections import namedtuple
 from DB.DBTest import DBTest
+from datetime import datetime
 
 
 class test_events(unittest.TestCase):
@@ -11,7 +12,7 @@ class test_events(unittest.TestCase):
     Тестирование ивентов
     '''
     def test_show(self):
-        user = User(True, False, '', Message.error_message(), False, 0)
+        user = User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1)
         # Вместо сообщения телеграмма
         message = namedtuple('message', ['text'])
         mes = message('some text')
@@ -22,7 +23,7 @@ class test_events(unittest.TestCase):
 
     def test_save_user_start(self):
         db = DBTest(UserInfoTable(0, False, 'lox', 18, 'Irkutsk', 71, 171))
-        user = User(True, False, '', Message.error_message(), False, 0)
+        user = User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1)
         message = namedtuple('message', ['text'])
         mes = message('some text')
 
@@ -38,8 +39,9 @@ class test_events(unittest.TestCase):
 
 
     def test_save_user_next(self):
-        db = DBTest(User(True, False, '', Message.error_message(), False, 0), UserInfoTable(2, False, 'lox', 18, 'Irkutsk', 71, 171))
-        user = User(True, False, '', Message.error_message(), False, 0)
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1), 
+                    UserInfoTable(2, False, 'lox', 18, 'Irkutsk', 71, 171))
+        user = User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1)
         message = namedtuple('message', ['text', 'reply_markup'])
         mes = message('Мужской', None)
 
@@ -53,8 +55,9 @@ class test_events(unittest.TestCase):
 
 
     def test_save_user_finish(self):
-        db = DBTest(User(True, False, '', Message.error_message(), False, 0), UserInfoTable(2, False, 'lox', 18, 'Irkutsk', 71, 171))
-        user = User(True, False, '', Message.error_message(), False, 0)
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1), 
+                    UserInfoTable(2, False, 'lox', 18, 'Irkutsk', 71, 171))
+        user = User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1)
         message = namedtuple('message', ['text'])
         mes = message('some text')
 
@@ -68,8 +71,9 @@ class test_events(unittest.TestCase):
         assert output.keyboard is not None
 
     def test_save_user_activate(self):
-        db = DBTest(User(True, False, '', Message.error_message(), False, 0), UserInfoTable(2, False, 'lox', 18, 'Irkutsk', 71, 171))
-        user = User(True, False, '', Message.error_message(), False, 0)
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1), 
+                    UserInfoTable(2, False, 'lox', 18, 'Irkutsk', 71, 171))
+        user = User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1)
         message = namedtuple('message', ['text'])
         mes = message('some text')
 

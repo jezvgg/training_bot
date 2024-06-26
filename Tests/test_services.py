@@ -5,6 +5,7 @@ from Src.commands_manager import command_manager
 from Src.dialogue_manager import dialogue_manager
 from DB.DBTest import DBTest
 from collections import namedtuple
+from datetime import datetime
 
 
 class test_services(unittest.TestCase):
@@ -15,7 +16,7 @@ class test_services(unittest.TestCase):
 
         dmanager = dialogue_manager([Message.error_message()])
         cmanager = command_manager([])
-        db = DBTest(User(True, False, '', Message.error_message(), False, 0))
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
 
         service = telegram_service(dmanager, cmanager, db)
 
@@ -29,7 +30,7 @@ class test_services(unittest.TestCase):
 
         dmanager = dialogue_manager([Message.error_message()])
         cmanager = command_manager([])
-        db = DBTest(User(True, False, '', Message.error_message(), False, 0))
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
 
         service = telegram_service(dmanager, cmanager, db)
 
@@ -46,12 +47,12 @@ class test_services(unittest.TestCase):
     def test_handle_message(self):
         dmanager = dialogue_manager([Message.error_message()])
         cmanager = command_manager([])
-        db = DBTest(User(True, False, '', Message.error_message(), False, 0))
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
         service = telegram_service(dmanager, cmanager, db)
 
         message = namedtuple('message', ['text'])
         mes = message('some text')
-        user = User(True, False, '', Message.error_message(), False, 0)
+        user = User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1)
 
         output = service.handle_message(user, mes)
 
@@ -62,12 +63,12 @@ class test_services(unittest.TestCase):
     def test_handle_command(self):
         dmanager = dialogue_manager([Message.error_message()])
         cmanager = command_manager([Command('',Message.error_message(),'start')])
-        db = DBTest(User(True, False, '', Message.error_message(), False, 0))
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
         service = telegram_service(dmanager, cmanager, db)
 
         message = namedtuple('message', ['text'])
         mes = message('/start')
-        user = User(True, False, '', Message.error_message(), False, 0)
+        user = User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1)
 
         output = service.handle_command(user, mes)
 
@@ -77,13 +78,13 @@ class test_services(unittest.TestCase):
     def test_handle_callback(self):
         dmanager = dialogue_manager([Message.error_message()])
         cmanager = command_manager([])
-        db = DBTest(User(True, False, '', Message.error_message(), False, 0))
+        db = DBTest(User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1))
         service = telegram_service(dmanager, cmanager, db)
 
         callback = namedtuple('callback', ['data', 'message'])
         message = namedtuple('message', ['text'])
         call = callback('0', message('xyi'))
-        user = User(True, False, '', Message.error_message(), False, 0)
+        user = User(True, False, '', Message.error_message(), datetime.now(), datetime.now(), 1)
 
         output = service.handle_callback(user, call)
 

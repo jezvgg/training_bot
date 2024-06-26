@@ -24,7 +24,7 @@ class test_models(unittest.TestCase):
         assert ut is not None
 
         message = Message(0, 'test text', 3)
-        user = User(True, True, 'test username', message, True, 0)
+        user = User(True, False, '', Message.error_message(), 0, 0, 1)
         
         ut2 = UserTable.build(user)
 
@@ -92,7 +92,7 @@ class test_models(unittest.TestCase):
 
     def test_table_factory(self):
         message = Message(0, 'test text', 3)
-        user = User(True, True, 'test username', message, True, 0)
+        user = User(True, False, '', Message.error_message(), 0, 0, 1)
 
         mtc = table_factory.get(message)
         mto = table_factory.create(message)

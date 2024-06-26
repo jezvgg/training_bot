@@ -35,7 +35,7 @@ class DBInterface(object):
         '''
         pass
 
-    def get(self, model: AbstractModel | BaseTable) -> list[AbstractModel]:
+    def get(self, model: AbstractModel | BaseTable) -> Query[AbstractModel]:
         '''
         Получить модели из таблицы данных соответствующей модели
         '''
