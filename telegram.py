@@ -10,7 +10,6 @@ from datetime import timedelta
 
 
 
-db = DBHelper(settings.from_json())
 sets = settings.from_env()
 db = DBHelper(sets)
 dialogue = dialogue_manager(db.get(Message))

@@ -37,7 +37,7 @@ class settings:
         with open('settings.json') as json_file:
             data = json.load(json_file)
         return settings(data['DB_USER'], data['DB_PASSWORD'], data['DB_HOST'],
-                        data['DB_PORT'], data['DB_NAME'], data['TOKEN'], data['TOKEN_FOR_GPT'], data['BOT_ID'])
+                        data['DB_PORT'], data['DB_NAME'],data['DB_URL'], data['TOKEN'], data['TOKEN_FOR_GPT'], data['BOT_ID'])
 
     def database_kwargs(self) -> dict:
         return {
@@ -81,7 +81,7 @@ class settings:
     @property
     def bot_token(self) -> str:
         return self.__bot_token
-    
+
 
     @property
     def token_for_gpt(self) -> str:
@@ -92,7 +92,9 @@ class settings:
     def id_bot_gpt(self) -> str:
         return self.__id_bot_gpt
 
+
     
     @property
     def db_url(self) -> str:
         return self.__db_url
+
