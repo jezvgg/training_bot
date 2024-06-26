@@ -4,6 +4,9 @@ from Src.Models import AbstractModel, Message
 
 @dataclass
 class Feature(AbstractModel):
+    '''
+    Модель "подсказки" - сообщения отправляемого пользователям с подпиской раз в день.
+    '''
     __id: int
     __message: Message = field(init=False, repr=False)
     __text: str = field(init = False)
@@ -17,11 +20,17 @@ class Feature(AbstractModel):
 
     @property
     def message(self) -> Message:
+        '''
+        Сообщение для отправки
+        '''
         return self.__message
 
 
     @property
     def text(self) -> str:
+        '''
+        Текст сообщения для отправки
+        '''
         return self.__text
 
 

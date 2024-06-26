@@ -27,8 +27,13 @@ class telegram_service:
 
 
     def get_features(self) -> dict[int:Message]:
+        '''
+        Получить словарь сообщений для рассылки раз в день.
+
+        В словаре ключ это chat_id, а значение Message который надо отправить.
+        '''
         users = self.__db.get(User)
-        # Нормально features выгружать раз в день или лучше выгрузить их сразу и потом использовать?
+        # Если будет высокая нагрузка на БД, то features можно выгрузить заранее
         features = self.__db.get(Feature)
         messages = {}
         
@@ -44,34 +49,49 @@ class telegram_service:
         return messages
 
 
-    def handle_command(self, user: User, message: types.Message) -> Message:
-        next_message = self.__commands.get(message.text)
+    def __handle(self, user: User, message: types.Message, next_message: Message) -> Message:
+        '''
+        Базовый обработчик сообщений
+        '''
+        last_message = user.current_message
         user.current_message = next_message
-        self.__db.update(user)
+        output = user.current_message
 
         if next_message.event_name:
-            return self.__events.get_event(next_message.event_name).activate(user, message)
-        return next_message
+            # Если при работе event будет ошибка, отправляем старое сообщение заного
+            try:
+                output = self.__events.get_event(next_message.event_name).activate(user, message)
+            except Exception as e:
+                # Временно сделана отловка всех ошибок, при логировании поменять
+                print(e)
+                return last_message
+        
+        self.__db.update(user)
+        return output
+
+
+    def handle_command(self, user: User, message: types.Message) -> Message:
+        '''
+        Обработчик команд
+        '''
+        next_message = self.__commands.get(message.text)
+        return self.__handle(user, message, next_message)
 
 
     def handle_message(self, user: User, message: types.Message) -> Message:
+        '''
+        Обработчик сообщений
+        '''
         next_message = self.__dilogue.get_next(user.current_message)
-        user.current_message = next_message
-        self.__db.update(user)
-
-        if next_message.event_name:
-            return self.__events.get_event(next_message.event_name).activate(user, message)
-        return next_message
+        return self.__handle(user, message, next_message)
 
     
     def handle_callback(self, user: User, callback: types.CallbackQuery) -> Message:
+        '''
+        Обработчик кнопок
+        '''
         next_message = self.__dilogue.get(int(callback.data))
-        user.current_message = next_message
-        self.__db.update(user)
-
-        if next_message.event_name:
-            return self.__events.get_event(next_message.event_name).activate(user, callback.message)
-        return next_message
+        return self.__handle(user, callback.message, next_message)
 
 
     def create_answer(self, message: Message) -> dict:
@@ -90,7 +110,7 @@ class telegram_service:
         '''
         Создать нового пользователя
         '''
-        user = User(True, False, username, self.__dilogue.get_start(), None, user_id)
+        user = User(True, False, username, self.__dilogue.get_start(), None, None, user_id)
         self.__db.add(user)
         return user
 

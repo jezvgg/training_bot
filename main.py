@@ -1,7 +1,7 @@
 import telegram
-from aiogram import Dispatcher, Bot
-from Src.settings import settings
+from aiogram import Dispatcher
 import asyncio
+
 
 dp = Dispatcher()
 

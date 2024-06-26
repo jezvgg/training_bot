@@ -6,13 +6,18 @@ import time
 
 
 class Cron:
+    '''
+    Асинхронный класс вызывающий функцию которую в него передадут
+    с периодом в delay.
+
+    Работает только с асинхронными функциями.
+    '''
     func: Callable
     delta: float
 
 
     def __init__(self, func: Callable, delay: timedelta) -> None:
         self.func = func
-        self.scheduler = sched.scheduler(timefunc=time.monotonic, delayfunc=asyncio.sleep)
         self.delta = float(delay.seconds)
 
 
@@ -23,6 +28,9 @@ class Cron:
 
 
 def every(period: timedelta):
+    '''
+    Декоратор оборачивающий функцию в класс Cron.
+    '''
 
     def scheduler(func):
 
