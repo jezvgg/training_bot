@@ -2,6 +2,8 @@ from DB.Tables import BaseTable
 from sqlalchemy import Column, BigInteger, Integer, String, ForeignKey, Boolean
 
 
+
+
 class DietInfoTable(BaseTable):
     __tablename__ = 'diet_info'
     

@@ -1,13 +1,14 @@
-from Src.Events.base_save_event import base_save_event
+from Src.Events import base_save_event
 from DB.DBInterface import DBInterface
 from DB.Tables import UserInfoTable
 from DB.Tables import DietInfoTable
 from Src.Models import Message, Keyboard, User
-from Src.Events.diet_get_event import diet_get_event
+from Src.Events import diet_get_event
 from aiogram import types
-
-
 from requests import post
+
+
+
 
 class diet_save_event(base_save_event):
     '''
@@ -32,7 +33,6 @@ class diet_save_event(base_save_event):
     
     def _finish(self, user: User, message: types.Message) -> Message:
         return self.__get_diet.activate(user,message)
-        
 
 
     def activate(self, user: User, message: types.Message) -> Message:

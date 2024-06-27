@@ -1,6 +1,9 @@
 from Src.Models import Message, AbstractModel
 from dataclasses import dataclass
 
+
+
+
 @dataclass
 class Diet(AbstractModel):
     '''

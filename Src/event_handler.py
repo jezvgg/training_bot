@@ -13,7 +13,7 @@ class event_handler:
     def __init__(self, db: DBInterface):
         self.__map = {'show': show_event(),
                       'save_user_info': save_user_event(db),
-                      'menu_event':diet_save_event(db),
+                      'diet_save_event':diet_save_event(db),
                       'diet_get_event':diet_get_event(db)}
 
 
