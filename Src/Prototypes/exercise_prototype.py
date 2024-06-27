@@ -6,6 +6,7 @@ from Src.Prototypes.prototype import prototype
 from random import sample
 
 class exersise_prototype(prototype):
+    '''прототип для фильтрации упражнений по критериям из Block_model'''
     __data:list[Exercise_model]=[]
     __is_error:bool=False
 
@@ -18,6 +19,7 @@ class exersise_prototype(prototype):
 
     
     def filter_exercises_criteria(self,criteria:list[muscle_type,location_type,pattern_type]):
+        '''фильтрация'''
         if self.__is_error:
             return self.__data
     
@@ -34,6 +36,7 @@ class exersise_prototype(prototype):
         return exersise_prototype(result)
     
     def sample(self, amount: int = 1):
+        '''взять n случайных элементов из прототипа'''
         return sample(self.__data,amount)
     
     @property

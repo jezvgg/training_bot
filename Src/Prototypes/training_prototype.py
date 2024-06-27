@@ -5,6 +5,7 @@ from Src.Prototypes.prototype import prototype
 from random import sample
 
 class training_prototype(prototype):
+    '''прототип для фильтрациии програм на неделю по требованиям пользователя'''
     __data:list[Weekly_program_model]=[]
     __is_error:bool=False
 
@@ -17,6 +18,7 @@ class training_prototype(prototype):
 
     @staticmethod
     def _equal_workouts(work1:list[workout_type],work2:list[workout_type])->bool:
+        '''сравнение типов тренировок'''
         if len(work1)!=len(work2):
             return False
         ret=True
@@ -25,6 +27,7 @@ class training_prototype(prototype):
         return ret
     
     def filter_person_training_model(self,user:Person_training_model):
+        '''фильтрация'''
         if self.__is_error:
             return self.__data
     
@@ -42,6 +45,7 @@ class training_prototype(prototype):
         return training_prototype(result)
     
     def sample(self, amount: int = 1):
+        '''взять n случайных элементов из прототипа'''
         return sample(self.__data,amount)
     
     @property

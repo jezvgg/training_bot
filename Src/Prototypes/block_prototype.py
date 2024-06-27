@@ -6,6 +6,7 @@ from Src.Prototypes.prototype import prototype
 from random import sample
 
 class block_prototype(prototype):
+    '''прототип для фильтрации блоков по нужной мышце и количеству упражнений в блоке'''
     __data:list[Block_model]=[]
     __is_error:bool=False
 
@@ -18,6 +19,7 @@ class block_prototype(prototype):
 
     
     def filter_block_on_day(self,muscle:muscle_type,amount_of_exercises:int):
+        '''фильтрация'''
         if self.__is_error:
             return self.__data
     
@@ -34,6 +36,7 @@ class block_prototype(prototype):
     
     #sample and samples
     def sample(self, amount: int = 1):
+        '''взять n случайных элементов из прототипа'''
         return sample(self.__data,amount)
     
     @property

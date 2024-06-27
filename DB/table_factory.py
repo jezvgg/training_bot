@@ -11,7 +11,11 @@ class table_factory:
         Keyboard: KeyboardsTable,
         User: UserTable,
         Message: DialogueTable,
-        Command: CommandsTable
+        Command: CommandsTable,
+        Block_model:BlockTable,
+        Exercise_model:ExerciseTable,
+        Person_training_model:TrainingInfoTable,
+        Weekly_program_model:ProgramTable
     }
 
 

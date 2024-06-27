@@ -5,6 +5,7 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Weekly_program_model(abstract_reference):
+    '''Модель программы занятий на неделю'''
     __is_male:bool=True
     __workout:list[workout_type]=field(default_factory=list[workout_type])
     __trainings:dict[int:list[Block_model]]=field(default_factory=dict[int:list[Block_model]])
@@ -13,18 +14,22 @@ class Weekly_program_model(abstract_reference):
 
     @property
     def is_male(self)->bool:
+        '''пол'''
         return self.__is_male
 
     @property
     def workout(self)->workout_type:
+        '''тип тренировок'''
         return self.__workout
     
     @property 
     def workouts_per_week(self)->int:
+        '''количество тренировок в неделю'''
         return len(list(self.__trainings.keys()))
     
     @property
     def trainings(self)->dict[int:list[Block_model]]:
+        '''словарь типа {номер_дня:[блок1, блок2 ... блокn]}'''
         return self.__trainings
     
     @is_male.setter
@@ -32,11 +37,13 @@ class Weekly_program_model(abstract_reference):
         self.__is_male=value
 
     def add_workout_type(self,value:workout_type)->None:
+        '''добавить тип тренировок'''
         self.__workout.append(value)
 
 
 
     def add_block(self,block:Block_model,day:int=1)->None:
+        '''добавить блок в нужный день'''
         #TODO инвертировать логику
         if day >0 and day<6:
             if day in self.__trainings.keys():

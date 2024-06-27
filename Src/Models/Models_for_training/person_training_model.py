@@ -6,6 +6,7 @@ from dataclasses import dataclass,field
 
 @dataclass
 class Person_training_model(abstract_reference):
+    '''модель пользовательских требований к тренировке'''
     __is_male:bool=False
     __trains_per_week:int=0
     __workout:list[workout_type]=field(default_factory=list[workout_type])
@@ -15,23 +16,28 @@ class Person_training_model(abstract_reference):
 
     
     def add_workout(self,value:workout_type)->bool:
+        '''добавить тип тренировки'''
         self.__workout.append(value)
         return True
 
     def clear_workout(self)->bool:
+        '''очистить типы тренировок'''
         self.__workout.clear()
         return True
 
     @property
     def workout(self)->list[workout_type]:
+        '''типы тренировок'''
         return self.__workout
     
     @property
     def is_male(self)->bool:
+        '''пол'''
         return self.__is_male
     
     @property 
     def trains_per_week(self)->int:
+        '''количество тренировок в неделю'''
         return self.__trains_per_week
     
     @is_male.setter

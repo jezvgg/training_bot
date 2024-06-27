@@ -8,6 +8,7 @@ from dataclasses import dataclass
 
 @dataclass
 class Exercise_model(abstract_reference):
+    '''модель упражнения'''
     __description:str=''
     __technique:str=''
     __recomendations:str=''
@@ -24,34 +25,42 @@ class Exercise_model(abstract_reference):
 
     @property
     def description(self)->str:
+        '''описание упражнения'''
         return self.__description
 
     @property
     def technique(self)->str:
+        '''техника упражнения'''
         return self.__technique
     
     @property
     def recomendations(self)->str:
+        '''рекомендации к выполнению'''
         return self.__recomendations
     
     @property
     def url_image(self)->str:
+        '''ссылка на изображение'''
         return self.__url_image
     
     @property
     def pattern(self)->pattern_type:
+        '''тип работы мышцы'''
         return self.__pattern
 
     @property
     def muscle(self)->muscle_type:
+        '''мышца'''
         return self.__muscle
     
     @property
     def locations(self)->location_type:
+        '''место'''
         return self.__locations
     
     @property
     def is_circular(self)->bool:
+        '''является ли циклической'''
         return self.__is_circular
     
     @description.setter
