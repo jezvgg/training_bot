@@ -12,6 +12,20 @@ class ProgramTable(BaseTable):
     workout=Column('workout',JSON)
     trainings=Column('trainings',JSON)
 
+    @staticmethod
+    def build(model:Weekly_program_model):
+        workout=[]
+        for cur_type in model.workout:
+            workout.append(cur_type.name)
+
+        blocks={}
+        for cur_day in model.trainings:
+            blocks[cur_day]=[]
+            for cur_block in model.trainings[cur_day]:
+                blocks[cur_day].append(cur_block.muscle.name)
+        
+        return ProgramTable(model.name,model.is_male,workout,blocks)
+
     def __init__ (self,id:int,gender:bool=None,wokout:list[workout_type]=[],trainings:dict[int,Block_model]=[]):
         self.id=id
         self.gender=gender

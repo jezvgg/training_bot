@@ -1,5 +1,5 @@
 from DB.Tables import BaseTable
-from sqlalchemy import Column, Boolean, JSON,Integer
+from sqlalchemy import Column, Boolean, JSON, BigInteger,Integer
 from Src.Models import *
 from Src.Enums import *
 
@@ -7,10 +7,18 @@ from Src.Enums import *
 class TrainingInfoTable(BaseTable):
     __tablename__='trainings_info'
 
-    id = Column("id", Integer, unique=True, primary_key=True,nullable=False)
+    id = Column("id", BigInteger, unique=True, primary_key=True,nullable=False)
     gender=Column('gender',Boolean)
     trainings_per_week=Column("trainings_per_week",Integer)
     workout=Column('workout',JSON)
+
+    @staticmethod
+    def build(model:Person_training_model):
+        workouts=[]
+        for cur_workout in model.workout:
+            workouts.append(cur_workout.name)
+        return TrainingInfoTable(model.name,model.is_male,model.trains_per_week,workouts)
+
 
     def __init__ (self,id:int,gender:bool=None,trainings_per_week:int=None,workout:list[workout_type]=None):
         self.id=id

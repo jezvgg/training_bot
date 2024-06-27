@@ -16,6 +16,10 @@ class ExerciseTable(BaseTable):
     locations=Column('location',String)
     is_circular=Column('circular',Boolean)
 
+    @staticmethod
+    def build(model:Exercise_model):
+        return ExerciseTable(model.name,model.description,model.technique,model.recomendations,model.url_image,model.pattern.name,model.muscle.name,model.locations.name,model.is_circular)
+
     def __init__(self,id:int,description:str=None,technique:str=None,recomendations:str=None,url:str=None,pattern:pattern_type=None,muscle:muscle_type=None,locations:location_type=None,is_circular:bool=None):
         self.id=id
         self.description=description

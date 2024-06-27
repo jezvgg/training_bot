@@ -11,6 +11,16 @@ class BlockTable(BaseTable):
     muscle=Column('muscle',String)
     exercises_criteria=Column('exercises_criteria',JSON)
 
+    @staticmethod
+    def build(model:Block_model):
+        criteria={}
+        for cur_day in model.exersices_criteria:
+            criteria[cur_day]=[]
+            for cur_criteria in model.exersices_criteria[cur_day]:
+                criteria[cur_day].append(cur_criteria[0].name,cur_criteria[1].name,cur_criteria[2].name)
+
+        return BlockTable(model.name,model.muscle.name,criteria)
+
     def __init__(self,id:int,muscle:str=None,exercises_criteria:dict[int, list[muscle_type,location_type,pattern_type]]=[]):
         self.id=id
         self.muscle=muscle
