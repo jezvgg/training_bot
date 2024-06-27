@@ -9,13 +9,19 @@ class Diet(AbstractModel):
     '''
     Модель меню
     '''
+    __diet_id:int #id записи 
     __telegram_id: int #id Пользователя
     __product: str #Продукты на которые у пользователя аллергия или которые он не любит
     __diet_goal: str #Последнее сохраненное меню
     __count_trainigs: int #Колво тренировок в неделю
+    __diet:str
 
 
-    
+    @property
+    def diet_id(self) -> int:
+        return self.__diet_id
+
+
     @property
     def id(self) -> int:
         return self.__telegram_id
@@ -48,6 +54,16 @@ class Diet(AbstractModel):
     @count_trainigs.setter
     def count_trainigs(self, value : int) -> None:
         self.__count_trainigs = value
+
+
+    @property
+    def diet(self) -> str:
+        return self.__diet
+
+
+    @diet.setter
+    def diet(self, value : str) -> None:
+        self.__diet = value
 
 
 

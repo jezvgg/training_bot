@@ -10,7 +10,7 @@ from datetime import timedelta
 
 
 
-sets = settings.from_env()
+sets = settings.from_json()
 db = DBHelper(sets)
 dialogue = dialogue_manager(db.get(Message))
 commands = command_manager(db.get(Command))

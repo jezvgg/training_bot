@@ -18,8 +18,7 @@ class diet_get_event(event):
     '''
     _db: DBInterface
     __settings:settings
-    __info_body:UserInfoTable=None
-    __info_diet:DietInfoTable=None
+
 
 
     def __init__(self, db: DBInterface):
@@ -28,16 +27,18 @@ class diet_get_event(event):
 
 
     def activate(self, user: User, message: types.Message) -> Message:
-        self.__info_body = self._db._get_one(UserInfoTable, user.id)
-        self.__info_diet = self._db._get_one(DietInfoTable, user.id)
+        info_body = self._db._get_one(UserInfoTable, user.id)
+        info_diet = self._db._get_one(DietInfoTable, user.id)
 
         
-        gpt_answer=self.get_diet()
+        gpt_answer=self.get_diet(info_body,info_diet)
+        
+
 
         return user.current_message.text.format(text=gpt_answer)
 
     
-    def get_diet(self):
+    def get_diet(self,info_body,info_diet):
 
         
 
@@ -47,13 +48,13 @@ class diet_get_event(event):
         arg={
         "{token}": self.__settings.token_for_gpt,
         "{bot_id}": self.__settings.id_bot_gpt,
-        "{gender}": {True:'Мужской', False:'Женский'}[self.__info_body.gender],
-        "{age}": str(self.__info_body.age),
-        "{weight}": str(self.__info_body.weight),
-        "{height}": str(self.__info_body.height),
-        "{product}": self.__info_diet.product,
-        "{goal}": self.__info_diet.diet_goal,
-        "{count_traings}": self.__info_diet.count_trainings}
+        "{gender}": {True:'Мужской', False:'Женский'}[info_body.gender],
+        "{age}": str(info_body.age),
+        "{weight}": str(info_body.weight),
+        "{height}": str(info_body.height),
+        "{product}": info_diet.product,
+        "{goal}": info_diet.diet_goal,
+        "{count_traings}": info_diet.count_trainings}
         gpt_request=self.__format_rpompt(gpt_request,**arg)
 
         gpt_request= json.loads(gpt_request)

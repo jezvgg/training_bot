@@ -20,6 +20,7 @@ class diet_save_event(base_save_event):
 
     def __init__(self, db: DBInterface):
         super().__init__(db)
+        self.__get_diet=diet_get_event(db)
         self.table_class = DietInfoTable
         self.types = {
             DietInfoTable.product.name: str,
@@ -28,7 +29,7 @@ class diet_save_event(base_save_event):
 
             
         }
-        self.__get_diet=diet_get_event(db)
+        
 
     
     def _finish(self, user: User, message: types.Message) -> Message:
@@ -37,10 +38,6 @@ class diet_save_event(base_save_event):
 
     def activate(self, user: User, message: types.Message) -> Message:
         message_ = super().activate(user, message)
-
-        if message_ is None:
-            self._db._delete(self._db._get_one(self.table_class, user.id))
-            message_ = super().activate(user, message)
 
         return message_
         
