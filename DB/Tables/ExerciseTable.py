@@ -1,12 +1,12 @@
 from DB.Tables import BaseTable
-from sqlalchemy import Column, Boolean, String
+from sqlalchemy import Column, Boolean, String,Integer
 from Src.Models import *
 from Src.Enums import *
 
 class ExerciseTable(BaseTable):
 
     __tablename__='exercises'
-
+    id=Column('id',Integer,primary_key=True,autoincrement='auto',nullable=False)
     description=Column('description',String)
     technique=Column('technique',String)
     recomendations=Column('recomendations',String)
@@ -16,7 +16,8 @@ class ExerciseTable(BaseTable):
     locations=Column('location',String)
     is_circular=Column('circular',Boolean)
 
-    def __init__(self,description:str=None,technique:str=None,recomendations:str=None,url:str=None,pattern:pattern_type=None,muscle:muscle_type=None,locations:location_type=None,is_circular:bool=None):
+    def __init__(self,id:int,description:str=None,technique:str=None,recomendations:str=None,url:str=None,pattern:pattern_type=None,muscle:muscle_type=None,locations:location_type=None,is_circular:bool=None):
+        self.id=id
         self.description=description
         self.technique=technique
         self.recomendations=recomendations
@@ -29,4 +30,4 @@ class ExerciseTable(BaseTable):
     def model(self):
 
 
-        return Exercise_model('',self.description,self.technique,self.recomendations,self.url,pattern_type(self.pattern),muscle_type(self.muscle),location_type(self.locations),self.is_circular)
+        return Exercise_model(self.id,self.description,self.technique,self.recomendations,self.url,pattern_type(self.pattern),muscle_type(self.muscle),location_type(self.locations),self.is_circular)

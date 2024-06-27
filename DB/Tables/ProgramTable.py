@@ -7,12 +7,13 @@ from Src.Enums import *
 class ProgramTable(BaseTable):
     __tablename__='Programs'
 
-    id=Column('id',BigInteger,primary_key=True,autoincrement='auto')
+    id=Column('id',BigInteger,primary_key=True,autoincrement='auto',nullable=False)
     gender=Column('gender',Boolean)
     workout=Column('workout',JSON)
     trainings=Column('trainings',JSON)
 
-    def __init__ (self,gender:bool=None,wokout:list[workout_type]=[],trainings:dict[int,Block_model]=[]):
+    def __init__ (self,id:int,gender:bool=None,wokout:list[workout_type]=[],trainings:dict[int,Block_model]=[]):
+        self.id=id
         self.gender=gender
         self.workout=wokout
         self.trainings=trainings
@@ -32,4 +33,4 @@ class ProgramTable(BaseTable):
 
 
         
-        result=Weekly_program_model('',self.gender,workout,trainings)
+        result=Weekly_program_model(self.id,self.gender,workout,trainings)
