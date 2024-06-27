@@ -5,6 +5,7 @@ __pycache__
 .vscode/
 # C extensions
 *.so
+settings.json
 
 # Distribution / packaging
 .Python
