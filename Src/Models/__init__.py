@@ -1,4 +1,5 @@
 from Src.Models.AbstractModel import AbstractModel
+from Src.Models.Period import Period
 from Src.Models.Keyboard import Keyboard
 from Src.Models.Message import Message
 from Src.Models.User import User
@@ -14,3 +15,4 @@ from Src.Models.Models_for_training.program_model import Weekly_program_model
 #классы с логикой - маленькая, модели - большая
 
 
+from Src.Models.Feature import Feature

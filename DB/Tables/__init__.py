@@ -13,3 +13,4 @@ from DB.Tables.ExerciseTable import ExerciseTable
 from DB.Tables.ProgramTable import ProgramTable
 from DB.Tables.BlockTable import BlockTable
 from DB.Tables.TrainingInfoTable import TrainingInfoTable
+from DB.Tables.FeaturesTable import FeaturesTable

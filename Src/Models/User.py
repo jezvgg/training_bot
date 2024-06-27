@@ -1,5 +1,7 @@
-from Src.Models import Message, AbstractModel
+from Src.Models import Message, AbstractModel, Period
 from dataclasses import dataclass,field
+
+from datetime import datetime
 
 @dataclass
 class User(AbstractModel):
@@ -11,7 +13,7 @@ class User(AbstractModel):
     __is_accepted: bool
     __username: str
     __current_message: Message
-    __subcribed: bool
+    __subcribe: Period
     __telegram_id: int
 
 
@@ -27,13 +29,13 @@ class User(AbstractModel):
 
 
     @property
-    def subscribed(self) -> bool:
-        return self.__subcribed
+    def subscribe(self) -> Period:
+        return self.__subscribe
 
 
-    @subscribed.setter
-    def subscribed(self, value : bool) -> None:
-        self.__subcribed = value
+    @subscribe.setter
+    def subscribe(self, value : Period) -> None:
+        self.__subscribe = value
 
 
     @property
