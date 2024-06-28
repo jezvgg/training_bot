@@ -9,5 +9,5 @@
         "bot_id": "{bot_id}",
         "user": "29032201862555",
         "query": "Составь меню на 7 дней с рецептами и грамовками для {gender} {age} лет ростом {height} весом {weight}, рассчитай дневной коллораж и бжу. В меню не должно быть {product}. Цель {goal} {count_traings}.  ",
-        "stream": False}
+        "stream": false}
 }

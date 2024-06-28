@@ -37,14 +37,14 @@ class telegram_service:
         features = self.__db.get(Feature)
         messages = {}
         
-        for user in users:
-            if user.subscribe.start is None or user.subscribe.end is None or \
-            user.subscribe.start > datetime.now() or user.subscribe.end < datetime.now():
-                continue
+        # for user in users:
+        #     if user.subscribe.start is None or user.subscribe.end is None or \
+        #     user.subscribe.start > datetime.now() or user.subscribe.end < datetime.now():
+        #         continue
 
-            delta = datetime.now() - user.subscribe.start
+        #     delta = datetime.now() - user.subscribe.start
 
-            messages[user.id] = features[delta.days].message
+        #     messages[user.id] = features[delta.days].message
 
         return messages
 
@@ -98,7 +98,7 @@ class telegram_service:
         '''
         Создать аргументы для ответа в телеграм
         '''
-        answer_kwargs = {'text':message.text}
+        answer_kwargs = {'text': message.text}
 
         if message.keyboard: 
             answer_kwargs['reply_markup'] = message.keyboard.build_markup()

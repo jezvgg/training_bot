@@ -1,5 +1,5 @@
 from DB.Tables import BaseTable
-from sqlalchemy import Column, BigInteger, Integer, String, ForeignKey, Boolean
+from sqlalchemy import Column, BigInteger, Integer, String, ForeignKey, Boolean, Sequence
 
 
 
@@ -7,7 +7,7 @@ from sqlalchemy import Column, BigInteger, Integer, String, ForeignKey, Boolean
 class DietInfoTable(BaseTable):
     __tablename__ = 'diet_info'
 
-    diet_id = Column("id", BigInteger, ForeignKey('users.telegram_id'), unique=True, primary_key=True, autoincrement=True)
+    subscribe_id=Column( BigInteger,Sequence("id", start=1, increment=1), primary_key=True)
     id = Column("telegram_id", BigInteger, ForeignKey('users.telegram_id'))
     product = Column("product", String)
     diet_goal = Column("diet_goal", String)
@@ -16,8 +16,7 @@ class DietInfoTable(BaseTable):
    
 
 
-    def __init__(self, diet_id:int,  id: int, product: str = None, diet_goal: str = None, count_trainigs: str = None):
-        self.diet_id=diet_id
+    def __init__(self,  id: int, product: str = None, diet_goal: str = None, count_trainigs: str = None):
         self.id = id
         self.product = product
         self.diet_goal = diet_goal

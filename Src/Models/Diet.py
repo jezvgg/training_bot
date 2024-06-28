@@ -10,7 +10,7 @@ class Diet(AbstractModel):
     Модель меню
     '''
     __diet_id:int #id записи 
-    __telegram_id: int #id Пользователя
+    __id: int #id Пользователя
     __product: str #Продукты на которые у пользователя аллергия или которые он не любит
     __diet_goal: str #Последнее сохраненное меню
     __count_trainigs: int #Колво тренировок в неделю
@@ -24,7 +24,7 @@ class Diet(AbstractModel):
 
     @property
     def id(self) -> int:
-        return self.__telegram_id
+        return self.__id
 
 
     @property
