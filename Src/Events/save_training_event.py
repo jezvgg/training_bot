@@ -28,10 +28,14 @@ class save_training_event(base_save_event):
         programs=self._db.get(ProgramTable)
 
         person=self._db.get_one(TrainingInfoTable,user.id)
-
+        print('hello')
         creator=trainings_getter(person,programs,blocks,exercises)
 
-        print(creator.get_training())
+        training=creator.get_training(2)
+        print(training)
+
+        finish_message=Message(0,'training_created',0,'')
+        return finish_message
     
 
 

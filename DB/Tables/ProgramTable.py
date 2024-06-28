@@ -47,4 +47,4 @@ class ProgramTable(BaseTable):
 
 
         
-        result=Weekly_program_model(self.id,self.gender,workout,trainings)
+        return Weekly_program_model(self.id,self.gender,workout,trainings)
