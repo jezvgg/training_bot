@@ -1,4 +1,3 @@
-
 from Src.Models.training_base import training_base
 from Src.Enums.muscle_type import muscle_type
 from Src.Enums.location_type import location_type
@@ -7,7 +6,7 @@ from dataclasses import dataclass, field
 
 
 @dataclass
-class Block_model(training_base):
+class TrainingBlock(training_base):
     """
     Модель блока в тренировке
     """

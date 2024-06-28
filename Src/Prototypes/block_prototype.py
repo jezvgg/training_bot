@@ -6,7 +6,7 @@ from random import sample
 
 class block_prototype(prototype):
     '''прототип для фильтрации блоков по нужной мышце и количеству упражнений в блоке'''
-    _data: list[Block_model]
+    _data: list[TrainingBlock]
 
 
     def filter_block_on_day(self, muscle: muscle_type, amount_of_exercises: int):

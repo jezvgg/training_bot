@@ -16,17 +16,17 @@ class test_trainings_creator(unittest.TestCase):
         spartan=workout_type('spartan')
 
         
-        block_biceps=Block_model("бицепс",arms,[[arms,location_type("дом"),pattern_type("накачка")],[arms,location_type("дом"),pattern_type("накачка")]])
-        block_chest=Block_model("бицепс",chest,[[chest,location_type("дом"),pattern_type("накачка")],[chest,location_type("дом"),pattern_type("накачка")]])
+        block_biceps=TrainingBlock("бицепс",arms,[[arms,location_type("дом"),pattern_type("накачка")],[arms,location_type("дом"),pattern_type("накачка")]])
+        block_chest=TrainingBlock("бицепс",chest,[[chest,location_type("дом"),pattern_type("накачка")],[chest,location_type("дом"),pattern_type("накачка")]])
 
 
 
-        program=Weekly_program_model('пример',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
-        program_5=Weekly_program_model('пример 2',True,[spartan],{1:[block_biceps],2:[block_chest],5:[block_chest,block_biceps]})
-        program_2=Weekly_program_model('не пример',True,[kachat],{1:None,3:None,5:None})
-        program_3=Weekly_program_model('не пример',False,[spartan],{1:None,3:None,5:None})
-        program_4=Weekly_program_model('не пример',True,[spartan],{1:None,3:None,5:None,6:None})
-        person=Person_training_model('вася',True,3,[spartan])
+        program=TrainingProgramm('пример',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
+        program_5=TrainingProgramm('пример 2',True,[spartan],{1:[block_biceps],2:[block_chest],5:[block_chest,block_biceps]})
+        program_2=TrainingProgramm('не пример',True,[kachat],{1:None,3:None,5:None})
+        program_3=TrainingProgramm('не пример',False,[spartan],{1:None,3:None,5:None})
+        program_4=TrainingProgramm('не пример',True,[spartan],{1:None,3:None,5:None,6:None})
+        person=TrainingPersonData('вася',True,3,[spartan])
 
         #действие
         examp=trainings_getter([program,program_2,program_3,program_4,program_5], [], [])
@@ -47,18 +47,18 @@ class test_trainings_creator(unittest.TestCase):
         spartan=workout_type('spartan')
 
         
-        block_biceps=Block_model("бицепс",arms,[[arms,location_type("дом"),pattern_type("локалка")],[arms,location_type("дом"),pattern_type("изолир")]])
-        block_biceps_2=Block_model("бицепс-одинарный",arms,[[arms,location_type("дом"),pattern_type("глобалка")]])
-        block_chest=Block_model("грудь",chest,[[chest,location_type("дом"),pattern_type("локалка")],[chest,location_type("дом"),pattern_type("глобалка")]])
-        block_chest_2=Block_model("грудь-одинарный",chest,[[chest,location_type("дом"),pattern_type("глобалка")]])
+        block_biceps=TrainingBlock("бицепс",arms,[[arms,location_type("дом"),pattern_type("локалка")],[arms,location_type("дом"),pattern_type("изолир")]])
+        block_biceps_2=TrainingBlock("бицепс-одинарный",arms,[[arms,location_type("дом"),pattern_type("глобалка")]])
+        block_chest=TrainingBlock("грудь",chest,[[chest,location_type("дом"),pattern_type("локалка")],[chest,location_type("дом"),pattern_type("глобалка")]])
+        block_chest_2=TrainingBlock("грудь-одинарный",chest,[[chest,location_type("дом"),pattern_type("глобалка")]])
 
 
-        program=Weekly_program_model('пример',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
-        program_5=Weekly_program_model('пример 2',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
-        program_2=Weekly_program_model('не пример',True,[kachat],{1:None,3:None,5:None})
-        program_3=Weekly_program_model('не пример',False,[spartan],{1:None,3:None,5:None})
-        program_4=Weekly_program_model('не пример',True,[spartan],{1:None,3:None,5:None,6:None})
-        person=Person_training_model('вася',True,3,[spartan])
+        program=TrainingProgramm('пример',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
+        program_5=TrainingProgramm('пример 2',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
+        program_2=TrainingProgramm('не пример',True,[kachat],{1:None,3:None,5:None})
+        program_3=TrainingProgramm('не пример',False,[spartan],{1:None,3:None,5:None})
+        program_4=TrainingProgramm('не пример',True,[spartan],{1:None,3:None,5:None,6:None})
+        person=TrainingPersonData('вася',True,3,[spartan])
 
 
         examp=trainings_getter([program,program_2,program_3,program_4,program_5],[block_biceps,block_chest,block_chest_2,block_biceps_2], [])
@@ -83,26 +83,26 @@ class test_trainings_creator(unittest.TestCase):
         spartan=workout_type('spartan')
 
         
-        block_biceps=Block_model("бицепс",arms,[[arms,location_type("дом"),pattern_type("локалка")],[arms,location_type("зал"),pattern_type("глобалка")]])
-        block_biceps_2=Block_model("бицепс-одинарный",arms,[[arms,location_type("зал"),pattern_type("глобалка")]])
-        block_chest=Block_model("грудь",chest,[[chest,location_type("дом"),pattern_type("локалка")],[chest,location_type("дом"),pattern_type("глобалка")]])
-        block_chest_2=Block_model("грудь-одинарный",chest,[[chest,location_type("дом"),pattern_type("глобалка")]])
+        block_biceps=TrainingBlock("бицепс",arms,[[arms,location_type("дом"),pattern_type("локалка")],[arms,location_type("зал"),pattern_type("глобалка")]])
+        block_biceps_2=TrainingBlock("бицепс-одинарный",arms,[[arms,location_type("зал"),pattern_type("глобалка")]])
+        block_chest=TrainingBlock("грудь",chest,[[chest,location_type("дом"),pattern_type("локалка")],[chest,location_type("дом"),pattern_type("глобалка")]])
+        block_chest_2=TrainingBlock("грудь-одинарный",chest,[[chest,location_type("дом"),pattern_type("глобалка")]])
 
 
-        program=Weekly_program_model('пример',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
-        program_5=Weekly_program_model('пример 2',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
-        program_2=Weekly_program_model('не пример',True,[kachat],{1:None,3:None,5:None})
-        program_3=Weekly_program_model('не пример',False,[spartan],{1:None,3:None,5:None})
-        program_4=Weekly_program_model('не пример',True,[spartan],{1:None,3:None,5:None,6:None})
-        person=Person_training_model('вася',True,3,[spartan])
+        program=TrainingProgramm('пример',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
+        program_5=TrainingProgramm('пример 2',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
+        program_2=TrainingProgramm('не пример',True,[kachat],{1:None,3:None,5:None})
+        program_3=TrainingProgramm('не пример',False,[spartan],{1:None,3:None,5:None})
+        program_4=TrainingProgramm('не пример',True,[spartan],{1:None,3:None,5:None,6:None})
+        person=TrainingPersonData('вася',True,3,[spartan])
 
         
 
-        exer1=Exercise_model('жим','',',','','',pattern_type('локалка'),muscle_type('chest'),location_type('дом'))
-        exer2=Exercise_model('махи','',',','','',pattern_type('глобалка'),muscle_type('chest'),location_type('дом'))
-        exer3=Exercise_model('гантели','',',','','',pattern_type('локалка'),muscle_type('arms'),location_type('дом'))
-        exer4=Exercise_model('станок','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('дом'))
-        exer5=Exercise_model('станок 2','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('зал'))
+        exer1=TrainingExercise('жим','',',','','',pattern_type('локалка'),muscle_type('chest'),location_type('дом'))
+        exer2=TrainingExercise('махи','',',','','',pattern_type('глобалка'),muscle_type('chest'),location_type('дом'))
+        exer3=TrainingExercise('гантели','',',','','',pattern_type('локалка'),muscle_type('arms'),location_type('дом'))
+        exer4=TrainingExercise('станок','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('дом'))
+        exer5=TrainingExercise('станок 2','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('зал'))
 
 
 
@@ -133,26 +133,26 @@ class test_trainings_creator(unittest.TestCase):
         spartan=workout_type('spartan')
 
         
-        block_biceps=Block_model("бицепс",arms,[[arms,location_type("дом"),pattern_type("локалка")],[arms,location_type("зал"),pattern_type("глобалка")]])
-        block_biceps_2=Block_model("бицепс-одинарный",arms,[[arms,location_type("зал"),pattern_type("глобалка")]])
-        block_chest=Block_model("грудь",chest,[[chest,location_type("дом"),pattern_type("локалка")],[chest,location_type("дом"),pattern_type("глобалка")]])
-        block_chest_2=Block_model("грудь-одинарный",chest,[[chest,location_type("дом"),pattern_type("глобалка")]])
+        block_biceps=TrainingBlock("бицепс",arms,[[arms,location_type("дом"),pattern_type("локалка")],[arms,location_type("зал"),pattern_type("глобалка")]])
+        block_biceps_2=TrainingBlock("бицепс-одинарный",arms,[[arms,location_type("зал"),pattern_type("глобалка")]])
+        block_chest=TrainingBlock("грудь",chest,[[chest,location_type("дом"),pattern_type("локалка")],[chest,location_type("дом"),pattern_type("глобалка")]])
+        block_chest_2=TrainingBlock("грудь-одинарный",chest,[[chest,location_type("дом"),pattern_type("глобалка")]])
 
 
-        program=Weekly_program_model('пример',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
-        program_5=Weekly_program_model('пример 2',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
-        program_2=Weekly_program_model('не пример',True,[kachat],{1:None,3:None,5:None})
-        program_3=Weekly_program_model('не пример',False,[spartan],{1:None,3:None,5:None})
-        program_4=Weekly_program_model('не пример',True,[spartan],{1:None,3:None,5:None,6:None})
-        person=Person_training_model('вася',True,3,[spartan])
+        program=TrainingProgramm('пример',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
+        program_5=TrainingProgramm('пример 2',True,[spartan],{1:[block_biceps],3:[block_chest],5:[block_chest,block_biceps]})
+        program_2=TrainingProgramm('не пример',True,[kachat],{1:None,3:None,5:None})
+        program_3=TrainingProgramm('не пример',False,[spartan],{1:None,3:None,5:None})
+        program_4=TrainingProgramm('не пример',True,[spartan],{1:None,3:None,5:None,6:None})
+        person=TrainingPersonData('вася',True,3,[spartan])
 
         
 
-        exer1=Exercise_model('жим','',',','','',pattern_type('локалка'),muscle_type('chest'),location_type('дом'))
-        exer2=Exercise_model('махи','',',','','',pattern_type('глобалка'),muscle_type('chest'),location_type('дом'))
-        exer3=Exercise_model('гантели','',',','','',pattern_type('локалка'),muscle_type('arms'),location_type('дом'))
-        exer4=Exercise_model('станок','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('дом'))
-        exer5=Exercise_model('станок 2','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('зал'))
+        exer1=TrainingExercise('жим','',',','','',pattern_type('локалка'),muscle_type('chest'),location_type('дом'))
+        exer2=TrainingExercise('махи','',',','','',pattern_type('глобалка'),muscle_type('chest'),location_type('дом'))
+        exer3=TrainingExercise('гантели','',',','','',pattern_type('локалка'),muscle_type('arms'),location_type('дом'))
+        exer4=TrainingExercise('станок','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('дом'))
+        exer5=TrainingExercise('станок 2','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('зал'))
 
 
 

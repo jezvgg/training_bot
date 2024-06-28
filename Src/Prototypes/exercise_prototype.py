@@ -7,12 +7,12 @@ from random import sample
 
 
 class exersise_prototype(prototype):
-    '''прототип для фильтрации упражнений по критериям из Block_model'''
-    _data: list[Exercise_model]
+    '''прототип для фильтрации упражнений по критериям из TrainingBlock'''
+    _data: list[TrainingExercise]
 
     def filter_exercises_criteria(self, criteria: list[muscle_type, location_type, pattern_type]):
         '''Фильтрация'''
-        # Какая фильтрация, чего блять?
+        # Комментарий недостаточно полный
         result = []
 
         for cur_exersise in self._data:

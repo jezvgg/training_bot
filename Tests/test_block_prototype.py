@@ -13,11 +13,11 @@ class test_block_prototype(unittest.TestCase):
         arms=muscle_type('arms')
 
 
-        block1=Block_model('блок1',arms,[[],[],[]])
-        block2=Block_model('блок2',arms,[[],[],[],[]])
-        block3=Block_model('блок3',chest,[[],[],[]])
-        block4=Block_model('блок4',hands,[[],[],[]])
-        block5=Block_model('блок5',arms,[[],[],[]])
+        block1=TrainingBlock('блок1',arms,[[],[],[]])
+        block2=TrainingBlock('блок2',arms,[[],[],[],[]])
+        block3=TrainingBlock('блок3',chest,[[],[],[]])
+        block4=TrainingBlock('блок4',hands,[[],[],[]])
+        block5=TrainingBlock('блок5',arms,[[],[],[]])
 
         prot=block_prototype([block1,block2,block3,block4,block5])
 

@@ -12,15 +12,15 @@ class trainings_getter:
     __exercise_prototype: exersise_prototype
 
 
-    def __init__(self, programs: list[Weekly_program_model], \
-                 blocks: list[Block_model], exesises: list[Exercise_model]) -> None:
+    def __init__(self, programs: list[TrainingProgramm], \
+                 blocks: list[TrainingBlock], exesises: list[TrainingExercise]) -> None:
         self.__exercise_prototype = exersise_prototype(exesises)
         self.__block_prototype = block_prototype(blocks)
         self.__program_prototype = training_prototype(programs)
 
 
-    def get_training(self, person: Person_training_model, trainings_per_day: int = 8) \
-                    -> defaultdict[int:list[Exercise_model]]:
+    def get_training(self, person: TrainingPersonData, trainings_per_day: int = 8) \
+                    -> Training:
         program = self.get_program(person)
 
         blocks = self.get_blocks(program, trainings_per_day)
@@ -28,43 +28,35 @@ class trainings_getter:
         return self.get_exercise(blocks)
 
 
-    def get_program(self, person: Person_training_model) -> Weekly_program_model:
+    def get_program(self, person: TrainingPersonData) -> TrainingProgramm:
         fitting_programs = self.__program_prototype.filter_person_training_model(person)
 
         return fitting_programs.sample()
 
 
-    def get_blocks(self, program: Weekly_program_model, trainings_pe_day: int = 8) -> defaultdict[int:list[Block_model]]:
-        person_training_blocks = defaultdict(lambda: [])
+    def get_blocks(self, program: TrainingProgramm, trainings_pe_day: int = 8) -> Training:
+        person_training_blocks = Training()
 
-        for cur_day in program.trainings:
-            trainings_per_block = trainings_pe_day // len(program.trainings[cur_day])
-
-            for cur_block in program.trainings[cur_day]:
-                fitting_blocks = self.__block_prototype.filter_block_on_day(
+        for cur_day, blocks in program.trainings.items():
+            trainings_per_block = trainings_pe_day // len(blocks)
+            for cur_block in blocks:
+                block = self.__block_prototype.filter_block_on_day(
                     cur_block.muscle, trainings_per_block)
 
-                block = fitting_blocks.sample()
-
-                added = person_training_blocks[cur_day]
-                added.append(block)
-                person_training_blocks[cur_day] = added
+                person_training_blocks[int(cur_day)-1].append(block.sample())
 
         return person_training_blocks
 
 
-    def get_exercise(self, blocks: defaultdict[int:list[Block_model]]) -> defaultdict[int:list[Exercise_model]]:
-        person_training_execises = defaultdict(lambda: [])
+    def get_exercise(self, blocks: Training) -> Training:
+        person_training_execises = Training()
+
         for cur_day in blocks.keys():
-
             for cur_block in blocks[cur_day]:
-
                 for cur_criteria in cur_block.exersices_criteria:
-                    fitting_exercises = self.__exercise_prototype.filter_exercises_criteria(
-                        cur_criteria)
+                    exercise = self.__exercise_prototype.filter_exercises_criteria(
+                        cur_criteria).sample()
 
-                    added = person_training_execises[cur_day]
-                    added.append(fitting_exercises.sample())
-                    person_training_execises[cur_day] = added
+                    person_training_execises[cur_day].append(exercise)
 
         return person_training_execises

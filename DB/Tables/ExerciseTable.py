@@ -20,7 +20,7 @@ class ExerciseTable(BaseTable):
 
 
     @staticmethod
-    def build(model: Exercise_model):
+    def build(model: TrainingExercise):
         return ExerciseTable(model.name, model.description, model.technique, 
                             model.recomendations, model.url_image, model.pattern.name, 
                             model.muscle.name, model.locations.name, model.is_circular)
@@ -39,6 +39,6 @@ class ExerciseTable(BaseTable):
 
 
     def model(self):
-        return Exercise_model(self.id, self.description, self.technique, self.recomendations, 
+        return TrainingExercise(self.id, self.description, self.technique, self.recomendations, 
                             self.url, pattern_type(self.pattern), muscle_type(self.muscle), 
                             location_type(self.locations), self.is_circular)

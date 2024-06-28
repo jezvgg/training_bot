@@ -15,7 +15,7 @@ class ProgramTable(BaseTable):
 
 
     @staticmethod
-    def build(model: Weekly_program_model):
+    def build(model: TrainingProgramm):
         workout = []
         for cur_type in model.workout:
             workout.append(cur_type.name)
@@ -29,7 +29,7 @@ class ProgramTable(BaseTable):
         return ProgramTable(model.name, model.is_male, workout, blocks)
 
 
-    def __init__(self, id: int, gender: bool = None, wokout: list[workout_type] = [], trainings: dict[int, Block_model] = []):
+    def __init__(self, id: int, gender: bool = None, wokout: list[workout_type] = [], trainings: dict[int, TrainingBlock] = []):
         self.id = id
         self.gender = gender
         self.workout = wokout
@@ -47,7 +47,6 @@ class ProgramTable(BaseTable):
             trainings[cur_day] = []
 
             for cur_block in self.trainings[cur_day]:
-                trainings[cur_day].append(
-                    Block_model('', muscle_type(cur_block)))
+                trainings[cur_day].append(TrainingBlock('', muscle_type(cur_block)))
 
-        return Weekly_program_model(self.id, self.gender, workout, trainings)
+        return TrainingProgramm(self.id, self.gender, workout, trainings)

@@ -14,7 +14,7 @@ class BlockTable(BaseTable):
 
 
     @staticmethod
-    def build(model: Block_model):
+    def build(model: TrainingBlock):
         criteria = []
 
         for cur_criteria in model.exersices_criteria:
@@ -37,4 +37,4 @@ class BlockTable(BaseTable):
             criteria.append([muscle_type(cur_criteria[0]), location_type(
                 cur_criteria[1]), pattern_type(cur_criteria[2])])
 
-        return Block_model(id, muscle_type(self.muscle), criteria)
+        return TrainingBlock(id, muscle_type(self.muscle), criteria)

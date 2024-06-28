@@ -7,7 +7,7 @@ class training_base(AbstractModel):
     __name: str = ""
 
     def __str__(self) -> str:
-        return self.name
+        return self.__repr__()
 
     @property
     def name(self) -> str:

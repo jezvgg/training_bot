@@ -7,7 +7,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Exercise_model(training_base):
+class TrainingExercise(training_base):
     '''модель упражнения'''
     __description: str = ''
     __technique: str = ''
@@ -18,6 +18,19 @@ class Exercise_model(training_base):
     __locations: location_type = None
     __is_circular: bool = False
     __link: str = None
+
+
+    def json(self):
+        return {'description':self.description,
+                'technique':self.technique,
+                'recommendations':self.recomendations,
+                'image': self.url_image,
+                'pattern': self.pattern.name,
+                'muscle': self.muscle.name,
+                'locations': self.locations.name,
+                'is_circular': self.is_circular,
+                'link': self.link}
+
 
     @property
     def description(self) -> str:
@@ -90,3 +103,7 @@ class Exercise_model(training_base):
     @is_circular.setter
     def is_circular(self, value: bool) -> None:
         self.__is_circular = value
+
+    @property
+    def link(self):
+        return self.__link

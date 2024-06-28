@@ -9,12 +9,12 @@ class test_exersise_prototype(unittest.TestCase):
 
     def test_prototype_work(self):
         #подготовка
-        block=Block_model('руки',muscle_type('бицепс'),[[muscle_type('бицепс'),location_type('дом'),pattern_type('накачка')]])
-        exer1=Exercise_model('жим','',',','','',pattern_type('накачка'),muscle_type('грудь'),location_type('дом'))
-        exer2=Exercise_model('махи','',',','','',pattern_type('фитнес'),muscle_type('бицепс'),location_type('зал'))
-        exer3=Exercise_model('гантели','',',','','',pattern_type('накачка'),muscle_type('бицепс'),location_type('дом'))
-        exer4=Exercise_model('станок','',',','','',pattern_type('накачка'),muscle_type('бицепс'),location_type('зал'))
-        exer5=Exercise_model('станок 2','',',','','',pattern_type('фитнес'),muscle_type('бицепс'),location_type('дом'))
+        block=TrainingBlock('руки',muscle_type('бицепс'),[[muscle_type('бицепс'),location_type('дом'),pattern_type('накачка')]])
+        exer1=TrainingExercise('жим','',',','','',pattern_type('накачка'),muscle_type('грудь'),location_type('дом'))
+        exer2=TrainingExercise('махи','',',','','',pattern_type('фитнес'),muscle_type('бицепс'),location_type('зал'))
+        exer3=TrainingExercise('гантели','',',','','',pattern_type('накачка'),muscle_type('бицепс'),location_type('дом'))
+        exer4=TrainingExercise('станок','',',','','',pattern_type('накачка'),muscle_type('бицепс'),location_type('зал'))
+        exer5=TrainingExercise('станок 2','',',','','',pattern_type('фитнес'),muscle_type('бицепс'),location_type('дом'))
 
         print(block.exersices_criteria)
         #действие

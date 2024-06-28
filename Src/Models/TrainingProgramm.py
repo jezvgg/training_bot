@@ -1,17 +1,17 @@
 from Src.Models import training_base
-from Src.Models import Block_model
+from Src.Models import TrainingBlock
 from Src.Enums.workout_type import workout_type
 from dataclasses import dataclass, field
 
 
 @dataclass
-class Weekly_program_model(training_base):
+class TrainingProgramm(training_base):
     '''
     Модель программы занятий на неделю
     '''
     __is_male: bool = True
     __workout: list[workout_type] = field(default_factory=list[workout_type])
-    __trainings: dict = field(default_factory=dict[int:list[Block_model]])
+    __trainings: dict = field(default_factory=dict[int:list[TrainingBlock]])
 
     @property
     def is_male(self) -> bool:
@@ -33,7 +33,7 @@ class Weekly_program_model(training_base):
         return len(list(self.__trainings.keys()))
 
     @property
-    def trainings(self) -> dict[int:list[Block_model]]:
+    def trainings(self) -> dict[int:list[TrainingBlock]]:
         '''
         Словарь типа {номер_дня:[блок1, блок2 ... блокn]}
         '''
@@ -49,7 +49,7 @@ class Weekly_program_model(training_base):
         '''
         self.__workout.append(value)
 
-    def add_block(self, block: Block_model, day: int = 1) -> None:
+    def add_block(self, block: TrainingBlock, day: int = 1) -> None:
         '''
         добавить блок в нужный день
         '''

@@ -1,8 +1,8 @@
 import unittest
-from Src.Models.Models_for_training.exercise_model import Exercise_model
-from Src.Models.Models_for_training.block_model import Block_model
-from Src.Models.Models_for_training.person_training_model import Person_training_model
-from Src.Models.Models_for_training.program_model import Weekly_program_model
+from Src.Models.Models_for_training.exercise_model import TrainingExercise
+from Src.Models.Models_for_training.block_model import TrainingBlock
+from Src.Models.Models_for_training.person_training_model import TrainingPersonData
+from Src.Models.Models_for_training.program_model import TrainingProgramm
 from Src.Enums.pattern_type import pattern_type
 from Src.Enums.muscle_type import muscle_type
 from Src.Enums.location_type import location_type
@@ -17,18 +17,18 @@ class test_training_prototype(unittest.TestCase):
         slim=workout_type('fitnes')
         spartan=workout_type('spartan')
         
-        baki=Person_training_model('baki',True,5,[workout_type('kachat')])
-        joseph=Person_training_model('Joseph',True,3,[spartan])
-        kama=Person_training_model('kama',True,3,[spartan])
-        jolyn=Person_training_model('Jolyne',False,3,[spartan])
-        ky=Person_training_model("Ky",True,3,[slim])
+        baki=TrainingPersonData('baki',True,5,[workout_type('kachat')])
+        joseph=TrainingPersonData('Joseph',True,3,[spartan])
+        kama=TrainingPersonData('kama',True,3,[spartan])
+        jolyn=TrainingPersonData('Jolyne',False,3,[spartan])
+        ky=TrainingPersonData("Ky",True,3,[slim])
 
 
-        joestar=Weekly_program_model("Joestar",True,[spartan],{1:None,3:None,5:None})
-        pula=Weekly_program_model("Pula",True,[spartan],{1:None,2:None,3:None})
-        hanma=Weekly_program_model("Hanma",True,[kachat],{1:None,2:None,3:None,4:None,5:None})
-        kujo=Weekly_program_model("Kujo",False,[spartan],{1:None,3:None,5:None})
-        kiske=Weekly_program_model("Kiske",True,[slim],{1:None,3:None,5:None})
+        joestar=TrainingProgramm("Joestar",True,[spartan],{1:None,3:None,5:None})
+        pula=TrainingProgramm("Pula",True,[spartan],{1:None,2:None,3:None})
+        hanma=TrainingProgramm("Hanma",True,[kachat],{1:None,2:None,3:None,4:None,5:None})
+        kujo=TrainingProgramm("Kujo",False,[spartan],{1:None,3:None,5:None})
+        kiske=TrainingProgramm("Kiske",True,[slim],{1:None,3:None,5:None})
 
         #действие
         prot=training_prototype([joestar,pula,hanma,kujo,kiske])
