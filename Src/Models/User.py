@@ -1,26 +1,42 @@
 from Src.Models import Message, AbstractModel, Period
-from dataclasses import dataclass,field
+
 
 from datetime import datetime
 
-@dataclass
+
 class User(AbstractModel):
 
     '''
     Модель пользователя
     '''
-    __is_use: bool
-    __is_accepted: bool
-    __username: str
-    __current_message: Message
-    __subcribe: Period
     __telegram_id: int
+    __current_message: Message
+    __username: str
+    __is_accepted: bool
+    __is_use: bool
+    __subscribe: Period
 
 
+    def __init__(self, is_use: bool, is_accepted: bool, username: str, \
+    current_message: Message, subscribe_start: datetime, subscribe_end: datetime, \
+    id: int) -> None:
+        '''
+        Модель пользователя
 
-
-
-
+        Args:
+            telegram_id - уникальный номер пользователя, из телеграма
+            subscribed - флаг, подписаный пользователь
+            current_message - сообщение на котором остановился пользователь
+            username - имя пользователя
+            is_accepted - принял ли условия соглашения пользователь
+            is_use - если false значит забанен
+        '''
+        self.__telegram_id: int = id
+        self.__subscribe: Period = Period(subscribe_start, subscribe_end)
+        self.__current_message: Message = current_message
+        self.__username: str = username
+        self.__is_accepted: bool = is_accepted
+        self.__is_use: bool = is_use
 
 
     @property

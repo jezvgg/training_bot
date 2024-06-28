@@ -15,7 +15,8 @@ class table_factory:
         Block_model:BlockTable,
         Exercise_model:ExerciseTable,
         Person_training_model:TrainingInfoTable,
-        Weekly_program_model:ProgramTable
+        Weekly_program_model:ProgramTable,
+        Feature:FeaturesTable
     }
 
     @staticmethod
@@ -31,7 +32,7 @@ class table_factory:
         Получить класс таблицы соответсвющий моделе
         '''
         if cls.get_type(model) not in cls.__map.keys():
-            raise Exception('Конвертация модели невозможна. Нет подходящей таблицы в фабрике.')
+            raise Exception(f'Конвертация модели невозможна. Нет подходящей таблицы в фабрике. {cls.get_type(model)}')
 
         return cls.__map[cls.get_type(model)]
 

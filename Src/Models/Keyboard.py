@@ -1,18 +1,26 @@
 from Src.Models.AbstractModel import AbstractModel
-
-from dataclasses import dataclass,field
-
-
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-@dataclass
+
 class Keyboard(AbstractModel):
     '''
     Модель клавиатуры бота
     '''
     __id: int
-    __data: list[dict[str,int]]=field(default_factory=list[dict[str,int]])
-    __buttons: list[list[InlineKeyboardButton]]=field(default_factory=list[list[InlineKeyboardButton]])
+    __data: list[dict[str,int]]
+    __buttons: list[list[InlineKeyboardButton]]
+
+
+    def __init__(self, id:int, data: list[dict[str,int]]) -> None:
+        '''
+        Модель клавиатуры бота
+
+        Args:
+            id - уникальный номер клавиатуры
+            data - список словарей, где каждый словарь строка, а элементы в нём - текст кнопки и id сообщения к которому она ведёт
+        '''
+        self.data = data
+        self.__id = id
 
 
     def build_markup(self):
