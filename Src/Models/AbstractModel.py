@@ -1,6 +1,7 @@
 from abc import ABC
+from dataclasses import dataclass
 
-
+@dataclass
 class AbstractModel(ABC):
 
     def __repr__(self):

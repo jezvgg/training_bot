@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import os
-
+import json
 
 @dataclass
 class settings:
@@ -14,6 +14,8 @@ class settings:
     __db_name: str
     __db_url: str
     __bot_token: str
+    __token_for_gpt: str
+    __id_bot_gpt: str
 
 
     @staticmethod
@@ -23,7 +25,19 @@ class settings:
         '''
         return settings(os.environ.get('DB_USER'), os.environ.get('DB_PASSWORD'), os.environ.get('DB_HOST'),
                         os.environ.get('DB_PORT'), os.environ.get('DB_NAME'), os.environ.get('DB_URL'), 
-                        os.environ.get('TOKEN'))
+                        os.environ.get('TOKEN'), os.environ.get('TOKEN_FOR_GPT'), os.environ.get('BOT_ID'))
+    
+    
+    @staticmethod
+    def from_json():
+        '''
+        Создать конфиги из переменных сред
+        '''
+        with open('settings.json') as json_file:
+            data = json.load(json_file)
+        return settings(data.get('DB_USER'), data.get('DB_PASSWORD'), data.get('DB_HOST'),
+                        data.get('DB_PORT'), data.get('DB_NAME'),data.get('DB_URL'), 
+                        data.get('TOKEN'), data.get('TOKEN_FOR_GPT'), data.get('BOT_ID'))
 
 
     def database_kwargs(self) -> dict:

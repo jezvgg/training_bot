@@ -2,9 +2,10 @@
 __pycache__
 *.py[cod]
 *$py.class
-
+.vscode/
 # C extensions
 *.so
+settings.json
 
 # Distribution / packaging
 .Python
@@ -162,3 +163,4 @@ cython_debug/
 #.idea/
 .vscode
 *.db
+.prettierrc

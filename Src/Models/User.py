@@ -1,8 +1,11 @@
 from Src.Models import Message, AbstractModel, Period
+
+
 from datetime import datetime
 
 
 class User(AbstractModel):
+
     '''
     Модель пользователя
     '''
