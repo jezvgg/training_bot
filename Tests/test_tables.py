@@ -4,7 +4,7 @@ from DB.Tables import *
 from DB.table_factory import table_factory
 
 
-class test_models(unittest.TestCase):
+class test_tables(unittest.TestCase):
     '''
     Проверка создания моделей таблиц, их функций (если таковые есть) и фабричных методов.
     '''

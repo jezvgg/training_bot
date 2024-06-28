@@ -1,13 +1,11 @@
 from abc import ABC
-from dataclasses import dataclass
 
 
 class abstract_type(ABC):
-    __name=''
+    __name = ''
 
-
-    def __init__(self,name:str) -> None:
-        self.__name=name
+    def __init__(self, name: str) -> None:
+        self.__name = name
 
     @property
     def name(self):

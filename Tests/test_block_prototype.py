@@ -26,4 +26,4 @@ class test_block_prototype(unittest.TestCase):
 
         #проверка
         assert len(new.data)==2
-        assert new.sample()[0] in new.data
+        assert new.sample() in new.data

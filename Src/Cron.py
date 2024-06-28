@@ -18,7 +18,7 @@ class Cron:
 
     def __init__(self, func: Callable, delay: timedelta) -> None:
         self.func = func
-        self.delta = float(delay.seconds)
+        self.delta = float(delay.total_seconds())
 
 
     async def __call__(self) -> None:

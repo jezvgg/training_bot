@@ -29,8 +29,8 @@ class test_trainings_creator(unittest.TestCase):
         person=Person_training_model('вася',True,3,[spartan])
 
         #действие
-        examp=trainings_getter(person,[program,program_2,program_3,program_4,program_5])
-        chck=examp.get_program()
+        examp=trainings_getter([program,program_2,program_3,program_4,program_5], [], [])
+        chck=examp.get_program(person)
 
         #проверка
         print(chck.name)
@@ -61,8 +61,8 @@ class test_trainings_creator(unittest.TestCase):
         person=Person_training_model('вася',True,3,[spartan])
 
 
-        examp=trainings_getter(person,[program,program_2,program_3,program_4,program_5],[block_biceps,block_chest,block_chest_2,block_biceps_2])
-        fitting_program=examp.get_program()
+        examp=trainings_getter([program,program_2,program_3,program_4,program_5],[block_biceps,block_chest,block_chest_2,block_biceps_2], [])
+        fitting_program=examp.get_program(person)
 
         #действие
         chck=examp.get_blocks(fitting_program,2)
@@ -106,8 +106,8 @@ class test_trainings_creator(unittest.TestCase):
 
 
 
-        examp=trainings_getter(person,[program,program_2,program_3,program_4,program_5],[block_biceps,block_chest,block_chest_2,block_biceps_2],[exer1,exer2,exer3,exer4,exer5])
-        fitting_program=examp.get_program()
+        examp=trainings_getter([program,program_2,program_3,program_4,program_5],[block_biceps,block_chest,block_chest_2,block_biceps_2],[exer1,exer2,exer3,exer4,exer5])
+        fitting_program=examp.get_program(person)
         blocks=examp.get_blocks(fitting_program,2)
 
 
@@ -156,12 +156,12 @@ class test_trainings_creator(unittest.TestCase):
 
 
 
-        examp=trainings_getter(person,[program,program_2,program_3,program_4,program_5],[block_biceps,block_chest,block_chest_2,block_biceps_2],[exer1,exer2,exer3,exer4,exer5])
+        examp=trainings_getter([program,program_2,program_3,program_4,program_5],[block_biceps,block_chest,block_chest_2,block_biceps_2],[exer1,exer2,exer3,exer4,exer5])
         
 
 
         #действие
-        execises=examp.get_training(2)
+        execises=examp.get_training(person, 2)
 
 
         #проверка

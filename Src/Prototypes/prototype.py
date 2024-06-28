@@ -3,13 +3,27 @@ from random import sample
 
 
 class prototype(ABC):
-    __is_error:bool=False
-    __data:list=[]
+    _data:list
 
 
-    def __init__(self) -> None:
-        super().__init__()
-    
+    def __init__(self, data: list):
+        self._data = data
 
-    def sample(self,amount:int=1):
-        return sample(self.__data,amount)
+
+    def sample(self):
+        '''
+        Вернуть случайный элемент прототипа
+        '''
+        return self.samples(1)[0]
+
+
+    def samples(self, amount: int = 1):
+        '''
+        Возвращает n разных элементов их прототипа
+        '''
+        return sample(self._data, amount)
+
+
+    @property
+    def data(self):
+        return self._data

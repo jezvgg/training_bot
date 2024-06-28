@@ -12,11 +12,11 @@ class table_factory:
         User: UserTable,
         Message: DialogueTable,
         Command: CommandsTable,
-        Block_model:BlockTable,
-        Exercise_model:ExerciseTable,
-        Person_training_model:TrainingInfoTable,
-        Weekly_program_model:ProgramTable,
-        Feature:FeaturesTable
+        Block_model: BlockTable,
+        Exercise_model: ExerciseTable,
+        Person_training_model: TrainingInfoTable,
+        Weekly_program_model: ProgramTable,
+        Feature: FeaturesTable
     }
 
     @staticmethod
@@ -32,10 +32,10 @@ class table_factory:
         Получить класс таблицы соответсвющий моделе
         '''
         if cls.get_type(model) not in cls.__map.keys():
-            raise Exception(f'Конвертация модели невозможна. Нет подходящей таблицы в фабрике. {cls.get_type(model)}')
+            raise Exception(
+                f'Конвертация модели невозможна. Нет подходящей таблицы в фабрике. {cls.get_type(model)}')
 
         return cls.__map[cls.get_type(model)]
-
 
     @classmethod
     def create(cls, model: AbstractModel) -> BaseTable:
@@ -44,7 +44,6 @@ class table_factory:
         '''
         # У этих таблиц соответственно должен быть фабричный метод от модели
         return cls.get(model).build(model)
-
 
     @classmethod
     def keys(cls):

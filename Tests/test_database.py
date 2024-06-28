@@ -12,7 +12,7 @@ class test_database(unittest.TestCase):
     '''
     Тестирование работы и связи с базой данных
     '''
-    sets = settings('test', '1111', Path('test_db.db').resolve(), '5432', 'test', 'sqlite:///{host}', '')
+    sets = settings('test', '1111', Path('test_db.db').resolve(), '5432', 'test', 'sqlite:///{host}', '', '', '')
     dbh = DBHelper(sets)
 
     def test_starting_database(self):
