@@ -5,7 +5,7 @@ from Src.Enums import *
 
 
 class ProgramTable(BaseTable):
-    __tablename__='Programs'
+    __tablename__='programs'
 
     id=Column('id',BigInteger,primary_key=True,autoincrement='auto',nullable=False)
     gender=Column('gender',Boolean)
