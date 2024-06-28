@@ -1,11 +1,12 @@
 from DB.DBHelper import DBInterface
 from Src.dialogue_manager import dialogue_manager
 from Src.commands_manager import command_manager
-from Src.Models import User, Message, Feature
+from Src.Models import User, Message, Feature, Subscribe
 from Src.event_handler import event_handler
 from aiogram import types
 from functools import singledispatchmethod
 from datetime import datetime
+from DB.Tables import SubscribeInfo
 
 
 
@@ -35,16 +36,12 @@ class telegram_service:
         users = self.__db.get(User)
         # Если будет высокая нагрузка на БД, то features можно выгрузить заранее
         features = self.__db.get(Feature)
+        # Загрузить данные из таблицы подписок 
         messages = {}
         
         for user in users:
-            if user.subscribe.start is None or user.subscribe.end is None or \
-            user.subscribe.start > datetime.now() or user.subscribe.end < datetime.now():
-                continue
+            subscribes = self.__db._get_ones(SubscribeInfo, user.id)
 
-            delta = datetime.now() - user.subscribe.start
-
-            messages[user.id] = features[delta.days].message
 
         return messages
 
@@ -53,18 +50,20 @@ class telegram_service:
         '''
         Базовый обработчик сообщений
         '''
+        print(user.current_message)
+        print(next_message)
         last_message = user.current_message
         user.current_message = next_message
         output = user.current_message
 
         if next_message.event_name:
-            # Если при работе event будет ошибка, отправляем старое сообщение заного
-            try:
-                output = self.__events.get_event(next_message.event_name).activate(user, message)
-            except Exception as e:
-                # Временно сделана отловка всех ошибок, при логировании поменять
-                print(e)
-                return last_message
+        #     # Если при работе event будет ошибка, отправляем старое сообщение заного
+        #     try:
+            output = self.__events.get_event(next_message.event_name).activate(user, message)
+        #     except Exception as e:
+        #         # Временно сделана отловка всех ошибок, при логировании поменять
+        #         print(e)
+        #         return last_message
         
         self.__db.update(user)
         return output
@@ -110,7 +109,7 @@ class telegram_service:
         '''
         Создать нового пользователя
         '''
-        user = User(True, False, username, self.__dilogue.get_start(), None, None, user_id)
+        user = User(True, False, username, self.__dilogue.get_start(), user_id)
         self.__db.add(user)
         return user
 

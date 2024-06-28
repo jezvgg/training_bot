@@ -12,7 +12,8 @@ class table_factory:
         User: UserTable,
         Message: DialogueTable,
         Command: CommandsTable,
-        Feature: FeaturesTable
+        Feature: FeaturesTable,
+        Subscribe: SubscribeInfo
     }
 
 

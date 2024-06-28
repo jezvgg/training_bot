@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import json
 import os
 
 
@@ -14,6 +15,8 @@ class settings:
     __db_name: str
     __db_url: str
     __bot_token: str
+    __account_id:int
+    __secret_key:str
 
 
     @staticmethod
@@ -25,6 +28,15 @@ class settings:
                         os.environ.get('DB_PORT'), os.environ.get('DB_NAME'), os.environ.get('DB_URL'), 
                         os.environ.get('TOKEN'))
 
+    @staticmethod
+    def from_json():
+        '''
+        Создать конфиги из переменных сред
+        '''
+        with open('settings.json') as json_file:
+            data = json.load(json_file)
+        return settings(data['DB_USER'], data['DB_PASSWORD'], data['DB_HOST'],
+                        data['DB_PORT'], data['DB_NAME'],data['DB_URL'], data['TOKEN'], data['account_id'],data["secret_key"])
 
     def database_kwargs(self) -> dict:
         return {
@@ -73,3 +85,13 @@ class settings:
     @property
     def db_url(self) -> str:
         return self.__db_url
+    
+
+    @property
+    def secret_key(self) -> str:
+        return self.__secret_key
+
+    
+    @property
+    def account_id(self) -> str:
+        return self.__account_id
