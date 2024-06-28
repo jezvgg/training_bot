@@ -5,7 +5,6 @@ from DB.table_factory import table_factory
 from Src.Models import AbstractModel
 from Src.settings import settings
 from DB.DBInterface import DBInterface
-from functools import singledispatchmethod
 
 
 class DBHelper(DBInterface):

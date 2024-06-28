@@ -13,6 +13,7 @@ class dialogue_manager:
         Args:
             messages - список моделей Message
         '''
+        print(messages)
         self.__messages = {}
         for message in messages:
             self.__messages[message.id] = message

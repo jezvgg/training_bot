@@ -25,5 +25,5 @@ class test_exersise_prototype(unittest.TestCase):
         #проверка
         print(new.data)
         assert len(new.data)==1
-        assert new.sample()[0].name=='гантели'
+        assert new.sample().name=='гантели'
         assert new.data[0].name=='гантели'
