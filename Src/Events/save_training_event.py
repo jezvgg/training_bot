@@ -46,17 +46,10 @@ class save_training_event(base_save_event):
 
     def _finish(self, user: User, message: types.Message) -> Message:
 
-<<<<<<< HEAD
         person = self._db._get_one(TrainingInfoTable, user.id)
         training = self.__creator.get_training(person.model(), 2)
         person.training = training.json()
         self._db._update()
-=======
-        person = self._db.get_one(TrainingInfoTable, user.id)
-        print('hello')
-        training = self.__creator.get_training(person, 6)
-        print(training)
->>>>>>> 5bcbd07ab1a79d6e6842e4d830b55674e4303489
 
         finish_message = Message(0, str(training), 0, '')
         return finish_message

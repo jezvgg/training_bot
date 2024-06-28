@@ -14,7 +14,7 @@ class block_prototype(prototype):
         result = []
 
 
-        for cur_block in self.__data:
+        for cur_block in self._data:
             if cur_block.muscle.name==muscle.name and \
             abs(cur_block.count-amount_of_exercises)<=2:
                 result.append(cur_block)
