@@ -12,22 +12,29 @@ class table_factory:
         User: UserTable,
         Message: DialogueTable,
         Command: CommandsTable,
-        Feature: FeaturesTable
+        Block_model:BlockTable,
+        Exercise_model:ExerciseTable,
+        Person_training_model:TrainingInfoTable,
+        Weekly_program_model:ProgramTable,
+        Feature:FeaturesTable
     }
 
+    @staticmethod
+    def get_type(model) -> type:
+        if isinstance(model, type):
+            return model
+
+        return type(model)
 
     @classmethod
     def get(cls, model: AbstractModel):
         '''
         Получить класс таблицы соответсвющий моделе
         '''
-        if model not in cls.__map.keys() and type(model) not in cls.__map.keys():
-            raise Exception('Конвертация модели невозможна. Нет подходящей таблицы в фабрике.')
+        if cls.get_type(model) not in cls.__map.keys():
+            raise Exception(f'Конвертация модели невозможна. Нет подходящей таблицы в фабрике. {cls.get_type(model)}')
 
-        if isinstance(model, type(AbstractModel)):
-            return cls.__map[model]
-
-        return cls.__map[type(model)]
+        return cls.__map[cls.get_type(model)]
 
 
     @classmethod
