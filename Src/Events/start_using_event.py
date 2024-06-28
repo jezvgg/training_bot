@@ -26,7 +26,6 @@ class start_using_event(event):
 
     def activate(self, user: User, message: types.Message) -> Message:
         subscribes = self._db._get_ones(SubscribeInfo, user.id)
-        print(user.current_message.keyboard.data)
         user.current_message.keyboard.data=[user.current_message.keyboard.data[self.__get_num(subscribes)]]
         return user.current_message
         
@@ -34,7 +33,6 @@ class start_using_event(event):
         
     
     def __get_num(self,subscribe):
-        print(subscribe)
         if len(subscribe)==0:
             return 1
         elif subscribe[-1].subscribe_end > datetime.now():

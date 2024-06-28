@@ -5,7 +5,7 @@ from Src.Models import User, Message, Feature, Subscribe
 from Src.event_handler import event_handler
 from aiogram import types
 from functools import singledispatchmethod
-from datetime import datetime
+from datetime import datetime, timedelta
 from DB.Tables import SubscribeInfo
 
 
@@ -41,6 +41,18 @@ class telegram_service:
         
         for user in users:
             subscribes = self.__db._get_ones(SubscribeInfo, user.id)
+            if len(subscribes)==0:
+                continue
+
+            subscribe= sorted(subscribes, key=lambda x: x.subscribe_id)[-1]
+
+            if subscribe.subscribe_start is None or subscribe.subscribe_end is None or \
+            subscribe.subscribe_start > datetime.now() or subscribe.subscribe_end < datetime.now():
+                messages[user.id] = self.__dilogue.get_start()
+
+            delta = datetime.now() - subscribe.subscribe_start + timedelta(days=subscribe.count_subskribe_day)
+
+            messages[user.id] = features[delta.days].message
 
 
         return messages

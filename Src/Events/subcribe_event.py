@@ -30,12 +30,14 @@ class subscribe_event(event):
 
     def activate(self, user: User, message: types.Message) -> Message:
         subscribes = self._db._get_ones(SubscribeInfo, user.id)
+        subscribes= sorted(subscribes, key=lambda x: x.subscribe_id)
         if len(subscribes)==0:
             user.current_message.text=self.get_start(user)
         elif subscribes[-1].subscribe_end > datetime.datetime.now():
             user.current_message.next_message_id=0
             return user.current_message
         else:
+
             user.current_message.text=self.pay_subscribe(user)   
             
             
@@ -78,17 +80,22 @@ class subscribe_event(event):
             "capture": True,
             "description": "Подписка на бота"
         }, uuid.uuid4())
-        print(json.loads(payment.json()))
         return json.loads(payment.json())
 
-    async def check_payment(self, payment_id, user: User):
+    async def check_payment(self, payment_id, user: User,):
         payment = json.loads((Payment.find_one(payment_id)).json())
         while payment['status'] == 'pending':
             payment = json.loads((Payment.find_one(payment_id)).json())
             await asyncio.sleep(3)
 
         if payment['status']=='succeeded':
-            sub=SubscribeInfo(user.id, datetime.datetime.now().date(), (datetime.datetime.now()+datetime.timedelta(days=30)).date(),0)
+            subscribes = self._db._get_ones(SubscribeInfo, user.id)
+            subscribes= sorted(subscribes, key=lambda x: x.subscribe_id)[-1]
+            if subscribes.count_subskribe_day==0:
+                sub_day=7
+            else:
+                sub_day=subscribes.count_subskribe_day
+            sub=SubscribeInfo(user.id, datetime.datetime.now().date(), (datetime.datetime.now()+datetime.timedelta(days=30)).date(), sub_day)
             self._db._add(sub)
             
     
