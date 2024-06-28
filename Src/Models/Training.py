@@ -43,9 +43,9 @@ class Training:
     def __str__(self):
         result = ''
         for day, exercises in self.json().items():
-            result += f'\n{day}\n'
+            result += f'\n{self.ru_days()[self.days().index(day)]}\n'
             for i, exercise in enumerate(exercises):
-                result += f'   {i}. {exercise["description"]}[{exercise["link"]}]\n'
+                result += f'   {i+1}. {exercise["description"]}[{exercise["link"]}]\n'
 
         return result
                 
@@ -64,4 +64,8 @@ class Training:
 
     def days(self):
         return ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+    
+    def ru_days(self):
+        return ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']
 

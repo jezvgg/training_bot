@@ -38,10 +38,9 @@ class trainings_getter:
         person_training_blocks = Training()
 
         for cur_day, blocks in program.trainings.items():
-            trainings_per_block = trainings_pe_day // len(blocks)
             for cur_block in blocks:
                 block = self.__block_prototype.filter_block_on_day(
-                    cur_block.muscle, trainings_per_block)
+                    cur_block.muscle, trainings_pe_day // len(blocks))
 
                 person_training_blocks[int(cur_day)-1].append(block.sample())
 
