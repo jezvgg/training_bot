@@ -12,4 +12,7 @@ from Src.Models.TrainingPersonData import TrainingPersonData
 from Src.Models.TrainingProgramm import TrainingProgramm
 from Src.Models.Training import Training
 
+from Src.Models.Diet import Diet
+
 from Src.Models.Feature import Feature
+

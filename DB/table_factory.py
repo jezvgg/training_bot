@@ -2,6 +2,7 @@ from DB.Tables import *
 from Src.Models import *
 
 
+
 class table_factory:
     '''
     Фабрика для конвертации моделей в таблицы БД.
