@@ -9,7 +9,6 @@ from Src.Cron import every
 from datetime import timedelta
 
 
-
 sets = settings.from_json()
 db = DBHelper(sets)
 dialogue = dialogue_manager(db.get(Message))
