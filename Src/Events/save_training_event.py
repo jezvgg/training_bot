@@ -47,8 +47,15 @@ class save_training_event(base_save_event):
     def _finish(self, user: User, message: types.Message) -> Message:
 
         person = self._db._get_one(TrainingInfoTable, user.id)
-        training = self.__creator.get_training(person.model(), 6)
-        person.training = training.json()
+        try:
+            training = self.__creator.get_training(person.model(), 6)
+            person.training = training.json()
+        except ValueError:
+            person.training = []
+            mes = Message.error_message()
+            mes.text += '\n Не удалось собрать тренировку, недостаточно данных!'
+            training = mes.text
+
         self._db._update()
 
         finish_message = Message(0, str(training), 0)

@@ -45,7 +45,7 @@ class Training:
         for day, exercises in self.json().items():
             result += f'\n{self.ru_days()[self.days().index(day)]}\n'
             for i, exercise in enumerate(exercises):
-                result += f'   {i+1}. {exercise["description"]}[{exercise["link"]}]\n'
+                result += f'   {i+1}. {exercise["description"]}\n'
 
         return result
                 
