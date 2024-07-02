@@ -32,8 +32,7 @@ class save_user_event(base_save_event):
             name=info.username, age=info.age, city=info.city, weight=info.weight, height=info.height
         )
 
-        finish_message = Message(0, text, 0,
-            keyboard=Keyboard(0, [{'Да':user.current_message.next_message_id, 'Нет':self._start_message}]))
+        finish_message = Message(0, text, 0,'',Keyboard(0, [{'Да':user.current_message.next_message_id, 'Нет':self._start_message}]))
         return finish_message
 
 

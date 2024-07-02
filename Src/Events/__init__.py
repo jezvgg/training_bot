@@ -4,3 +4,6 @@ from Src.Events.base_save_event import base_save_event
 from Src.Events.save_user_event import save_user_event
 from Src.Events.start_using_event import start_using_event
 from Src.Events.subcribe_event import subscribe_event
+from Src.Events.save_training_event import save_training_event
+from Src.Events.diet_get_event import diet_get_event
+from Src.Events.diet_save_event import diet_save_event

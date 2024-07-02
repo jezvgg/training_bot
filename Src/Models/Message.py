@@ -1,6 +1,7 @@
 from Src.Models import Keyboard, AbstractModel
+from dataclasses import dataclass,field
 
-
+@dataclass
 class Message(AbstractModel):
     '''
     Модель сообщения.
@@ -10,9 +11,10 @@ class Message(AbstractModel):
     '''
     __id: int
     __text: str
-    __keyboard: Keyboard
-    __event_name: str
     __next_message_id: int
+    __event_name: str=field(default=None)
+    __keyboard: Keyboard=field(default=None)
+
 
 
     @staticmethod
@@ -22,23 +24,6 @@ class Message(AbstractModel):
         '''
         return Message(0, 'Если вы видите это сообщение, то произошла ошибка. Напишите об этом администрации.', 0)
 
-
-    def __init__(self, id: int, text: str, next_message_id: int, event_name: str = None, keyboard: Keyboard = None) -> None:
-        '''
-        Модель сообщения.
-
-        Args:
-            id - айди сообщения.
-            text - текст сообщения.
-            keyboard - объект класса Keyboard, для создания reply_keyboard в боте.
-            event_name - ключ евента для его вызова.
-            next_message_id - айди сообщения, которые будет после этого, если пользователь не перейдёт на другое другим методом.
-        '''
-        self.__id: int = id
-        self.__text: str = text
-        self.__keyboard: Keyboard = keyboard
-        self.__event_name: str = event_name
-        self.__next_message_id: int = next_message_id
 
 
     @property

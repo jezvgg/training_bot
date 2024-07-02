@@ -2,7 +2,6 @@ import telegram
 from aiogram import Dispatcher
 import asyncio
 
-
 dp = Dispatcher()
 
 

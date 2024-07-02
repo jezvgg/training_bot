@@ -1,7 +1,11 @@
 from Src.Models import Message, AbstractModel
 
+from Src.Models import Message, AbstractModel
+
+
 
 class User(AbstractModel):
+
     '''
     Модель пользователя
     '''

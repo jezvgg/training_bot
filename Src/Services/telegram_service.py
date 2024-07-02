@@ -39,6 +39,7 @@ class telegram_service:
         # Загрузить данные из таблицы подписок 
         messages = {}
         
+
         for user in users:
             subscribes = self.__db._get_ones(SubscribeInfo, user.id)
             if len(subscribes)==0:
@@ -52,7 +53,9 @@ class telegram_service:
 
             delta = datetime.now() - subscribe.subscribe_start + timedelta(days=subscribe.count_subskribe_day)
 
-            messages[user.id] = features[delta.days].message
+
+
+        #     messages[user.id] = features[delta.days].message
 
 
         return messages
@@ -69,13 +72,15 @@ class telegram_service:
         output = user.current_message
 
         if next_message.event_name:
-        #     # Если при работе event будет ошибка, отправляем старое сообщение заного
-        #     try:
+
+            # # Если при работе event будет ошибка, отправляем старое сообщение заного
+            # try:
             output = self.__events.get_event(next_message.event_name).activate(user, message)
-        #     except Exception as e:
-        #         # Временно сделана отловка всех ошибок, при логировании поменять
-        #         print(e)
-        #         return last_message
+            # except Exception as e:
+            #     # Временно сделана отловка всех ошибок, при логировании поменять
+            #     print(e)
+            #     return last_message
+
         
         self.__db.update(user)
         return output
@@ -109,7 +114,7 @@ class telegram_service:
         '''
         Создать аргументы для ответа в телеграм
         '''
-        answer_kwargs = {'text':message.text}
+        answer_kwargs = {'text': message.text}
 
         if message.keyboard: 
             answer_kwargs['reply_markup'] = message.keyboard.build_markup()

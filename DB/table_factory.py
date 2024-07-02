@@ -2,6 +2,7 @@ from DB.Tables import *
 from Src.Models import *
 
 
+
 class table_factory:
     '''
     Фабрика для конвертации моделей в таблицы БД.
@@ -13,23 +14,31 @@ class table_factory:
         Message: DialogueTable,
         Command: CommandsTable,
         Feature: FeaturesTable,
-        Subscribe: SubscribeInfo
+        Subscribe: SubscribeInfo,
+        TrainingBlock: BlockTable,
+        TrainingExercise: ExerciseTable,
+        TrainingPersonData: TrainingInfoTable,
+        TrainingProgramm: ProgramTable,
+        Feature: FeaturesTable
     }
 
+    @staticmethod
+    def get_type(model) -> type:
+        if isinstance(model, type):
+            return model
+
+        return type(model)
 
     @classmethod
     def get(cls, model: AbstractModel):
         '''
         Получить класс таблицы соответсвющий моделе
         '''
-        if model not in cls.__map.keys() and type(model) not in cls.__map.keys():
-            raise Exception('Конвертация модели невозможна. Нет подходящей таблицы в фабрике.')
+        if cls.get_type(model) not in cls.__map.keys():
+            raise Exception(
+                f'Конвертация модели невозможна. Нет подходящей таблицы в фабрике. {cls.get_type(model)}')
 
-        if isinstance(model, type(AbstractModel)):
-            return cls.__map[model]
-
-        return cls.__map[type(model)]
-
+        return cls.__map[cls.get_type(model)]
 
     @classmethod
     def create(cls, model: AbstractModel) -> BaseTable:
@@ -38,7 +47,6 @@ class table_factory:
         '''
         # У этих таблиц соответственно должен быть фабричный метод от модели
         return cls.get(model).build(model)
-
 
     @classmethod
     def keys(cls):

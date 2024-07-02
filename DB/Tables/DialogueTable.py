@@ -34,11 +34,11 @@ class DialogueTable(BaseTable):
 
 
     def model(self) -> Message:
-        args = {"id":self.id}
-        if self._text: args|={"text":self._text.text}
-        else: args |= {"text":Message.error_message().text}
-        args|={"next_message_id":self.next_message}
-        if self.eventname: args|={"event_name":self.eventname}
-        if self._keyboard: args|={"keyboard":self._keyboard.model()}
+        args = {"_Message__id":self.id}
+        if self._text: args|={"_Message__text":self._text.text}
+        else: args |= {"_Message__text":Message.error_message().text}
+        args|={"_Message__next_message_id":self.next_message}
+        if self.eventname: args|={"_Message__event_name":self.eventname}
+        if self._keyboard: args|={"_Message__keyboard":self._keyboard.model()}
         return Message(**args)
     
