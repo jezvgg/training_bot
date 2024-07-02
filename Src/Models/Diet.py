@@ -19,16 +19,19 @@ class Diet(AbstractModel):
 
     @property
     def diet_id(self) -> int:
+        '''id записи '''
         return self.__diet_id
 
 
     @property
     def id(self) -> int:
+        '''id Пользователя'''
         return self.__id
 
 
     @property
     def product(self) -> str:
+        '''Продукты на которые у пользователя аллергия или которые он не любит'''
         return self.__product
 
 
@@ -39,6 +42,7 @@ class Diet(AbstractModel):
 
     @property
     def diet_goal(self) -> str:
+        '''Последнее сохраненное меню'''
         return self.__diet_goal
 
 
@@ -48,6 +52,7 @@ class Diet(AbstractModel):
 
     @property
     def count_trainigs(self) -> int:
+        '''Колво тренировок в неделю'''
         return self.__count_trainigs
 
 
@@ -58,6 +63,7 @@ class Diet(AbstractModel):
 
     @property
     def diet(self) -> str:
+        '''описание диеты'''
         return self.__diet
 
 

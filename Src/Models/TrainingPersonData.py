@@ -16,6 +16,7 @@ class TrainingPersonData(training_base):
 
     @property
     def trains_per_week(self):
+        '''количество тренировок в неделю'''
         return self.__trains_per_week
 
 

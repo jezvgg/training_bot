@@ -26,14 +26,17 @@ class Command(AbstractModel):
 
     @property
     def name(self) -> str:
+        '''сама команда (без черты)'''
         return '/' + self.__name
 
 
     @property
     def message(self) -> Message:
+        '''message - сообщение, к которому ведёт команда'''
         return self.__message
 
 
     @property
     def description(self) -> str:
+        '''описание команды (на будущее)'''
         return self.__description
