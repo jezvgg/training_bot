@@ -7,11 +7,17 @@ class Training:
     '''
     Модель тренировки
         monday: список упражнений на понедельник
+
         tuesday: список упражнений на вторник
+
         wednesday: список упражнений на среду
+
         thursday: список упражнений на четверг
+
         friday: список упражнений на пятницу
+
         saturday: список упражнений на субботу
+        
         sunday: список упражнений на воскресенье
     '''
     monday: list[TrainingExercise] = field(default_factory=list[TrainingExercise])

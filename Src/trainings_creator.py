@@ -32,6 +32,7 @@ class trainings_getter:
         получить расписание тренировок на неделю
         args:
             person - TrainingPersonData информация о пользователе
+            
             trainings_per_day - тренировок в день
         '''
         program = self.get_program(person)
@@ -57,6 +58,7 @@ class trainings_getter:
         получить словарь из блоков по программе триноровок
         args:
             program - TrainingsProgramm программа тренировок
+
             trainings_pe_day - количество тренировок в день
         '''
 

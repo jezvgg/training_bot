@@ -34,6 +34,9 @@ class DBHelper(DBInterface):
 
 
     def _get(self, obj: BaseTable | AbstractModel) -> Query[BaseTable]:
+        '''
+        Получить таблицу данных соответствующую модели
+        '''
         if issubclass(self.__get_type(obj), BaseTable): return self._get_table(obj)
         elif issubclass(self.__get_type(obj), AbstractModel): return self._get_model(obj)
         return None
@@ -48,28 +51,46 @@ class DBHelper(DBInterface):
 
 
     def _get_one(self, table: BaseTable | AbstractModel, id: int) -> BaseTable:
+        '''
+        Получить данные объекта из БД
+        '''
         filter_table = table_factory.get(table) if issubclass(self.__get_type(table), AbstractModel) else table
         return self._get(table).filter(filter_table.id == id).one()
 
 
     def _get_ones(self, table: BaseTable | AbstractModel, id: int) -> list[BaseTable]:
+        '''
+        Получить все данные всех обектов совпадающих с моделью
+        '''
         filter_table = table_factory.get(table) if issubclass(self.__get_type(table), AbstractModel) else table
         return self._get(table).filter(filter_table.id == id).all()
 
 
     def get(self, model: BaseTable | AbstractModel) -> list[AbstractModel]:
+        '''
+        Получить модели из таблицы данных соответствующей модели
+        '''
         return [table.model() for table in self._get(model)]
 
 
     def get_one(self, model: BaseTable | AbstractModel, id: int) -> AbstractModel:
+        '''
+        Получить модель из БД
+        '''
         return self._get_one(model, id).model()
 
 
     def get_ones(self, model: BaseTable | AbstractModel, id: int) -> list[AbstractModel]:
+        '''
+        Получить все модели всех обектов совпадающих с моделью
+        '''
         return [table.model() for table in self._get_ones(model, id)]
 
 
     def _add(self, table: BaseTable) -> bool:
+        '''
+        Добавление значения таблицы в БД
+        '''
         self.session.add(table)
         self.session.commit()
 
@@ -77,6 +98,9 @@ class DBHelper(DBInterface):
 
 
     def add(self, model: AbstractModel) -> bool: 
+        '''
+        Добавление модели в БД
+        '''
         table_object = table_factory.create(model)
         if len(self.get_ones(model, model.id)) > 0:
             return False
@@ -85,10 +109,16 @@ class DBHelper(DBInterface):
 
 
     def _update(self):
+        '''
+        Обновляет значения в БД
+        '''
         self.session.commit()
 
 
     def update(self, model: AbstractModel) -> bool:
+        '''
+        Обновление данных соотвутсвующих модели в БД
+        '''
         current_table_object = table_factory.create(model)
         was_table_object = self._get_one(table_factory.get(model), model.id)
         
@@ -106,11 +136,17 @@ class DBHelper(DBInterface):
 
 
     def _delete(self, table: BaseTable) -> bool:
+        '''
+        Удалить запись из таблицы
+        '''
         self.session.delete(table)
         self.session.commit()
 
 
     def delete(self, model: AbstractModel) -> bool:
+        '''
+        Удалить модель из БД
+        '''
         self._delete(table_factory.create(model))
         
 
