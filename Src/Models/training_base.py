@@ -11,6 +11,7 @@ class training_base(AbstractModel):
 
     @property
     def name(self) -> str:
+        '''имя'''
         return self.__name
 
     @name.setter

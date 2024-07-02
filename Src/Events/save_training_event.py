@@ -45,6 +45,7 @@ class save_training_event(base_save_event):
 
 
     def _finish(self, user: User, message: types.Message) -> Message:
+        '''метод в конце опроса. отправляет расписание'''
 
         person = self._db._get_one(TrainingInfoTable, user.id)
         training = self.__creator.get_training(person.model(), 6)
@@ -57,7 +58,7 @@ class save_training_event(base_save_event):
 
 
     def activate(self, user: User, message: types.Message) -> Message:
-
+        '''активация ивента'''
         if len(self._db._get_ones(TrainingInfoTable, user.id)) == 0 or \
             sorted(self._db._get_ones(TrainingInfoTable, user.id), key=lambda x: x.training_id)[-1].training is not None :
             return self._start(user, message)

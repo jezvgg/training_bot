@@ -11,7 +11,9 @@ class exersise_prototype(prototype):
     _data: list[TrainingExercise]
 
     def filter_exercises_criteria(self, criteria: list[muscle_type, location_type, pattern_type]):
-        '''Фильтрация'''
+        '''Фильтрация уроажнений по критериям из модели блока
+         Args:
+            criteria - muscle_type, location_type, pattern_type - мышца, место и ти работы соответственно '''
         # Комментарий недостаточно полный
         result = []
 

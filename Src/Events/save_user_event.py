@@ -37,6 +37,7 @@ class save_user_event(base_save_event):
 
 
     def activate(self, user: User, message: types.Message) -> Message:
+        '''активация ивента'''
         message_ = super().activate(user, message)
 
         if message_ is None:
