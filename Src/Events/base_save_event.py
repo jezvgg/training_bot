@@ -40,7 +40,8 @@ class base_save_event(event):
         он так же и сохраняет данные.
         '''
         # info - данные которые мы сохраняем
-        info = self._db._get_one(self._table_class, user.id)
+        info = self._db._get_ones(self._table_class, user.id)
+        info = [infotable for infotable in info if not all(map(bool, vars(infotable).values()))][0]
 
         varnames = list(self._types.keys())
         for varname in varnames:

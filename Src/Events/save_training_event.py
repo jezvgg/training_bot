@@ -46,7 +46,9 @@ class save_training_event(base_save_event):
 
     def _finish(self, user: User, message: types.Message) -> Message:
 
-        person = self._db._get_one(TrainingInfoTable, user.id)
+        info = self._db._get_ones(self._table_class, user.id)
+        person = [infotable for infotable in info if not all(map(bool, vars(infotable).values()))][0]
+
         try:
             training = self.__creator.get_training(person.model(), 6)
             person.training = training.json()
