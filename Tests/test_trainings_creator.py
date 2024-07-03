@@ -68,9 +68,9 @@ class test_trainings_creator(unittest.TestCase):
         chck=examp.get_blocks(fitting_program,2)
 
         #проверка
-        assert len(chck[1])==1 and chck[1][0].name=='бицепс'
-        assert len(chck[3])==1 and chck[3][0].name=='грудь'
-        assert len(chck[5])==2 and chck[5][0].name=='грудь-одинарный' and chck[5][1].name=='бицепс-одинарный'
+        assert len(chck[0])==1 and chck[0][0].name=='бицепс'
+        assert len(chck[2])==1 and chck[2][0].name=='грудь'
+        assert len(chck[4])==2 and chck[4][0].name=='грудь-одинарный' and chck[4][1].name=='бицепс-одинарный'
 
     
     def test_get_exercise(self):
@@ -98,11 +98,11 @@ class test_trainings_creator(unittest.TestCase):
 
         
 
-        exer1=TrainingExercise('жим','',',','','',pattern_type('локалка'),muscle_type('chest'),location_type('дом'))
-        exer2=TrainingExercise('махи','',',','','',pattern_type('глобалка'),muscle_type('chest'),location_type('дом'))
-        exer3=TrainingExercise('гантели','',',','','',pattern_type('локалка'),muscle_type('arms'),location_type('дом'))
-        exer4=TrainingExercise('станок','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('дом'))
-        exer5=TrainingExercise('станок 2','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('зал'))
+        exer1=TrainingExercise('жим','',pattern_type('локалка'),muscle_type('chest'),location_type('дом'))
+        exer2=TrainingExercise('махи','',pattern_type('глобалка'),muscle_type('chest'),location_type('дом'))
+        exer3=TrainingExercise('гантели','',pattern_type('локалка'),muscle_type('arms'),location_type('дом'))
+        exer4=TrainingExercise('станок','',pattern_type('глобалка'),muscle_type('arms'),location_type('дом'))
+        exer5=TrainingExercise('станок 2','',pattern_type('глобалка'),muscle_type('arms'),location_type('зал'))
 
 
 
@@ -113,10 +113,10 @@ class test_trainings_creator(unittest.TestCase):
 
         #действие
         execises=examp.get_exercise(blocks)
-
+        print(execises)
         #проверка
-        for cur_key in execises.keys():
-            assert len(execises[cur_key])==2
+        for cur_key in execises.json().keys():
+            assert len(execises[cur_key])==2 
 
 
 
@@ -148,11 +148,11 @@ class test_trainings_creator(unittest.TestCase):
 
         
 
-        exer1=TrainingExercise('жим','',',','','',pattern_type('локалка'),muscle_type('chest'),location_type('дом'))
-        exer2=TrainingExercise('махи','',',','','',pattern_type('глобалка'),muscle_type('chest'),location_type('дом'))
-        exer3=TrainingExercise('гантели','',',','','',pattern_type('локалка'),muscle_type('arms'),location_type('дом'))
-        exer4=TrainingExercise('станок','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('дом'))
-        exer5=TrainingExercise('станок 2','',',','','',pattern_type('глобалка'),muscle_type('arms'),location_type('зал'))
+        exer1=TrainingExercise('жим','',pattern_type('локалка'),muscle_type('chest'),location_type('дом'))
+        exer2=TrainingExercise('махи','',pattern_type('глобалка'),muscle_type('chest'),location_type('дом'))
+        exer3=TrainingExercise('гантели','',pattern_type('локалка'),muscle_type('arms'),location_type('дом'))
+        exer4=TrainingExercise('станок','',pattern_type('глобалка'),muscle_type('arms'),location_type('дом'))
+        exer5=TrainingExercise('станок 2','',pattern_type('глобалка'),muscle_type('arms'),location_type('зал'))
 
 
 
@@ -165,7 +165,7 @@ class test_trainings_creator(unittest.TestCase):
 
 
         #проверка
-        for cur_key in execises.keys():
+        for cur_key in execises.json().keys():
             print (execises[cur_key])
             assert len(execises[cur_key])==2
 

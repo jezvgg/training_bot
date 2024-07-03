@@ -33,11 +33,11 @@ class settings:
     
     
     @staticmethod
-    def from_json():
+    def from_json(path: str = 'settings.json'):
         '''
         Создать конфиги из переменных сред
         '''
-        with open('settings.json') as json_file:
+        with open(path) as json_file:
             data = json.load(json_file)
         return settings(data.get('DB_USER'), data.get('DB_PASSWORD'), data.get('DB_HOST'),
                         data.get('DB_PORT'), data.get('DB_NAME'),data.get('DB_URL'), 

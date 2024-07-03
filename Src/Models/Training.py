@@ -45,7 +45,9 @@ class Training:
         for day, exercises in self.json().items():
             result += f'\n{self.ru_days()[self.days().index(day)]}\n'
             for i, exercise in enumerate(exercises):
-                result += f'   {i+1}. {exercise["description"]}[{exercise["link"]}]\n'
+                if exercise['link'] is not None:
+                    result += f"   {i+1}. <a href='{exercise['link']}'>{exercise['name']}</a>\n"
+                else: result += f'   {i+1}. {exercise["name"]}\n'
 
         return result
                 

@@ -10,6 +10,9 @@ class abstract_type(ABC):
     def __hash__(self):
         return hash(self.__name)
 
+    def __repr__(self):
+        return str(self.__name)
+
     @property
     def name(self):
         return self.__name
