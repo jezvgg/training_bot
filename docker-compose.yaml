@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+  # База данныхъ
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "8925"
+      PGDATA: /data/postgres
+    volumes:
+       - /data/postgres
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+  
+  # Админка [хост:5050]
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin4@pgadmin.org"
+      PGADMIN_DEFAULT_PASSWORD: "123456"
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+       - /var/lib/pgadmin
+    ports:
+      - 5050:80
+    restart: unless-stopped
+
+  # Приложение
+  training:
+    container_name: training
+    image: training-bot
+    volumes:
+      - ./settings.json:/app/settings.json
+    restart: unless-stopped   
+
+networks:
+  default:
