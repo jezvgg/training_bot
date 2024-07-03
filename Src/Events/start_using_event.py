@@ -26,8 +26,8 @@ class start_using_event(event):
 
     def activate(self, user: User, message: types.Message) -> Message:
         subscribes = self._db._get_ones(SubscribeInfo, user.id)
-        user.current_message.keyboard.data=[user.current_message.keyboard.data[self.__get_num(subscribes)]]
-        return user.current_message
+        messages = Message(0,user.current_message.text, 0,None,Keyboard(10, [user.current_message.keyboard.data[self.__get_num(subscribes)]]),  )
+        return messages
         
 
         
