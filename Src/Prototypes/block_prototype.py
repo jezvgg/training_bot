@@ -1,7 +1,6 @@
 from Src.Models import *
 from Src.Enums.muscle_type import muscle_type
 from Src.Prototypes import prototype
-from random import sample
 
 
 class block_prototype(prototype):
@@ -15,12 +14,16 @@ class block_prototype(prototype):
             muscle - muscle_type мышца
             amount_of_exercises - количество упражнений'''
         result = []
+        delta = 0
 
+        while result == []:
+            for cur_block in self._data:
+                if cur_block.muscle.name==muscle.name and \
+                amount_of_exercises - cur_block.count <= delta and \
+                amount_of_exercises - cur_block.count >= 0:
+                    result.append(cur_block)
 
-        for cur_block in self._data:
-            if cur_block.muscle.name==muscle.name and \
-            (cur_block.count-amount_of_exercises)<=2:
-                result.append(cur_block)
+            delta += 1
 
         return block_prototype(result)
 

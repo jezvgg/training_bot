@@ -13,6 +13,8 @@ class table_factory:
         User: UserTable,
         Message: DialogueTable,
         Command: CommandsTable,
+        Feature: FeaturesTable,
+        Subscribe: SubscribeInfo,
         TrainingBlock: BlockTable,
         TrainingExercise: ExerciseTable,
         TrainingPersonData: TrainingInfoTable,
