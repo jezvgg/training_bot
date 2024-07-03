@@ -16,6 +16,8 @@ class settings:
     __db_name: str
     __db_url: str
     __bot_token: str
+    __account_id:int
+    __secret_key:str
     __token_for_gpt: str
     __id_bot_gpt: str
 
@@ -49,7 +51,9 @@ class settings:
         with open('settings.json') as json_file:
             data = json.load(json_file)
         return settings(data['DB_USER'], data['DB_PASSWORD'], data['DB_HOST'],
-                        data['DB_PORT'], data['DB_NAME'],data['DB_URL'], data['TOKEN'], data['TOKEN_FOR_GPT'], data['BOT_ID'])
+
+                        data['DB_PORT'], data['DB_NAME'],data['DB_URL'], data['TOKEN'], data['account_id'],data["secret_key"],data['TOKEN_FOR_GPT'], data['BOT_ID'])
+
 
     def database_kwargs(self) -> dict:
         return {
@@ -110,3 +114,13 @@ class settings:
     def db_url(self) -> str:
         return self.__db_url
 
+    
+
+    @property
+    def secret_key(self) -> str:
+        return self.__secret_key
+
+    
+    @property
+    def account_id(self) -> str:
+        return self.__account_id
