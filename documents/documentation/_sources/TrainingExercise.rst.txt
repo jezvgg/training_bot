@@ -1,0 +1,7 @@
+TrainingExercise
+
+=================
+
+.. automodule:: Src.Models.TrainingExercise
+   :members:
+   :undoc-members:

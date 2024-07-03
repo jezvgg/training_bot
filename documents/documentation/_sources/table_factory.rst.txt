@@ -1,0 +1,7 @@
+table_factory
+
+=================
+
+.. automodule:: DB.table_factory
+   :members:
+   :undoc-members:

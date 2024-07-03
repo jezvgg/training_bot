@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; документация training_bot </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=372fde1a"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=29b1f277"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>Training</p>
+<hr class="docutils" />
+<dl class="py class" id="module-Src.Models.Training">
+<dt class="sig sig-object py" id="Src.Models.Training.Training">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Src.Models.Training.</span></span><span class="sig-name descname"><span class="pre">Training</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monday:</span> <span class="pre">list[~Src.Models.TrainingExercise.TrainingExercise]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tuesday:</span> <span class="pre">list[~Src.Models.TrainingExercise.TrainingExercise]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wednesday:</span> <span class="pre">list[~Src.Models.TrainingExercise.TrainingExercise]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thursday:</span> <span class="pre">list[~Src.Models.TrainingExercise.TrainingExercise]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">friday:</span> <span class="pre">list[~Src.Models.TrainingExercise.TrainingExercise]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saturday:</span> <span class="pre">list[~Src.Models.TrainingExercise.TrainingExercise]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sunday:</span> <span class="pre">list[~Src.Models.TrainingExercise.TrainingExercise]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Src.Models.Training.Training" title="Link to this definition">¶</a></dt>
+<dd><dl>
+<dt>Модель тренировки</dt><dd><p>monday: список упражнений на понедельник</p>
+<p>tuesday: список упражнений на вторник</p>
+<p>wednesday: список упражнений на среду</p>
+<p>thursday: список упражнений на четверг</p>
+<p>friday: список упражнений на пятницу</p>
+<p>saturday: список упражнений на субботу</p>
+<p>sunday: список упражнений на воскресенье</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.days">
+<span class="sig-name descname"><span class="pre">days</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Src.Models.Training.Training.days" title="Link to this definition">¶</a></dt>
+<dd><p>дни</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.friday">
+<span class="sig-name descname"><span class="pre">friday</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TrainingExercise.html#Src.Models.TrainingExercise.TrainingExercise" title="Src.Models.TrainingExercise.TrainingExercise"><span class="pre">TrainingExercise</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#Src.Models.Training.Training.friday" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Src.Models.Training.Training.items" title="Link to this definition">¶</a></dt>
+<dd><p>получить пары (день,значение)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Src.Models.Training.Training.json" title="Link to this definition">¶</a></dt>
+<dd><p>получить словарь в формате словаря</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Src.Models.Training.Training.keys" title="Link to this definition">¶</a></dt>
+<dd><p>получить дни</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.monday">
+<span class="sig-name descname"><span class="pre">monday</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TrainingExercise.html#Src.Models.TrainingExercise.TrainingExercise" title="Src.Models.TrainingExercise.TrainingExercise"><span class="pre">TrainingExercise</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#Src.Models.Training.Training.monday" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.ru_days">
+<span class="sig-name descname"><span class="pre">ru_days</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Src.Models.Training.Training.ru_days" title="Link to this definition">¶</a></dt>
+<dd><p>дни на русском</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.saturday">
+<span class="sig-name descname"><span class="pre">saturday</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TrainingExercise.html#Src.Models.TrainingExercise.TrainingExercise" title="Src.Models.TrainingExercise.TrainingExercise"><span class="pre">TrainingExercise</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#Src.Models.Training.Training.saturday" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.sunday">
+<span class="sig-name descname"><span class="pre">sunday</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TrainingExercise.html#Src.Models.TrainingExercise.TrainingExercise" title="Src.Models.TrainingExercise.TrainingExercise"><span class="pre">TrainingExercise</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#Src.Models.Training.Training.sunday" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.thursday">
+<span class="sig-name descname"><span class="pre">thursday</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TrainingExercise.html#Src.Models.TrainingExercise.TrainingExercise" title="Src.Models.TrainingExercise.TrainingExercise"><span class="pre">TrainingExercise</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#Src.Models.Training.Training.thursday" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.tuesday">
+<span class="sig-name descname"><span class="pre">tuesday</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TrainingExercise.html#Src.Models.TrainingExercise.TrainingExercise" title="Src.Models.TrainingExercise.TrainingExercise"><span class="pre">TrainingExercise</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#Src.Models.Training.Training.tuesday" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.values">
+<span class="sig-name descname"><span class="pre">values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Src.Models.Training.Training.values" title="Link to this definition">¶</a></dt>
+<dd><p>получить все значения</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Src.Models.Training.Training.wednesday">
+<span class="sig-name descname"><span class="pre">wednesday</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TrainingExercise.html#Src.Models.TrainingExercise.TrainingExercise" title="Src.Models.TrainingExercise.TrainingExercise"><span class="pre">TrainingExercise</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#Src.Models.Training.Training.wednesday" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">training_bot</a></h1>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Tria.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/Training.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

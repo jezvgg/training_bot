@@ -1,0 +1,7 @@
+save_user_event
+
+=================
+
+.. automodule:: Src.Events.save_user_event
+   :members:
+   :undoc-members:

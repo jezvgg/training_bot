@@ -1,0 +1,6 @@
+dialogue_manager
+====
+
+.. automodule:: Src.dialogue_manager
+   :members:
+   :undoc-members:

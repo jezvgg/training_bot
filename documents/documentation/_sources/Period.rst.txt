@@ -1,0 +1,7 @@
+Period
+
+=================
+
+.. automodule:: Src.Models.Period
+   :members:
+   :undoc-members:

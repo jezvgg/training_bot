@@ -1,0 +1,7 @@
+diet_save_event
+
+=================
+
+.. automodule:: Src.Events.diet_save_event
+   :members:
+   :undoc-members:

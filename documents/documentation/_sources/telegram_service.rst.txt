@@ -1,0 +1,7 @@
+telegram_service
+
+=================
+
+.. automodule:: Src.Services.telegram_service
+   :members:
+   :undoc-members:

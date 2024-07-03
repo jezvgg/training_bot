@@ -1,0 +1,7 @@
+User
+
+=================
+
+.. automodule:: Src.Models.User
+   :members:
+   :undoc-members:

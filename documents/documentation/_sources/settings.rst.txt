@@ -1,0 +1,6 @@
+settings
+========
+
+.. automodule:: Src.settings
+   :members:
+   :undoc-members:

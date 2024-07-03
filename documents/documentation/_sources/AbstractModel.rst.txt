@@ -1,0 +1,7 @@
+AbstractModel
+
+=================
+
+.. automodule:: Src.Models.AbstractModel
+   :members:
+   :undoc-members:

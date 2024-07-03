@@ -1,0 +1,6 @@
+trainings_creator
+=================
+
+.. automodule:: Src.trainings_creator
+   :members:
+   :undoc-members:
