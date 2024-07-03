@@ -8,7 +8,8 @@ from datetime import datetime
 class SubscribeInfo(BaseTable):
     __tablename__ = "subscribe_info"
     
-    subscribe_id=Column( BigInteger,Sequence("id", start=1, increment=1), primary_key=True)
+    subscribe_id=Column('id', Integer, unique=True,
+                        primary_key=True, nullable=False)
     id = Column("telegram_id", BigInteger)
     subscribe_start = Column("subscribing_start", DateTime(timezone=None))
     subscribe_end = Column("subscribing_end", DateTime(timezone=None))
