@@ -66,52 +66,62 @@ class settings:
 
 
     def database_args(self) -> list:
+        '''аргументы базы данных'''
         return list(self.database_kwargs().values())
 
 
     @property
     def db_username(self) -> str:
+        '''имя пользователя бд'''
         return self.__db_username
 
 
     @property
     def db_password(self) -> str:
+        '''название пароля от пользователя'''
         return self.__db_password
 
 
     @property
     def db_host(self) -> str:
+        '''хост базы данных'''
         return self.__db_host
 
 
     @property
     def db_port(self) -> str:
+        '''порт'''
         return self.__db_port
 
 
     @property
     def db_name(self) -> str:
+        '''имя бд'''
         return self.__db_name
 
 
     @property
     def bot_token(self) -> str:
+        '''токен бота'''
         return self.__bot_token
 
 
     @property
     def token_for_gpt(self) -> str:
+        '''токен для gpt'''
         return self.__token_for_gpt
     
 
     @property
     def id_bot_gpt(self) -> str:
+        '''айди бота и гпт'''
         return self.__id_bot_gpt
 
 
     
     @property
     def db_url(self) -> str:
+        '''url для базы данных'''
         return self.__db_url
 
     

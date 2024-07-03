@@ -37,11 +37,13 @@ class User(AbstractModel):
 
     @property
     def id(self) -> int:
+        '''уникальный номер пользователя, из телеграма'''
         return self.__telegram_id
 
 
     @property
     def current_message(self) -> Message:
+        '''сообщение на котором остановился пользователь'''
         return self.__current_message
 
 
@@ -52,6 +54,7 @@ class User(AbstractModel):
 
     @property
     def username(self) -> str:
+        '''имя пользователя'''
         return self.__username
 
 
@@ -62,6 +65,7 @@ class User(AbstractModel):
 
     @property
     def is_accepted(self) -> bool:
+        '''принял ли условия соглашения пользователь'''
         return self.__is_accepted
 
 
@@ -72,6 +76,7 @@ class User(AbstractModel):
 
     @property
     def is_use(self) -> bool:
+        '''если false значит забанен'''
         return self.__is_use
 
 

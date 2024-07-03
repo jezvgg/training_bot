@@ -12,7 +12,7 @@ class training_prototype(prototype):
 
     @staticmethod
     def _equal_workouts(work1: list[workout_type], work2: list[workout_type]) -> bool:
-        '''сравнение типов тренировок'''
+        '''сравнение типов тренировок '''
         # Нужно было создать __hash__, и сравнивать множества напрямую
         if len(work1) != len(work2):
             return False
@@ -24,7 +24,9 @@ class training_prototype(prototype):
 
 
     def filter_person_training_model(self, user: TrainingPersonData):
-        '''фильтрация'''
+        '''фильтрация тренировок по модели пользователя
+        Args:
+            user - TrainingPersonData модель пользователя'''
         result = []
 
         for cur_program_model in self._data:

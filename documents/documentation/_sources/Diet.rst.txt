@@ -1,0 +1,7 @@
+Diet
+
+=================
+
+.. automodule:: Src.Models.Diet
+   :members:
+   :undoc-members:

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; документация training_bot </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=372fde1a"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=29b1f277"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>TrainingProgramm</p>
+<hr class="docutils" />
+<dl class="py class" id="module-Src.Models.TrainingProgramm">
+<dt class="sig sig-object py" id="Src.Models.TrainingProgramm.TrainingProgramm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Src.Models.TrainingProgramm.</span></span><span class="sig-name descname"><span class="pre">TrainingProgramm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_training_base__name:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_TrainingProgramm__is_male:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_TrainingProgramm__workout:</span> <span class="pre">list[~Src.Enums.workout_type.workout_type]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_TrainingProgramm__trainings:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Src.Models.TrainingProgramm.TrainingProgramm" title="Link to this definition">¶</a></dt>
+<dd><p>Модель программы занятий на неделю</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Src.Models.TrainingProgramm.TrainingProgramm.add_block">
+<span class="sig-name descname"><span class="pre">add_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="TrainingBlock.html#Src.Models.TrainingBlock.TrainingBlock" title="Src.Models.TrainingBlock.TrainingBlock"><span class="pre">TrainingBlock</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#Src.Models.TrainingProgramm.TrainingProgramm.add_block" title="Link to this definition">¶</a></dt>
+<dd><p>добавить блок в нужный день</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Src.Models.TrainingProgramm.TrainingProgramm.add_workout_type">
+<span class="sig-name descname"><span class="pre">add_workout_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">workout_type</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#Src.Models.TrainingProgramm.TrainingProgramm.add_workout_type" title="Link to this definition">¶</a></dt>
+<dd><p>Добавить тип тренировок</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Src.Models.TrainingProgramm.TrainingProgramm.is_male">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_male</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#Src.Models.TrainingProgramm.TrainingProgramm.is_male" title="Link to this definition">¶</a></dt>
+<dd><p>Пол</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Src.Models.TrainingProgramm.TrainingProgramm.trainings">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">trainings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict[slice(&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">list[Src.Models.TrainingBlock.TrainingBlock],</span> <span class="pre">None)]</span></em><a class="headerlink" href="#Src.Models.TrainingProgramm.TrainingProgramm.trainings" title="Link to this definition">¶</a></dt>
+<dd><p>Словарь типа {номер_дня:[блок1, блок2 … блокn]}</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Src.Models.TrainingProgramm.TrainingProgramm.workout">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">workout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">workout_type</span></em><a class="headerlink" href="#Src.Models.TrainingProgramm.TrainingProgramm.workout" title="Link to this definition">¶</a></dt>
+<dd><p>Тип тренировок</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Src.Models.TrainingProgramm.TrainingProgramm.workouts_per_week">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">workouts_per_week</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#Src.Models.TrainingProgramm.TrainingProgramm.workouts_per_week" title="Link to this definition">¶</a></dt>
+<dd><p>Количество тренировок в неделю</p>
+</dd></dl>
+
+</dd></dl>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">training_bot</a></h1>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Tria.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/TrainingProgramm.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

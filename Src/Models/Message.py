@@ -28,11 +28,13 @@ class Message(AbstractModel):
 
     @property
     def id(self) -> int:
+        '''айди'''
         return self.__id
 
 
     @property
     def text(self) -> str:
+        '''текст сообщения'''
         return self.__text
 
 
@@ -43,14 +45,17 @@ class Message(AbstractModel):
 
     @property
     def keyboard(self) -> Keyboard:
+        '''привязанная клавиатура'''
         return self.__keyboard
 
 
     @property
     def event_name(self) -> str:
+        '''название события'''
         return self.__event_name
 
 
     @property
     def next_message_id(self) -> int:
+        '''id следующего сообщения'''
         return self.__next_message_id

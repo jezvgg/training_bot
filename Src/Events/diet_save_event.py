@@ -37,7 +37,7 @@ class diet_save_event(base_save_event):
 
 
     def activate(self, user: User, message: types.Message) -> Message:
-
+        '''активация ивента'''
         info_diet = self._db._get_ones(DietInfoTable, user.id)
         if len(info_diet)==0:
             return self._start(user, message)

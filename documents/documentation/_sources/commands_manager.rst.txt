@@ -1,0 +1,6 @@
+commands_manager
+================
+
+.. automodule:: Src.commands_manager
+   :members:
+   :undoc-members:

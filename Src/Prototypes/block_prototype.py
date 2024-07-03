@@ -9,7 +9,10 @@ class block_prototype(prototype):
 
 
     def filter_block_on_day(self, muscle: muscle_type, amount_of_exercises: int):
-        '''фильтрация'''
+        '''фильтрация блоков по типу мышцы и количеству упражнений
+        Args:
+            muscle - muscle_type мышца
+            amount_of_exercises - количество упражнений'''
         result = []
         delta = 0
 

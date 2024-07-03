@@ -1,0 +1,6 @@
+BaseTable
+=================
+
+.. automodule:: DB.Tables.BaseTable
+   :members:
+   :undoc-members:

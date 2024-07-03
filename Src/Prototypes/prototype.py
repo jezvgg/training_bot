@@ -3,10 +3,15 @@ from random import sample
 
 
 class prototype(ABC):
+    '''абстрактный проттотип'''
     _data:list
 
 
     def __init__(self, data: list):
+        '''
+        Args:
+            data - list определённого типа
+        '''
         self._data = data
 
 
@@ -26,4 +31,7 @@ class prototype(ABC):
 
     @property
     def data(self):
+        '''
+        список данных в прототипе
+        '''
         return self._data

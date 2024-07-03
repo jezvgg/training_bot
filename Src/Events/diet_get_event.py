@@ -45,7 +45,7 @@ class diet_get_event(event):
 
     
     def get_diet(self,info_body,info_diet):
-
+        '''получить диету'''
         
 
         with open('gpt_request.json') as json_file:

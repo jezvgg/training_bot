@@ -1,0 +1,7 @@
+TrainingProgramm
+
+=================
+
+.. automodule:: Src.Models.TrainingProgramm
+   :members:
+   :undoc-members:

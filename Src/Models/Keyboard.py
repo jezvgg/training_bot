@@ -29,11 +29,13 @@ class Keyboard(AbstractModel):
 
     @property
     def id(self) -> int:
+        '''уникальный номер клавиатуры'''
         return self.__id
 
 
     @property
     def data(self) -> list[dict[str,int]]:
+        ''' список словарей, где каждый словарь строка, а элементы в нём - текст кнопки и id сообщения к которому она ведёт'''
         return self.__data
 
 
