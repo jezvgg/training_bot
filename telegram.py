@@ -1,4 +1,5 @@
 from aiogram import Dispatcher, types, F, Bot
+from aiogram.enums.parse_mode import ParseMode
 from DB.DBHelper import DBHelper
 from Src.dialogue_manager import dialogue_manager
 from Src.commands_manager import command_manager
@@ -21,7 +22,7 @@ bot = Bot(sets.bot_token)
 async def features_sender():
     '''Функция вызывается раз в день.'''
     for id, message in service.get_features().items():
-        await bot.send_message(id, **service.create_answer(message))
+        await bot.send_message(id, **service.create_answer(message), parse_mode=ParseMode.HTML)
 
 
 async def command_handler(message: types.Message):
@@ -30,7 +31,7 @@ async def command_handler(message: types.Message):
 
     output_message = service.handle_command(user, message)
 
-    await message.answer(**service.create_answer(output_message)) 
+    await message.answer(**service.create_answer(output_message), parse_mode=ParseMode.HTML) 
 
 
 async def message_handler(message: types.Message):
@@ -39,7 +40,7 @@ async def message_handler(message: types.Message):
 
     output_message = service.handle_message(user, message)
 
-    await message.answer(**service.create_answer(output_message))
+    await message.answer(**service.create_answer(output_message), parse_mode=ParseMode.HTML)
 
 
 async def callback_handler(callback: types.CallbackQuery):
@@ -48,7 +49,7 @@ async def callback_handler(callback: types.CallbackQuery):
 
     output_message = service.handle_callback(user, callback)
 
-    await callback.message.answer(**service.create_answer(output_message))
+    await callback.message.answer(**service.create_answer(output_message), parse_mode=ParseMode.HTML)
 
 
 def register_handlers(dp: Dispatcher):

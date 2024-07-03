@@ -9,10 +9,7 @@ from dataclasses import dataclass
 @dataclass
 class TrainingExercise(training_base):
     '''модель упражнения'''
-    __description: str = ''
-    __technique: str = ''
-    __recomendations: str = ''
-    __url_image: str = ''
+    __ex_name: str = ''
     __pattern: pattern_type = None
     __muscle: muscle_type = None
     __locations: location_type = None
@@ -21,10 +18,7 @@ class TrainingExercise(training_base):
 
 
     def json(self):
-        return {'description':self.description,
-                'technique':self.technique,
-                'recommendations':self.recomendations,
-                'image': self.url_image,
+        return {'name':self.ex_name,
                 'pattern': self.pattern.name,
                 'muscle': self.muscle.name,
                 'locations': self.locations.name,
@@ -33,24 +27,9 @@ class TrainingExercise(training_base):
 
 
     @property
-    def description(self) -> str:
+    def ex_name(self) -> str:
         '''описание упражнения'''
-        return self.__description
-
-    @property
-    def technique(self) -> str:
-        '''техника упражнения'''
-        return self.__technique
-
-    @property
-    def recomendations(self) -> str:
-        '''рекомендации к выполнению'''
-        return self.__recomendations
-
-    @property
-    def url_image(self) -> str:
-        '''ссылка на изображение'''
-        return self.__url_image
+        return self.__ex_name
 
     @property
     def pattern(self) -> pattern_type:
@@ -72,21 +51,9 @@ class TrainingExercise(training_base):
         '''является ли циклической'''
         return self.__is_circular
 
-    @description.setter
-    def description(self, value: str) -> None:
-        self.__description = value
-
-    @technique.setter
-    def technique(self, value: str) -> None:
-        self.__technique = value
-
-    @recomendations.setter
-    def recomendations(self, value: str) -> None:
-        self.__recomendations = value
-
-    @url_image.setter
-    def url_image(self, value: str) -> None:
-        self.__url_image = value
+    @ex_name.setter
+    def ex_name(self, value: str) -> None:
+        self.__ex_name = value
 
     @pattern.setter
     def pattern(self, value: pattern_type) -> None:
@@ -107,3 +74,7 @@ class TrainingExercise(training_base):
     @property
     def link(self):
         return self.__link
+
+    @link.setter
+    def link(self, value: str) -> None:
+        self.__link = value

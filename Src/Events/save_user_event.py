@@ -37,12 +37,13 @@ class save_user_event(base_save_event):
 
 
     def activate(self, user: User, message: types.Message) -> Message:
-        message_ = super().activate(user, message)
+        info = self._db._get_ones(self._table_class, user.id)
+        infotable = [infotable for infotable in info if not all(map(bool, vars(infotable).values()))]
 
-        if message_ is None:
+        if len(infotable) == 0 and len(info) > 0:
             self._db._delete(self._db._get_one(UserInfoTable, user.id))
-            message_ = super().activate(user, message)
-
+        
+        message_ = super().activate(user, message)
         return message_
         
         
