@@ -1,4 +1,4 @@
-FROM python:3.10-bookworm as base
+FROM python:3.10-bookworm AS base
 WORKDIR /app
 EXPOSE 5000
 

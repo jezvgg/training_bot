@@ -10,9 +10,9 @@ services:
       POSTGRES_PASSWORD: "8925"
       PGDATA: /data/postgres
     volumes:
-       - /data/postgres
+    - ./data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 5060:5432
     restart: unless-stopped
   
   # Админка [хост:5050]
@@ -32,9 +32,9 @@ services:
   # Приложение
   training:
     container_name: training
-    image: training-bot
-    volumes:
-      - ./settings.json:/app/settings.json
+    image: training
+    env_file:
+      variables.env
     restart: unless-stopped   
 
 networks:
