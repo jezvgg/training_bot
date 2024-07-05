@@ -5,9 +5,7 @@ services:
   postgres:
     container_name: postgres
     image: postgres
-    environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
+    env_file: "variables.env"
     volumes:
     - ./data:/var/lib/postgresql/data
     ports:
@@ -18,9 +16,7 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "pgadmin4@pgadmin.org"
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    env_file: "variables.env"
     ports:
       - 5050:80
     restart: unless-stopped

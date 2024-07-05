@@ -12,4 +12,5 @@ async def main():
 
 if __name__ == '__main__':
     telegram.register_handlers(dp)
+    print("Started succesfully!")
     asyncio.run(main())

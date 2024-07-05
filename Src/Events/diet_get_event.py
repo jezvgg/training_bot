@@ -23,7 +23,7 @@ class diet_get_event(event):
 
     def __init__(self, db: DBInterface):
         self._db = db
-        self.__settings=settings.from_json()
+        self.__settings=settings.from_env()
 
 
     def activate(self, user: User, message: types.Message) -> Message:
